@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  22 MAR 2016 13:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  28 MAR 2016 11:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -973,43 +973,73 @@ Overfull \hbox (13.46503pt too wide) in paragraph at lines 88--90
 [] 
  []
 
-<figs/eclipse.png, id=19, 1414.28375pt x 1002.74625pt>
-File: figs/eclipse.png Graphic file (type png)
- <use figs/eclipse.png>
-Package pdftex.def Info: figs/eclipse.png used on input line 113.
-(pdftex.def)             Requested size: 347.12354pt x 246.11105pt.
 
-[3 <./figs/eclipse.png>]
-<figs/eclipse-2.png, id=28, 1411.2725pt x 994.71625pt>
+LaTeX Warning: Citation `nielson2015principles' on page 3 undefined on input li
+ne 96.
+
+
+LaTeX Warning: Citation `adolph2011using' on page 3 undefined on input line 98.
+
+
+
+LaTeX Warning: Citation ` Murphy-Hill:2010:Ambient' on page 3 undefined on inpu
+t line 98.
+
+
+LaTeX Warning: Citation `ge2012reconciling' on page 3 undefined on input line 9
+8.
+
+
+LaTeX Warning: Citation `ernst2003static' on page 3 undefined on input line 99.
+
+
+
+LaTeX Warning: Citation `ernst2003static' on page 3 undefined on input line 103
+.
+
+
+LaTeX Warning: Citation `ernst2003static' on page 3 undefined on input line 112
+.
+
+[3] <figs/eclipse.png, id=27, 1414.28375pt x 1002.74625pt>
+File: figs/eclipse.png Graphic file (type png)
+
+<use figs/eclipse.png>
+Package pdftex.def Info: figs/eclipse.png used on input line 136.
+(pdftex.def)             Requested size: 347.12354pt x 246.11105pt.
+ [4 <./figs/eclipse.png>]
+<figs/eclipse-2.png, id=33, 1411.2725pt x 994.71625pt>
 File: figs/eclipse-2.png Graphic file (type png)
 
 <use figs/eclipse-2.png>
-Package pdftex.def Info: figs/eclipse-2.png used on input line 126.
+Package pdftex.def Info: figs/eclipse-2.png used on input line 149.
 (pdftex.def)             Requested size: 347.12354pt x 244.65625pt.
- [4 <./figs/eclipse-2.png>] (./main.bbl) [5]
+ [5 <./figs/eclipse-2.png>] (./main.bbl) [6]
 (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 20534 strings out of 493089
- 405797 string characters out of 6134842
- 449022 words of memory out of 5000000
- 23637 multiletter control sequences out of 15000+600000
- 14157 words of font info for 37 fonts, out of 8000000 for 9000
+ 20565 strings out of 493089
+ 406156 string characters out of 6134842
+ 450022 words of memory out of 5000000
+ 23658 multiletter control sequences out of 15000+600000
+ 18899 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,6n,56p,10414b,297s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,9n,56p,10414b,295s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-s
 uper-t1.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfb
 x0900.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1
 000.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx120
 0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1440.
 pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on main.pdf (5 pages, 865716 bytes).
+b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on main.pdf (6 pages, 887745 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 77 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  27 words of extra memory for PDF output out of 10000 (max. 10000000)
 
