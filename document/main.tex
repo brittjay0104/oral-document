@@ -97,6 +97,13 @@
 \subsection*{Motivating Example}
 % merge motivating examples from icse and fse papers into one big example (make sure detailed but say what I mean!)
 
+\begin{figure} [ht]
+	\centering
+	\includegraphics[width=\textwidth]{figs/eclipse.png}
+	\caption{Findbugs notification in the Eclipse IDE concerning multi-threading.}
+	\label{fig:eclipse}
+\end{figure} 
+
 Valerie is a software developer at a start-up company. She primarily writes Java code, though she did not learn to program in Java, and uses the Eclipse Integrated Development Environment (IDE). In her spare time, she builds her knowledge of Java programming concepts by contributing to open source software and using tools that provide feedback about the code she writes. While modifying code in the Sun JDK source code repository, she contributes code that results in the notification shown in Figure~\ref{fig:eclipse}. She has experience using FindBugs, so she is familiar with some of the ways FindBugs communicates. For example, she knows that an orange bug icon indicates a \textit{scary} bug and that by clicking the bug icon she can gain access to more information about the bug.
 
 As she explores the information provided by FindBugs, she realizes that despite her experience with FindBugs, she is having difficulty determining how to resolve the notification. She first attempts to use what knowledge she does have regarding multi-threading, which she accrued from struggling with and resolving compiler synchronization warnings, to better understand the problem. 
@@ -104,13 +111,6 @@ As she explores the information provided by FindBugs, she realizes that despite 
 However, she is unfamiliar with the concept central to the notification in Figure~\ref{fig:eclipse} (lazy initialization). Though the notification tells her that the problem relates to multi-threading, she is unable to make a connection between her knowledge regarding multi-threading and the message FindBugs is attempting to communicate and therefore cannot resolve the notification without outside help. As done previously with compiler synchronization notifications, she toggles between the web and her IDE to understand and resolve the notification.
 
 % TODO compiler synchronization notification??
-
-\begin{figure} [ht]
-	\centering
-	\includegraphics[width=\textwidth]{figs/eclipse.png}
-	\caption{Findbugs notification in the Eclipse IDE concerning multi-threading.}
-	\label{fig:eclipse}
-\end{figure} 
 
 \begin{figure} 
 	\centering
