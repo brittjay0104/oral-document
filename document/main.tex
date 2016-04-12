@@ -184,13 +184,6 @@ As with verbal communication, the ability of a developer to interpret a tool's m
 % interactive interviews (icse) & %session study (fse)
 Despite the possibility provided by program analysis tools for exploration and improvement of source code, research has found that developers often to not use tools like FindBugs~\cite{Ayewah:2008:FindBugs}.
 Though research explored tool usage, there was no research that explored the reasons developers have for using the tools they do use and not using the tools they do not use~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}.
-I will briefly outline my findings that led to my proposed research in this section; I will discuss the mentioned studies in more detail in Section~\ref{sec:eval}. Based on findings from these studies, I identified the following problems with the state-of-the-art in program analysis tool notification design:
-
-\begin{itemize}
-	\item Tool notifications can be difficult to sort through and interpret, making them difficult to use.
-	\item Many notifications do not effectively and consistently communicate to accommodate individual developer knowledge.
-\end{itemize}
-
 To answer the question \emph{why do developers not use static analysis tools}, I conducted interactive interviews with 20 professional developers to better understand why they do not use static analysis tools, one type of program analysis tool, when writing code~\cite{johnson2013don}.
 Each interactive interview consisted of three parts: 1) an interview regarding past experiences with static analysis tools, 2) an interactive exploration of FindBugs and 3) a participatory design session to discuss suggested tool improvements.
 
@@ -200,6 +193,13 @@ Discovering that tool notifications are one of the reasons developers do not use
 
 To answer the question \emph{why do developers encounter challenges when interpreting program analysis tool notifications?}, I observed 26 developers with varying backgrounds while they used three different program analysis tools: Eclipse Java compiler, FindBugs, and EclEmma. I presented participants with and asked them to interpret notifications from each of the three tools. Based on the challenges participants encountered, I propose a tool miscommunication theory that can be used to inform the design of program analysis tools.
 % TODO need something relevant to cross-tool!
+
+Based on findings from these studies, I identified the following problems with the state-of-the-art in program analysis tool notification design:
+
+\begin{itemize}
+	\item Tool notifications can be difficult to sort through and interpret, making them difficult to use.
+	\item Many notifications do not effectively and consistently communicate to accommodate individual developer knowledge.
+\end{itemize}
 
 \section{A Tool Miscommunication Theory}\label{sec:theory}
 %session study (fse)
