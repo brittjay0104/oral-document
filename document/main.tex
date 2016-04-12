@@ -144,7 +144,7 @@ Typically, static analysis works by examining the current state of the program, 
 Examples of static analysis tools include defect detectors, such as FindBugs, compilers, code smell detectors, and refactoring tools.
 % TODO talk about what static analysis can do/find to motivate further
 
-Let's use the example of FindBugs,\footnote{http://findbugs.sourceforge.net/factSheet.html} an open source static analysis tool, to better understand how static analysis tools work. FindBugs statically analyzes code to report potential defects. FindBugs determines the potential for defects using \emph{bug patterns}, or code idioms that map to errors, found in Java \emph{bytecode}, or compiled Java class files. Because FindBugs analyzes code without executing it, there is a heightened risk for \emph{false positives}, or defects detected that will never manifest during run-time. When FindBugs finds a potential defect, it alerts the developer using notifications that provide information regarding the defect. I will discuss tool notifications in more detail in Section~\ref{subsec:comm}.
+Let's use the example of FindBugs,\footnote{http://findbugs.sourceforge.net/factSheet.html} an open source static analysis tool, to better understand how static analysis tools work. FindBugs statically analyzes code to report potential defects. FindBugs determines the potential for defects using \emph{bug patterns}. Bug patterns are code idioms that map to errors, found in Java \emph{bytecode}. Bytecode, in Java, represents the compiled Java class files. Because FindBugs analyzes code without executing it, there is a heightened risk for \emph{false positives}. False positives are defects detected that will never manifest during run-time. When FindBugs finds a potential defect, it alerts the developer using notifications that provide information regarding the defect. I will discuss tool notifications in more detail in Section~\ref{subsec:comm}.
 
 
 \subsubsection{Dynamic Analysis Tools.}
@@ -251,8 +251,8 @@ For my next concept inventory, I combined concept inventory research with examin
 I discuss the process that led to this final set of steps when I related study in Section~\ref{subsec:s3}.
 
 \subsection{Using Public Git Repositories to Predict Concept Knowledge}
-Research suggests that knowledge is often accumulated and organized based on our own relevant experiences~\cite{johnson1989mental,argote2011organizational}. As a developer, many experiences are focused on writing source code; writing software is also perhaps one of the most concrete actions that can be labeled as an experience for a developer. Therefore, I used \emph{concept-specific source code} to determine independent variables for my models. Concept-specific code is code that maps to a given programming concepts; an example of multi-threading-specific code is \texttt{synchronized(variable)}, where the developer has written code that synchronizes variables for multi-threaded execution.
-I built a Java source code analyzer that analyzes code bases for concept-specific code, which I will discuss in more detail in Section~\ref{sec:eval}. 
+Research suggests that knowledge is often accumulated and organized based on our own relevant experiences~\cite{johnson1989mental,argote2011organizational}. As a developer, many experiences are focused on writing source code; writing software is also perhaps one of the most concrete actions that can be labeled as an experience for a developer. Therefore, I used \emph{concept-specific source code} to determine independent variables for my models. I define concept-specific code is code that maps to a given programming concepts; an example of multi-threading-specific code is \texttt{synchronized(variable)}, where the developer has written code that synchronizes variables for multi-threaded execution.
+I built a Java source code analyzer that analyzes code bases for concept-specific code.
 
 To accurately create models, I need to be able to attribute code changes to a specific developer; this is coupled with developer--dependent scores from the concept inventories to create and evaluate the models. Analyzing static code can tell me the presence of conceptually relevant code patterns, such as synchronization or generics usage. However, it can not tell me who contributed that code which is important when trying to build models that can accurately predict individual knowledge. 
 Therefore, I propose using version control to automate and ease the process of assigning code contributions to a given developer. 
@@ -683,7 +683,7 @@ In the study outlined in Section~\ref{subsec:s2}, I found that the challenges de
 I propose that communication between notifications and developers can be improved if the notifications could adapt to the developer based on the developer's knowledge of programming concepts.
 This proposition is based on constructivism, a verbal communication theory that suggests awareness of how the audience might react to a message improves communication~\cite{griffin2011first}. For this to be possible in the context of tool use, tools need a way of knowing what concepts the developer knows and does not know. 
 We propose using concept inventories, a method used in education research for assessing conceptual knowledge~\cite{tew2010assessing}, and the possibility of providing knowledge information to tools in the form of concept knowledge models. 
-The goal of this study was to develop and assess an approach for developing models that predict knowledge of programming concepts that appear in tool notifications based on code the developer has written pertaining to that concept, or concept-specific code. 
+The goal of this study was to develop and assess an approach for developing models that predict knowledge of programming concepts that appear in tool notifications based on concept-specific code the developer has written. 
 %We designed a concept inventory to assess conceptual knowledge and collected source code relevant to the Java concept of generics from 24 developers. We used unsupervised learning to determine a model that accurately predicts developer knowledge.
 %The main contributions of this paper are: 1) an approach for assessing developer conceptual knowledge using concept inventories and 2) an approach for modeling developer conceptual knowledge based on concept-specific code written by a given developer.
 
@@ -712,7 +712,7 @@ To test my hypotheses, I chose Java generics as the initial concept. I made this
 Another advantage to using a concept like generics to test my hypotheses is that it is multi-faceted; there are enough features of and ways to use generics for there to be relationships that I can explore and use to generalize for applicability to other concepts.
 
 To determine the independent variables for my model, I analyzed for code contributions and assigned them to developers using version control. 
-I built a Java source code analyzer that analyzes code bases for concept-specific code, or code directly related to a concept, using the Eclipse JDT ASTParser. 
+I built a Java source code analyzer that analyzes code bases for concept-specific code using the Eclipse JDT ASTParser. 
 One example of generics-specific code is a generic type declaration ((\texttt{public class <T> Box})).
 Analyzing static code with the ASTParser detects the presence of concept-specific code, however, it cannot provide who contributed that code. 	
 Therefore, I used code bases in repositories so I could determine what developer made what contribution via the commit history. 
