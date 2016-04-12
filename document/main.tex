@@ -140,7 +140,7 @@ In the following sections, I will define and discuss static analysis and dynamic
 \subsubsection{Static Analysis Tools.}
 
 Static analysis tools are designed to aide developers when developing software by statically analyzing source code, pre-runtime, and providing the developer with feedback about the state of their code~\cite{ernst2003static}.
-Typically, static analysis works by examining the current state of the program and then predicting and reporting how the program may react in that state at runtime. Static analyses are often more conservative than dynamic analyses; this is to reduce the potential for false positives, as in most cases static analysis cannot say with 100\% certainty what will happen during run-time. 
+Typically, static analysis works by examining the current state of the program, predicting how the program may react in that state at runtime, and reporting any information they deem necessary to the developer. Static analyses are often more conservative than dynamic analyses; this is to reduce the potential for false positives, as in most cases static analysis cannot say with 100\% certainty what will happen during run-time. 
 Examples of static analysis tools include defect detectors, such as FindBugs, compilers, code smell detectors, and refactoring tools.
 % TODO talk about what static analysis can do/find to motivate further
 
