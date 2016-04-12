@@ -24,6 +24,7 @@
 
 \usepackage{blindtext}
 \usepackage{scrextend}
+\usepackage{multirow}
 \addtokomafont{labelinglabel}{\ttfamily}
 
 \setlength\floatsep{1\baselineskip plus 3pt minus 2pt}
@@ -76,9 +77,9 @@
 
 
 %
-\newpage
-\tableofcontents
-\newpage
+%\newpage
+%\tableofcontents
+%\newpage
 %
 
 % TODO update ToC with page numbers!
@@ -87,7 +88,7 @@
 
 
 \fbox{
-	\parbox{\textwidth}{If program analysis \emph{tool use} is a form of \emph{communication} and \emph{inability to resolve} notifications is \emph{miscommunication}, tools can adopt a theory similar to \emph{constructivism} where tools can \emph{approximate} individual developer's \emph{conceptual knowledge} to adapt notifications, leading to \emph{reduced time and effort} required for developers to understand and resolve tool notifications.
+	\parbox{\textwidth}{I propose program analysis \emph{tool use} is a form of \emph{communication} and \emph{inability to resolve} notifications is a result of \emph{miscommunication}, therefore tools can adopt a theory similar to \emph{constructivism} where tools can \emph{approximate} individual developer's \emph{conceptual knowledge} to adapt notifications, leading to \emph{reduced time and effort} required for developers to understand and resolve tool notifications.
 		}
 	}
 %
@@ -135,7 +136,7 @@ Because the tools Valerie uses have no notion of what she does and does not know
 Program analysis tools are tools designed to aide developers when developing software by automating the writing, analysis, and modification of source code.
 Often, program analysis is discussed as synonymous with static analysis~\cite{nielson2015principles}. 
 For the purpose of my research, I define a program analysis tool as a tool that performs program analysis, whether it be static or dynamic analysis.
-Examples of program analysis tools include, but are not limited to, static code analyzers, code coverage tools, code smell detectors, and refactoring tools~\cite{adolph2011using, Murphy-Hill:2010:Ambient,ge2012reconciling}.
+Examples of program analysis tools include, but are not limited to, static code analyzers, code coverage tools, code smell detectors, and refactoring tools~\cite{adolph2011using,Murphy-Hill:2010:Ambient,ge2012reconciling}.
 In the following sections, I will define and discuss static analysis and dynamic analysis tools separately; the reader should note that although we discuss static and dynamic analysis separately, it is not uncommon to find program analysis tools that combine static and dynamic analysis~\cite{ernst2003static}.                                                
 
 \subsubsection{Static Analysis Tools.}
@@ -181,7 +182,7 @@ In verbal communication, there is a speaker with a message; depending on how the
 As with verbal communication, the ability of a developer to interpret a tool's message depends on how the message is composed and delivered.
 % TODO more here on similarities between verbal and tool comm (or explicit mapping to comm model?)
 
-\subsection{Why do developers not use or have difficulty using program analysis tools?}
+\subsection{How do developers feel about program analysis tools?}
 % interactive interviews (icse) & %session study (fse)
 Despite the possibility program analysis tools provide for exploration and improvement of source code, research has found that consistent usage of tools like FindBugs is not frequent~\cite{Ayewah:2008:FindBugs}.
 Though research explored tool usage, there was no research exploring what tool features developers use, what improvements they would like to see, and why~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}.
@@ -231,11 +232,12 @@ Borrowing from existing computer science education research, I developed concept
 
 I need to assess knowledge with a wide range of developers outside of academia, therefore I could not borrow directly from literature. So far I have created two concept inventories. The first was on null object dereferencing. For this concept inventory, I created 9 questions based on the chapters in~\cite{stuart2011building} and program analysis tool notifications relevant to the concept. Although findings from using this concept inventory are promising, we needed more validation to determine the usefulness of the concept inventory as a method of knowledge assessment. 
 
-For my next concept inventory, I combined concept inventory research with examinations using Bloom's Taxonomy~\cite{tew2010developing, nelson1967testing,scott2003bloom}. By using Bloom's Taxonomy to inform question creation, I can increase assurance that my questions exhaustively assess understanding. The current inventory has 10 questions, each worth 1 point, that effectively assess knowledge and represent ground truth conceptual knowledge. The final, validated process I have developed for creating general programming concept inventories is as follows:
+For my next concept inventory, I combined concept inventory research with examinations using Bloom's Taxonomy~\cite{tew2010developing,nelson1967testing,scott2003bloom}. By using Bloom's Taxonomy to inform question creation, I can increase assurance that my questions exhaustively assess understanding. The current inventory has 10 questions, each worth 1 point, that effectively assess knowledge and represent ground truth conceptual knowledge. The final, validated process I have developed for creating general programming concept inventories is as follows:
 
+\vspace{0.5em}
 \noindent\textbf{Define Conceptual Content for Test Specification.} I used sources such as Oracle Documentation and Tutorials to come up with the relevant conceptual content. A test specification is a way of formally outlining what will be on the test without having to write the questions~\cite{tew2010developing}. 
 
-\vspace*{0.5em}
+\vspace{0.5em}
 
 \noindent\textbf{Build Bank of Test Questions.} This step is where Bloom's Taxonomy becomes important. Without using Bloom's Taxonomy, I could create a group of questions that potentially assess the same level of understanding. Therefore, I came up with at least 1 question for each level of Bloom's taxonomy, based on my test specification, using examples found in ~\cite{nelson1967testing} and ~\cite{thompson2008bloom}.  
 
@@ -293,7 +295,7 @@ I have outlined my proposed research; next I will outline the studies, experimen
 \section{Experiments \& Evaluations}\label{sec:eval}
 % TODO think about RQs for each
 % why don't study (completed)
-\subsection{Why don't developers use static analysis tools to find bugs?}\label{subsec:s1}
+\subsection{Why don't developers use static analysis tools to find bugs? [Reasons]}\label{subsec:s1}
 
 \subsubsection{Study rationale.} Static analysis tools provide a means for analyzing code without having to run
 the code, helping ensure higher quality software throughout the development process. There are a variety of ways to perform automatic static
@@ -305,7 +307,7 @@ lead to unsafe thread interactions. Developers have been able to eliminate many 
 by static analysis tools. 
 Despite the benefits of using static analysis tools to find bugs, consistent usage of these tools is not very frequent~\cite{Ayewah:2008:FindBugs}. 
 There have been studies to investigate ways of improving static analysis tools. However, none look at what the tools do or can do for a developer, what features
-developers use, what could be improved \emph{and} why~\cite{Bessey:2010:Coverity, Khoo:2008:PathProjection}. 
+developers use, what could be improved \emph{and} why~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}. 
 
 \subsubsection{Research questions.}
 \begin{labeling}{questions}
@@ -314,7 +316,7 @@ developers use, what could be improved \emph{and} why~\cite{Bessey:2010:Coverity
 	\item [RQ3] What improvements do developers want to see made to static analysis tools?
 \end{labeling}
 
-\subsubsection{Participants}
+\subsubsection{Participants.}
 
 
 \subsubsection{Methodology.}
@@ -413,7 +415,7 @@ I also explored the ability for existing tools to integrate with developer workf
 	\item [Fast Feedback] Participants noted that another important part of workflow integration is the ability to give fast feedback; in other words, the sooner the tool can alert the developer to a problem in their code, the better the tool integrates into their workflow.
 \end{description}
 
-Finally, participants elaborated a number of ideas for how current static analysis tools could improve. 
+Finally, participants elaborated a number of ideas for how current static analysis tools could improve (RQ3). 
 The majority of design suggestions fell into one of two categories: \textbf{Quick Fix Design} and \textbf{Warning Notification and Manipulation Design}. I will now discuss each design suggestion in detail:
 \begin{description}
 	\item[Quick Fix Design (10)] Quick fixes automatically resolve defects by applying a fix to the developer's code on her behalf. Suggestions participants had for improving this feature include providing fix previews through diffs and providing dialog boxes for walking through and toggling between fixes. 
@@ -431,9 +433,9 @@ Other suggestions made by participants throughout their sessions include having 
 
 
 
-\subsection{Why do developers have difficulty interpreting tool notifications?}\label{subsec:s2}
+\subsection{Why do developers have difficulty interpreting tool notifications? [Challenges]}\label{subsec:s2}
 % session study (completed)
-\subsubsection{Study rationale.} Program analysis tools, such as static analysis tools, refactoring tools, and code smell detectors, can ease manual and sometimes tedious software development tasks by automatically analyzing and modifying source code~\cite{adolph2011using, Murphy-Hill:2010:Ambient}. 
+\subsubsection{Study rationale.} Program analysis tools, such as static analysis tools, refactoring tools, and code smell detectors, can ease manual and sometimes tedious software development tasks by automatically analyzing and modifying source code~\cite{adolph2011using,Murphy-Hill:2010:Ambient}. 
 Output from these tools, such as warnings and errors, come in the form of textual or visual notifications that vary from tool to tool.
 In our previous interviews, 20 professional developers reported not using static analysis tools, one type of program analysis tool, because notifications can be difficult to interpret~\cite{johnson2013don}. The goal of this study was to understand what makes it challenging for developers to interpret program analysis tool notifications. To identify challenges, we examined tool use through the lens of communication theory~\cite{bowman1987modeling}. 
 
@@ -581,7 +583,7 @@ I also wanted to see if developers could interpret tool notifications without th
 discussed or completed notification resolution. I did not require them to do so, since it would be unfair to ask them to resolve a notification if they did not understand it.
 As participants explained the notifications, I asked follow-up questions as necessary. 
 
-% HERE!
+
 For each task, I chose notifications to represent the types of notifications developers may encounter when programming.
 For FindBugs and the Eclipse compiler, I chose notifications that appeared frequently in the Sun JDK project. I chose EclEmma notifications from JFreeChart to exercise a range of its coverage scenarios. Because EclEmma's documentation does not specify the range of notifications it uses, I manually went through JFreeChart's codebase after running the tool and took note of each new coverage scenario encountered. I then included an example of each coverage scenario in the EclEmma tasks.
 
@@ -619,7 +621,7 @@ Each EclEmma task consisted of participants explaining coverage notifications fo
 I transcribed each session and included descriptions of actions that a participant performed relevant to interpreting the notification. 
 For example, if a participant navigated to different parts of the code but did not explicitly describe it, I added a description of that navigation to the transcript.
 
-% HERE!
+
 I analyzed each transcript using selective coding~\cite{corbin2014basics} to discover the challenges participants encountered with the goal of explaining the challenges programmers encounter. 
 To identify a challenge in the context of my research goal, I needed concrete coding criteria. I propose that tool use is a form of communication, and therefore that challenges when interpreting a notification can be seen as miscommunication. Following this logic, I used Mustajoki's proposed model of (mis)communication to determine when a miscommunication-related challenge occurred~\cite{mustajoki2008modelling} by creating three criteria to identify a challenge: 1) the participant explicitly states a challenge, 2) is unable to explain the notification, or 3) has to take steps, outside of reading the notification, to deduce the problem.
 Whether an observation met a criterion is independent of whether the participant was able to explain the notification.
@@ -635,7 +637,7 @@ In phase 1, we sorted all cards into high-level themes; each card could only go 
 Phase 2 focused on determining where high-level themes could be broken down into lower-level themes.
 In phase 3, we focused on making sure that each card was in the best fitting theme. During this phase, we also clarified theme definitions and made note of example statements to represent each theme.
 
-Because one of our criteria is participant inability to explain a notification, any actions or statements made surrounding that occurrence was included in the card sort. Upon reflection, some emergent themes took the form of consequences of being unable to explain rather than challenges that led to inability to explain, such as notification resolution without understanding and lack of trust in the tool, therefore I will not discuss them in relation to this study. I likewise do not discuss the emergent theme of tool feature requests.
+Because one my criteria is participant inability to explain a notification, any actions or statements made surrounding that occurrence was included in the card sort. Upon reflection, some emergent themes took the form of consequences of being unable to explain rather than challenges that led to inability to explain, such as notification resolution without understanding and lack of trust in the tool, therefore I will not discuss them in relation to this study. I likewise do not discuss the emergent theme of tool feature requests.
 
 \def\toggle{
 	\begin{scope}[ocg={name=test1, ref=t1, status=visible}]
@@ -676,7 +678,7 @@ When opened in Adobe Acrobat, clicking \framebox{``Hide/Display Details''}
 interactively toggles between showing and hiding this mapping.
 
 % model building (completed)
-\subsection{Can we use developer experiences to predict knowledge?}\label{subsec:s3}
+\subsection{Can we use developer experience to predict knowledge? [Predictions]}\label{subsec:s3}
 
 \subsubsection{Study rationale.}
 In the study outlined in Section~\ref{subsec:s2}, I found that the challenges developers encounter may be due to the fact that, despite developer differences in background and knowledge, tools use the same notifications to communicate to all developers. 
@@ -691,13 +693,13 @@ The goal of this study was to develop and assess an approach for developing mode
 
 \begin{labeling}{hypotheses}
 	\item [H\textsubscript{1}] We can predict conceptual knowledge using source code as a primary source of developer data.
-	\item [H\textsubscript{2}] Concept-specific code increases model accuracy and precision compared a model that uses lines of code (LOC) only.
+	\item [H\textsubscript{2}] Concept-specific code increases model accuracy and precision compared to a model that uses lines of code (LOC) only.
 \end{labeling}
 
 \subsubsection{Approach.}
 \vspace{0.5em}
 \noindent\textit{Assessing \& Encapsulating Conceptual Knowledge.}
-To assess \& encapsulate developer knowledge as the dependent variable for our models, I borrowed from computer science education literature and developed a concept inventory~\cite{tew2010assessing}. 
+To assess \& encapsulate developer knowledge as the dependent variable my our models, I borrowed from computer science education literature and developed a concept inventory~\cite{tew2010assessing}. 
 To determine the questions for the inventory, I identified key generics concepts. I used the Oracle Java Tutorial on Generics\footnote{\url{http://docs.oracle.com/javase/tutorial/java/generics/}} to find and map the relationships between generics concepts and ancestor concepts; if Lesson 5 built on top of Lesson 1, I considered Lesson 5 an ancestor of Lesson 1. For example, based on the generics tutorial, I labeled Upper Bounded Wildcards as an ancestor concept to Wildcards. Once I had the key concepts, I mapped each level of Bloom's Taxonomy to at least one key concept. From this process, I derived 11 questions.
 
 Next, to test the validity of our concept inventory, I used item and distractor analysis in R. Item analysis determined if the items on our inventory contribute are valid methods of assessment; from this process we eliminated 1 question, which gave us a final set of 10 questions.  Distractor analysis determined if the options provided for a given question are fair and if the incorrect options contribute to the quality of our inventory; because each option was selected at least once for each inventory item, and most often the correct option was chosen, I kept all response options for each inventory item.
@@ -758,9 +760,114 @@ For increased model stability, I selected the variables that appeared in more th
 
 \subsubsection{Results.}
 
+\begin{table}[h]
+	\centering
+	\caption{Precision, Recall, and F-Score for Beginner Classification}
+	\label{tab:beginner}
+	\begin{tabular}{llll}
+		\hline
+		\multirow{2}{*}{}                                                    & \multicolumn{3}{c}{\textbf{Beginner}}                   \\ \cline{2-4} 
+		& \textit{Precision} & \textit{Recall} & \textit{F-Score} \\ \hline
+		\textbf{LOC}                                                         & 0.5                & 0.333           & 0.4              \\
+		\textbf{DeclRecency}                                                 & 0.667              & 0.333           & 0.444            \\
+		\textbf{\begin{tabular}[c]{@{}l@{}}DeclRecency +\\ LOC\end{tabular}} & 0.625              & 0.833           & 0.714       \\
+		\hline    
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{Precision, Recall, and F-Score for Intermediate Classification}
+	\label{tab:intermediate}
+	\begin{tabular}{llll}
+		\hline
+		\multirow{2}{*}{}                                                    & \multicolumn{3}{c}{\textbf{Intermediate}}               \\ \cline{2-4} 
+		& \textit{Precision} & \textit{Recall} & \textit{F-Score} \\ \hline
+		\textbf{LOC}                                                         & 0.636              & 0.778           & 0.7              \\
+		\textbf{DeclRecency}                                                 & 0.727              & 0.889           & 0.8              \\
+		\textbf{\begin{tabular}[c]{@{}l@{}}DeclRecency +\\ LOC\end{tabular}} & 0.75               & 0.667           & 0.706        \\   
+		\hline
+	\end{tabular}
+\end{table}
 
 
-\subsection{Does my prototype concept knowledge model scale?} \label{subsec:s4}
+\begin{table}[h]
+	\centering
+	\caption{Precision, Recall, and F-Score for Advanced Classification}
+	\label{tab:advanced}
+	\begin{tabular}{llll}
+		\hline
+		\multirow{2}{*}{}                                                    & \multicolumn{3}{c}{\textbf{Advanced}}                   \\ \cline{2-4} 
+		& \textit{Precision} & \textit{Recall} & \textit{F-Score} \\ \hline
+		\textbf{LOC}                                                         & 0.875              & 0.875           & 0.875            \\
+		\textbf{DeclRecency}                                                 & 0.778              & 0.875           & 0.824            \\
+		\textbf{\begin{tabular}[c]{@{}l@{}}DeclRecency +\\ LOC\end{tabular}} & 1                  & 0.875           & 0.933     \\
+		\hline      
+	\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+	\centering
+	\caption{Total Precision, Recall, and F-Score}
+	\label{tab:total}
+	\begin{tabular}{llll}
+		\hline
+		\multirow{2}{*}{}                                                    & \multicolumn{3}{c}{\textbf{Total}}                      \\ \cline{2-4} 
+		& \textit{Precision} & \textit{Recall} & \textit{F-Score} \\ \hline
+		\textbf{LOC}                                                         & 0.684              & 0.696           & 0.683            \\
+		\textbf{DeclRecency}                                                 & 0.729              & 0.739           & 0.715            \\
+		\textbf{\begin{tabular}[c]{@{}l@{}}DeclRecency +\\ LOC\end{tabular}} & 0.804              & 0.783           & 0.787      \\
+		\hline     
+	\end{tabular}
+\end{table}
+
+
+Based on developer classifications and the set of independent variables, CFS identified two variables that fit my variable selection criteria: LOC and DeclRecency.  	
+I created three decision tree models: 1) LOC only (Figure~\ref{fig:LOC}, 2) DeclRecency only (Figure~\ref{fig:decl}, and 3) LOC \(+\) DeclRecency (Figure~\ref{fig:declLOC}. I created a model based on LOC only to test H\textsubscript{2}. 
+To further explore how each affects overall model accuracy and precision for H\textsubscript{1} and H\textsubscript{2}, I created a model using both LOC and DeclRecency.
+The values for each model's \emph{precision}, \emph{recall}, and \emph{F-Score} values are shown in Table~\ref{tab:beginner} (Beginner), Table~\ref{tab:intermediate} (Intermediate), Table~\ref{tab:advanced} (Advanced), and Table~\ref{tab:total} (Total).
+%	We observed the model's ~\cite{olson2008advanced}; 
+
+% H1 --> can use source code
+\vspace{0.5em}
+
+\begin{figure} [h]
+	\centering
+	\includegraphics[width=4in]{figs/decl-LOC.pdf}
+	\caption{Decision tree model using DeclRecency and LOC as independent variables.}
+	\label{fig:declLOC}
+\end{figure}
+
+\begin{figure} [h]
+	\centering
+	\includegraphics[width=3.5in]{figs/decl.pdf}
+	\caption{Decision tree model using DeclRecency as the independent variable.}
+	\label{fig:decl}
+\end{figure}
+
+\begin{figure} [h]
+	\centering
+	\includegraphics[width=3in]{figs/LOC.pdf}
+	\caption{Decision tree model using LOC as the independent variable.}
+	\label{fig:LOC}
+\end{figure}
+
+\noindent\textbf{My findings support my hypothesis that it is possible to predict conceptual knowledge using source code as a primary source of developer data. (H\textsubscript{1})}\\
+All three models correctly classified developers more often than not (LOC = 70\%; DeclRecency = 74\%; Combination = 78\%); in fact, by combining LOC with DeclRecency, the accuracy of classification increased by 4\%. This increase may be due to the fact that, as existing research suggests, all experiences contribute to overall knowledge~\cite{argote2011organizational}. Similarly, general coding experience seems to also contribute to conceptual knowledge.
+
+Based on the models shown in Figure~\ref{fig:declLOC} and Figure~\ref{fig:decl}, how recently code contributions are made also affect conceptual knowledge. Based on the recency heuristic, a higher DeclRecency value suggest more recent code contributions. This suggests that determining a developer's knowledge of concepts may require both declarations and recent experience with declarations. 
+
+
+% H2 --> concept-specific code better
+\vspace{0.5em}
+
+\noindent\textbf{My findings support my hypothesis that concept-specific code improves model performance compared to a model that uses LOC only. (H\textsubscript{2})}\\
+The LOC model's precision, recall, and F-Score suggest it may be better at classifying developers with advanced generics knowledge than the DeclRecency model (Figure~\ref{tab:advanced}). However, overall model accuracy is higher in the DeclRecency model (74\%) than the LOC model (70\%) (Table~\ref{tab:total}. There was also a slight performance increase overall, with increased precision and F-Score for beginner (\(+ 0.167\), \(+ 0.04\)) and intermediate (\(+ 0.09\), \(+ 0.1\)) classification and increased total precision (\(+ 0.05\)), recall (\(+ 0.04\)), and F-Score (\(+ 0.03\)). Also, as shown in Figure~\ref{fig:declLOC}, LOC only becomes relevant when classifying beginner and intermediate developers. This may be because beginner and intermediate developers do not declare enough generics to make an informed decision without some reference to general experience they have.
+Regardless, these findings suggest that although both LOC and concept-specific code can both be used to predict conceptual knowledge, concept-specific code increases overall model accuracy and precision.
+
+
+\subsection{Does my prototype concept knowledge model scale? [Scalability]} \label{subsec:s4}
 
 \subsubsection{Study rationale.} Two important aspects to consider when developing a quality tool or approach are \emph{performance} and \emph{scalability}. 
 Research suggests that there is an inverse relationship between performance and scalability with respect to information systems; when performance is increased, stability decreases(and vice versa)~\cite{khaddaj2004evaluation}.
@@ -779,13 +886,14 @@ Assessing scalability in the context of a mathematical model is a primarily quan
 
 \subsubsection{Proposed methodology.}
 I plan to explore the scalability of, and refine, M1 by combining qualitative feedback with scalability assessments. One of my ongoing (implicit) model refinement efforts is finding more developers for building and assessing M1 and, if needed, creating and evaluating new models.
+
 \vspace{0.5em}
 \noindent\textit{Scalability Assessments.}
 I built and assessed M1 using the same set of developers; one way I plan to assess the scalability of M1 to other developers (RQ1) is by making predictions with a separate set of developers. Doing so will allow me to observe the ability for M1 to scale to a wide range of developers. 
 To assess the scalability of M1 in regards to other concepts, I plan to analyze participant repositories for concept-specific code pertaining to others Java concepts. 
 To select the concepts for assessment, I plan to use the following criteria:
 \begin{itemize}
-	\item It is a concept that appears in program analysis tool notifications, particularly FindBugs which I plan to extend to assess the potential for adaptive notifications(Section~\ref{subsec:s5}).
+	\item It is a concept that appears in program analysis tool notifications, particularly FindBugs which I plan to extend to assess the potential for adaptive notifications (Section~\ref{subsec:s5}).
 	\item It is a concept that has a wide range of sub-concepts.
 	\item It is a concept that has features that may go unused by most developers.
 \end{itemize}
@@ -807,22 +915,46 @@ Using the codes from the transcripts, I will perform content analysis to determi
 To validate source code as a factor, and other factors that emerged during the interviews, I plan to administer a survey to another set of developers (50--100). Using data from the survey, I will perform various analyses using R. Findings from both the qualitative and quantitative analyses will serve to potentially confirm current model building efforts and inform future data analysis and model building efforts.
 
 
-\subsection{Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications?} \label{subsec:s5}
+\subsection{Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications? [SmartBugs]} \label{subsec:s5}
 \subsubsection{Study rationale.}
-\subsubsection{Research questions.}
+Based on findings from previous studies, I propose that communication between tools and developers can be improved if rather than using one-size-fits-all notifications, tools used knowledge-based notifications. Knowledge-based notifications would use the models I propose and refine in the studies from Section~\ref{subsec:s3} and Section~\ref{subsec:s4}. If communication theory applies directly to tool use, constructivism communication theory should also apply~\cite{griffin2011first}. Constructivism states that a speaker with awareness of how her audience will react to her message can tailor the message to the audience and therefore improve the audience's ability to understand and relate to the message. 
+I have explicitly assessed the applicability of general communication theory to tool use (Section~\ref{subsec:s2}), however, I have not explicitly assessed the applicability of constructivism to notification and tool design. Therefore, the goal of this study is to assess whether knowledge-based communication, in regards to tool use, is better than one-size-fits-all communication.
+
+\subsubsection{Research questions \& Hypothesis.}
 
 \begin{labeling}{questions}
 	\item [RQ1] How does existing notification design research map to differences in developer knowledge?
 	\item [RQ2] Are there differences in notification design expectations across developers with differing knowledge?
-	\item [RQ3] Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications?
+	\item [H\textsubscript{1}] Adaptive, knowledge-based notifications are more effective than one-size-fits-all notifications.
 \end{labeling}
 
 \subsubsection{Proposed methodology.}
 % TODO make sure to mention using FindBugs and why
-% notification adaptations
-% study 1: design notifications based on existing research; user study to determine which are better for which group (and maybe some participatory design)
-% tool: automatically apply predicted knowledge to adapt
-% study 2: compare performance between our tool and FindBugs
+To answer RQ1, I will perform a literature review of existing research on the design, presentation, and developer interpretation of tool notifications. The focus of this literature review will be to explore the design space of notifications and how developers with various backgrounds (i.e. novice versus expert) find and use information to understand problems in their code. For example, existing research suggests that experts more often rely on abstractions to understand problems in their code, while novices tend to focus on the literal features, such as the constructs in the source code~\cite{Weiser:1983:Representation}. Therefore, one potential design consideration for notifications for novices is to center the explanation around the source code, or parts of the source code, while for experts a consideration would be to use more abstractions. I will compile a list of related findings and map these findings to developer knowledge or expertise.
+
+To answer RQ2, I will code the list of findings to determine 1) themes within a knowledge group and 2) how themes differ across knowledge groups. I plan to use a methodology similar to the methodology outlined in Section~\ref{subsec:s2}. Once I have these themes, I can begin to develop my approach for assessing H\textsubscript{1}. 
+
+To assess H\textsubscript{1}, I plan to 1) assess potential knowledge-based notification adaptations and 2) implement and evaluate a tool that replaces one-size-fits-all notifications with knowledge-based notifications. 
+I will first use findings from RQ1 and RQ2 to design notification templates that map to different levels of expertise; for consistency, I will attempt to use three groups as I did in the study in Section~\ref{subsec:s3}. 
+% TODO this is incomplete!
+Once I have a prototype notification design template...
+
+Based on the results from my user study, I will develop a prototype tool, which I will call SmartBugs, that will adapt notification presentation based on developer knowledge. I plan to build SmartBugs on top of FindBugs because it is a mature, open source defect finding tool with a wide range of notifications that have no obvious pattern behind the information it provides in a given notification. FindBugs will serve as the baseline (one-size-fits-all) set of notifications to compare SmartBugs' notifications to (knowledge-based).
+
+For the evaluation of SmartBugs, I will attempt to re-use the same participants from the studies in Section~\ref{subsec:s3} and Section~\ref{subsec:s4}. This will prevent the overhead of finding new participants with Git repositories and the potential overhead of asking more developers to take potentially multiple concept inventories.
+As a back-up plan, I will consider using self--reported knowledge; my findings from the study in Section~\ref{subsec:s3} suggest that most often developers are aware of how much they know about a given concept.
+% TODO what other way can I get knowledge? Anything lighter weight?
+
+For the user evaluation, I will divide participants into two groups: one group will use FindBugs (FB) and the other will use SmartBugs(SB). Each group will have an equal number of developers from each classification group to ease the process of analyzing the data. All developers in the FB group will be presented with the normal notifications used by FindBugs. Developers in the SB group will be presented with notifications based on their classification and the mappings from RQ1 and RQ2.
+
+To assess whether SmartBugs is more effective than FindBugs, I will observe 1) the ability for participants to understand and resolve each notification and 2) the time it takes for participants to understand and resolve each notification. I will measure understanding by requesting participants explain the notification aloud. I will assess the correctness of their explanations to determine whether they correctly interpreting the message; this will be my proxy for understanding. I will assess ability to resolve the notification by observing if the participant makes intentional code changes
+
+I also plan to allow use of the web for both FindBugs and SmartBugs; this will inform future improvement efforts. For example, if a group of SmartBugs users have to go to the web, particularly if they are in the same classification, this information can be used to improve the information provided to developers in that classification.
+
+To assess user satisfaction with SmartBugs and FindBugs notifications, I will administer a user satisfaction survey post-evaluation to gain insights into participant options of both sets of output.
+
+% TODO really wanna put PD in here somewhere!
+
 
 \section{Related Work}
 
@@ -831,10 +963,37 @@ There will be lots here -- just seemed like something I could put on the backbur
 \section{Project Plan}
 % TODO month by month (deadline driven - what papers?)
 
+\subsection{Completed Projects \& Publications}
+
+I have completed the following projects \& publications:
+\begin{description}
+	\item[Reasons] Completed Fall 2012; Publication: ICSE 2013
+	\item[Challenges] Completed Fall 2015; Publication: FSE 2016 (in submission)
+	\item[Predictions] Completed Spring 2016; Publication: VL/HCC 2016 (in submission)
+\end{description}
+
+\subsection{Upcoming Projects \& Publications}
+
+I plan to complete the following projects \& publications by my defense in Spring 2017:
+
+\begin{description}
+	\item[Scalability] (in progress) \textit{Amend IRB for interviews and survey} (May 2 -- May 9); \textit{Data collection} (April 11 -- April 25); \textit{Conduct Interviews} (May 11 -- May 20); \textit{Data analysis} (May 21 -- May 28) ; \textit{Create and administer survey} (May 29 -- June 12); \textit{Survey analysis} (June 13 -- June 30); \textit{Publication}: ICSE 2017 (est. 8/28)
+	\item[SmartBugs] \textit{Study IRB} (May 2 -- May 9); \textit{Literature Review} (June 6 -- June 12); \textit{Develop SmartBugs} (with aide of Master's student) (June 13 -- October 3); \textit{User Study} (October 10 -- October 21) ; \textit{Data analysis} (October 22 -- October 30); \textit{Write and edit draft} (November 1 - March 11/March 18); \textit{Publication}: FSE 2017 (est. 3/11) or VL/HCC 2017 (est. 3/18)
+	\item[Dissertation] \textit{Write and edit draft} (January 1 -- May 1) ; \textit{Publication}: Thesis Document
+\end{description}
+
+%ICSE 2017
+
+%FSE2017
+
+%VLHCC (backup?)
+
+% JOURNAL??
 
 \section*{Acknowledgments}
 
 
+\bibliographystyle{splncs03}
 \bibliography{main.bib}
 
 %
@@ -869,9 +1028,6 @@ There will be lots here -- just seemed like something I could put on the backbur
 %On subharmonic solutions of a Hamiltonian system.
 %Comm. Pure Appl. Math. 33, 609--633 (1980)
 %\end{thebibliography}
-%
 
-
-\bibauthoryear
 %
 \end{document}

@@ -13,30 +13,32 @@
 \contentsline {subsection}{\numberline {4.2}Using Public Git Repositories to Predict Concept Knowledge}{11}
 \contentsline {section}{\numberline {5}A Proposed Approach for Knowledge-Based Notifications}{11}
 \contentsline {section}{\numberline {6}Experiments \& Evaluations}{12}
-\contentsline {subsection}{\numberline {6.1}Why don't developers use static analysis tools to find bugs?}{12}
+\contentsline {subsection}{\numberline {6.1}Why don't developers use static analysis tools to find bugs? [Reasons]}{12}
 \contentsline {subsubsection}{Study rationale.}{12}
 \contentsline {subsubsection}{Research questions.}{13}
-\contentsline {subsubsection}{Participants}{13}
+\contentsline {subsubsection}{Participants.}{13}
 \contentsline {subsubsection}{Methodology.}{13}
 \contentsline {subsubsection}{Results.}{16}
-\contentsline {subsection}{\numberline {6.2}Why do developers have difficulty interpreting tool notifications?}{17}
+\contentsline {subsection}{\numberline {6.2}Why do developers have difficulty interpreting tool notifications? [Challenges]}{17}
 \contentsline {subsubsection}{Study rationale.}{17}
 \contentsline {subsubsection}{Research questions.}{18}
 \contentsline {subsubsection}{Participants.}{19}
 \contentsline {subsubsection}{Methodology.}{19}
 \contentsline {subsubsection}{Results.}{22}
-\contentsline {subsection}{\numberline {6.3}Can we use developer experiences to predict knowledge?}{23}
+\contentsline {subsection}{\numberline {6.3}Can we use developer experiences to predict knowledge? [Predictions]}{23}
 \contentsline {subsubsection}{Study rationale.}{23}
 \contentsline {subsubsection}{Hypotheses.}{24}
 \contentsline {subsubsection}{Approach.}{24}
 \contentsline {subsubsection}{Results.}{27}
-\contentsline {subsection}{\numberline {6.4}Does my prototype concept knowledge model scale?}{27}
-\contentsline {subsubsection}{Study rationale.}{27}
-\contentsline {subsubsection}{Research questions.}{27}
-\contentsline {subsubsection}{Proposed methodology.}{28}
-\contentsline {subsection}{\numberline {6.5}Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications?}{29}
+\contentsline {subsection}{\numberline {6.4}Does my prototype concept knowledge model scale? [Scalability]}{29}
 \contentsline {subsubsection}{Study rationale.}{29}
-\contentsline {subsubsection}{Research questions.}{29}
-\contentsline {subsubsection}{Proposed methodology.}{29}
-\contentsline {section}{\numberline {7}Related Work}{29}
-\contentsline {section}{\numberline {8}Project Plan}{29}
+\contentsline {subsubsection}{Research questions.}{30}
+\contentsline {subsubsection}{Proposed methodology.}{30}
+\contentsline {subsection}{\numberline {6.5}Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications? [SmartBugs]}{31}
+\contentsline {subsubsection}{Study rationale.}{31}
+\contentsline {subsubsection}{Research questions \& Hypothesis.}{32}
+\contentsline {subsubsection}{Proposed methodology.}{32}
+\contentsline {section}{\numberline {7}Related Work}{33}
+\contentsline {section}{\numberline {8}Project Plan}{33}
+\contentsline {subsection}{\numberline {8.1}Completed Projects \& Publications}{33}
+\contentsline {subsection}{\numberline {8.2}Upcoming Projects \& Publications}{33}
