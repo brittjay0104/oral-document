@@ -164,12 +164,32 @@ Notifications across tools vary; some provide lots of text (like FindBugs), some
 The goal of EclEmma notifications is to statically show dynamic program behavior and help the developer determine the effectiveness of her test suite. Though EclEmma could use text to communicate code coverage, this takes away the ability to scan the program for areas in most need of attention; therefore, EclEmma uses colors applied directly to the source code to communicate. EclEmma uses other visuals, such as the bar visuals in the Coverage View (Figure~\ref{fig:ecl}) to show coverage on a given package or class.
  % TODO talk about how different parts of notification communicate for each tool; make sure it ties back to goals (defects and test coverage)!
 
-The list of tools and notifications tools use can go on and on, but for the purposes of my research, the general definition I will use for a notification is \emph{a combination of visual and textual information used by a program analysis tool to communicate a message to developers.} Notifications can vary regarding what information and how much detail they provide, however, there are commonalities across tool notifications, which I will discuss next.
+The list of tools and notifications tools use can go on and on, but for the purposes of my research, the general definition I will use for a notification is \emph{a combination of visual and textual information used by a program analysis tool to communicate information to developers about their code.} Notifications can vary regarding what information and how much detail they provide, however, there are commonalities across tool notifications that informed this definition, which I will discuss next.
 
 \subsection{What are the typical components of a tool notification?}
 % based on robilliard book
+One reason I talk about program analysis tools as a type of recommendation system is because they provide information to developers while completing software engineering tasks~\cite{robillard2014recommendation}. 
+Another reason is that program analysis tools use the same strategies defined by Robillard as typical of recommendation systems.
+There are typically two parts to a program analysis tool notification: 1) something that gets the user's attention and 2) a description of what the tool is attempting to communicate.
+Because the program analysis tools I study are typically used within integrated development environments (IDE), I will focus on examples of notifications inside IDEs.
 
+\subsubsection{Getting Developer's Attention.}
+There are a variety of ways that a tool can get the attention of its user~\cite{robillard2014recommendation}. Program analysis tools get the attention of developers in their IDEs in one of three ways: icons, dashboards, or email notifications.
+
+\noindent\textit{Icons.} Most often, program analysis tools use icons to get developers' attention. Icons are images found in the sidebar of IDEs. To alert developers of information available about their source code, tools place an icon on the line of code the tool deems most relevant to the information being conveyed. Images used for icons vary by tool, as can be seen in Figures~\ref{fig:eclipse} and~\ref{fig:ecl}.
+
+\noindent\textit{Dashboards.} Dashboards are less frequently used by program analysis tools, however, there exists tools that use dashboards to get developers' attention while they are writing code. For example, StenchBlossom, a tool that detects bad code smells, uses an ambient dashboard to provide information to developers regarding code smells in their code.
 % recommendation systems break down: somethign to get attention, description
+
+\noindent\textit{Email Notifications.} The least intrusive way that program analysis tools get user's attention is by sending email notifications when there is information to communicate. For example, developers can configure Coverity to send emails when there are potential defects found in their code.
+
+\subsubsection{Description Interfaces.}
+All program analysis tools provide descriptive interfaces that convey information about developer source code~\cite{robillard2014recommendation}. 
+Information is conveyed using some combination of textual descriptions and visual descriptions.
+
+\noindent\textit{Textual Descriptions.}
+
+\noindent\textit{Visual Descriptions.}
 % types of descriptions (text and visual)
 % goals of information provided (??)
 
