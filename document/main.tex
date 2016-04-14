@@ -219,7 +219,6 @@ A developer may also get a notification regarding exception handling. Here, the 
 
 % TODO later, should note that focusing on programming oriented concepts because those generalize and are foundational to developing the abstractions that are human oriented concepts (biggerstaff)
 
-%Notifications communicate about both simple and more complex programming concepts, and often communicate about multiple, typically related, concepts in a given notification. For example, the programming concepts in the notification in Figure~\ref{fig:eclipse} are variables, synchronization, lazy initialization, and multi-threading. The idea of a variable is a simpler concept that can be related to any number of other concepts. Synchronization, lazy initialization, and multi-threading, however, are more complex and relate to each other explicitly and exclusively. Lazy initialization is a specific approach to synchronization, both of which relate to multi-threading. The presence of these concepts narrows the concept of a variable in this notification to a variable in the context of a multi-threaded environment. 
 
 \subsection{Are developers able to interpret tool notifications?}
 Despite the possibility provided by program analysis tools for exploration and improvement of source code, research has found that developers often to not use tools like FindBugs~\cite{Ayewah:2008:FindBugs}.
@@ -242,7 +241,7 @@ Building on an existing model of (mis)communication~\cite{mustajoki2008modelling
 
 
 
-Based on findings from these studies, I identified the following problems with the state-of-the-art in program analysis tool notification design:
+Based on findings from these studies, we identified the following problems with the state-of-the-art in program analysis tool notification design:
 
 \begin{itemize}
 	\item Tool notifications can be difficult to sort through and interpret, making them difficult to use.
@@ -794,7 +793,7 @@ I applied natural log to the data following the reasoning of Fritz and colleague
 I used both the \emph{features} and \emph{heuristics} defined above to determine the independent variables for analyses.
 
 \vspace{0.5em}
-\noindent\textit{Data Analysis.} % TODO if I get more developers, would I increase this number of could those go towards the next study (scalability)? (probably depends on how many more -- can I add some to the 24 for model building/assessment but then still have some I can leave out for validation of the model?)
+\noindent\textit{Data Analysis.} % TODO if I get more developers, would I increase this number of could those go towards the next study ()? (probably depends on how many more -- can I add some to the 24 for model building/assessment but then still have some I can leave out for validation of the model?)
 To define the relationship between the dependent and independent variables, I used Weka~\cite{Hall:2009:WDM:1656274.1656278} for access to machine learning algorithms suitable for my small dataset of 24 GitHub developers; only 24 developers completed the concept inventory, which was necessary for developing my current approach. 
 Specifically, I used Weka's J48 classifier~\cite{witten1999weka} to create decision trees.
 
@@ -911,30 +910,30 @@ The LOC model's precision, recall, and F-Score suggest it may be better at class
 Regardless, these findings suggest that although both LOC and concept-specific code can both be used to predict conceptual knowledge, concept-specific code increases overall model accuracy and precision.
 
 
-\subsection{Does my prototype concept knowledge model scale? [Scalability]} \label{subsec:s4}
+\subsection{Does my prototype concept knowledge model generalize? [Generalizability]} \label{subsec:s4}
 
 \subsubsection{Study rationale.} Two important aspects to consider when developing a quality tool or approach are \emph{performance} and \emph{scalability}. 
-Research suggests that there is an inverse relationship between performance and scalability with respect to information systems; when performance is increased, stability decreases(and vice versa)~\cite{khaddaj2004evaluation}.
-My previous study found that it is possible to assess, model, and accurately predict developer knowledge regarding Java generics (performance), based on the predictions of a prototype model (M1). However, it is not obvious 1) if M1 scales to other concepts and developers and 2) if increased scalability of M1 will decrease its performance. 
-The end goal is an approach that can be applied to any concept and be used to make predictions for any Java developer (scalable) while still performing at a high level. Therefore, I designed a study where I will explore the scalability of M1 to other programming concepts and different sets of developers and the affects on model performance. 
+% Because the goal is to develop an approach the generalizes to all developers and concepts, I plan to assess scalability in terms of the ability to generalize to other populations/data sets.
+My previous study found that it is possible to assess, model, and accurately predict developer knowledge regarding Java generics (performance), based on the predictions of a prototype model (M1). However, it is not obvious if M1 generalizes to other concepts and developers.
+The end goal is an approach that can be applied to any concept and be used to make predictions for any Java developer (scalable) while still performing at a high level. Therefore, I designed a study where I will explore the generalizability of M1 to other programming concepts and different sets of developers and the affects on model performance. 
 
-Assessing scalability in the context of a mathematical model is a primarily quantitative process. Although there is value in quantitative findings, my research experience suggests that there is a richness in qualitative data that cannot be achieved with quantitative data and analyses. I chose the variables for M1 based on quantitative data and analyses; however, it may be that there are other factors that contribute to developer concept knowledge I have not yet considered. Therefore, I also plan to explore the scalability, and approach that led to the creation, of M1 by interviewing and surveying developers. 
+Assessing generalizability in the context of a mathematical model is a primarily quantitative process. Although there is value in quantitative findings, my research experience suggests that there is a richness in qualitative data that cannot be achieved with quantitative data and analyses. I chose the variables for M1 based on quantitative data and analyses; however, it may be that there are other factors that contribute to developer concept knowledge I have not yet considered. Therefore, I also plan to explore the scalability, and approach that led to the creation, of M1 by interviewing and surveying developers. 
 
 \subsubsection{Research questions.}
 
 \begin{labeling}{questions}
 	\item [RQ1] To what extent does M1 generalize to developers and concepts outside the set used to create the model?
-	\item [RQ2] If M1 scales, is there decreased performance in the predictions it makes?
-	\item [RQ3] Do developers agree with the factor (source code) used to develop M1?
+	\item [RQ2] Do developers agree with the factor (source code) used to develop M1?
 \end{labeling}
 
 \subsubsection{Proposed methodology.}
 I plan to explore the scalability of, and refine, M1 by combining qualitative feedback with scalability assessments. One of my ongoing (implicit) model refinement efforts is finding more developers for building and assessing M1 and, if needed, creating and evaluating new models.
 
 \vspace{0.5em}
-\noindent\textit{Scalability Assessments.}
-I built and assessed M1 using the same set of developers; one way I plan to assess the scalability of M1 to other developers (RQ1) is by making predictions with a separate set of developers. Doing so will allow me to observe the ability for M1 to scale to a wide range of developers. 
-To assess the scalability of M1 in regards to other concepts, I plan to analyze participant repositories for concept-specific code pertaining to others Java concepts. 
+\noindent\textit{Generalizability Assessments.}
+I built and assessed M1 using the same set of developers; one way I plan to assess the generalizability of M1 to other developers (RQ1) is by making predictions with a separate set of developers. Doing so will allow me to observe the ability for M1 to generalize to a wide range of developers. 
+To assess the scalability of M1 in regards to other concepts, I plan to analyze participant repositories for concept-specific code pertaining to others Java concepts.
+% TODO how am I going to choose the 3? concepts where possible to get multi-concept notifications that include two or more??? To prepare for future study that adapts and assesses notifications 
 To select the concepts for assessment, I plan to use the following criteria:
 \begin{itemize}
 	\item It is a concept that appears in program analysis tool notifications, particularly FindBugs which I plan to extend to assess the potential for adaptive notifications (Section~\ref{subsec:s5}).
@@ -945,18 +944,17 @@ To select the concepts for assessment, I plan to use the following criteria:
 Rather than attempting to find an exhaustive list of concepts that fit one or more of these criteria, I plan to begin with the first criteria; FindBugs has a publicly available, and regularly updated, webpage with a list of the notifications it uses.\footnote{http://findbugs.sourceforge.net/bugDescriptions.html}
 I plan to evaluate M1 on at least three additional concepts.
 
-To determine if performance is affected by model scalability (RQ2), I will evaluate and compare performance on 1) the dataset used to create M1 and the new dataset and 2) the concept used to create M1 and the new set of concepts. 
-
 \vspace{0.5em}
 
-\noindent\textit{Qualitative Feedback Collection \& Analysis.}
+\noindent\textit{Qualitative Data Collection \& Analysis.}
 % TODO should this be another RQ (i.e. do developers agree with the relationship between source code and knowledge)??
-Another way I plan to assess the scalability of M1 is by conducting short, semi-structured interviews with developers (10--20) regarding their perceptions of source code and programming concept expertise (RQ3). Each interview will last approximately 30 minutes and will be divided into two phases: 1) their perception of the relationship between the code they write and their expertise regarding the concept and 2) their perception of the other factors that contribute to their knowledge of programming concepts.  
+Another way I plan to assess the scalability of M1 is by conducting short, semi-structured interviews with developers (10--20) regarding their perceptions of source code and programming concept expertise (RQ2). Each interview will last approximately 30 minutes and will be divided into two phases: 1) their perception of the relationship between the code they write and their expertise regarding the concept and 2) their perception of the other factors that contribute to their knowledge of programming concepts.  
 
-To determine if developers agree with using source code as a proxy for knowledge, and identify developer perceptions of what factors contribute most to their knowledge, I plan to 1) code each transcript and 2) perform content analysis in R~\cite{RSoftware} on interview transcripts. Content analysis assumes that content most frequently mentioned is the most important. In order to perform content analysis, I need well defined categories; this is where the coding process comes into play. Using a methodology similar to the one in Section~\ref{subsec:s2}, I will code each transcript for statements pertaining to their knowledge of concepts and experiences that contributed knowledge for them. 
+To determine if source code is the only or best option to use as a proxy for knowledge, I plan to 1) code each transcript and 2) perform content analysis in R~\cite{RSoftware} on interview transcripts. Content analysis assumes that content most frequently mentioned is the most important. In order to perform content analysis, I need well defined categories; this is where the coding process comes into play. Using a methodology similar to the one in Section~\ref{subsec:s2}, I will code each transcript for statements pertaining to their knowledge of concepts and experiences that contributed knowledge for them. 
 
 Using the codes from the transcripts, I will perform content analysis to determine which factors developers feel contribute most to their knowledge.
-To validate source code as a factor, and other factors that emerged during the interviews, I plan to administer a survey to another set of developers (50--100). Using data from the survey, I will perform various analyses using R. Findings from both the qualitative and quantitative analyses will serve to potentially confirm current model building efforts and inform future data analysis and model building efforts.
+To validate source code as a factor, and other factors that emerged during the interviews, I plan to administer a survey to another set of developers (50--100). To encourage participation, and thereby increase the likelihood I will get a large set of responses, I plan to ask only one question: \emph{Which of the following contribute to your knowledge of programming concepts?}. I will include a definition and example of a programming concept so that participants are able to accurately respond. I will include each factor identified during the interviews as response options.
+I will determine the factors that contribute most to developer knowlede by running various analyses using R with data from the survey. Findings from both the qualitative and quantitative analyses will serve to potentially confirm current model building efforts and inform future data analysis and model building efforts.
 
 
 \subsection{Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications? [SmartBugs]} \label{subsec:s5}
@@ -1021,7 +1019,7 @@ I have completed the following projects \& publications:
 I plan to complete the following projects \& publications by my defense in Spring 2017:
 
 \begin{description}
-	\item[Scalability] (in progress) \textit{Amend IRB for interviews and survey} (May 2 -- May 9); \textit{Data collection} (April 11 -- April 25); \textit{Conduct Interviews} (May 11 -- May 20); \textit{Data analysis} (May 21 -- May 28) ; \textit{Create and administer survey} (May 29 -- June 12); \textit{Survey analysis} (June 13 -- June 30); \textit{Publication}: ICSE 2017 (est. 8/28)
+	\item[Generalizability] (in progress) \textit{Amend IRB for interviews and survey} (May 2 -- May 9); \textit{Data collection} (April 11 -- April 25); \textit{Conduct Interviews} (May 11 -- May 20); \textit{Data analysis} (May 21 -- May 28) ; \textit{Create and administer survey} (May 29 -- June 12); \textit{Survey analysis} (June 13 -- June 30); \textit{Publication}: ICSE 2017 (est. 8/28)
 	\item[SmartBugs] \textit{Study IRB} (May 2 -- May 9); \textit{Literature Review} (June 6 -- June 12); \textit{Develop SmartBugs} (with aide of Master's student) (June 13 -- October 3); \textit{User Study} (October 10 -- October 21) ; \textit{Data analysis} (October 22 -- October 30); \textit{Write and edit draft} (November 1 - March 11/March 18); \textit{Publication}: FSE 2017 (est. 3/11) or VL/HCC 2017 (est. 3/18)
 	\item[Dissertation] \textit{Write and edit draft} (January 1 -- May 1) ; \textit{Publication}: Thesis Document
 \end{description}
