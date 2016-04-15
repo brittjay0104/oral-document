@@ -327,7 +327,7 @@ I need to assess knowledge with a wide range of developers outside of academia, 
 I discuss the process that led to this final set of steps when I related study in Section~\ref{subsec:s3}.
 
 \subsection{Using Public Git Repositories to Predict Concept Knowledge}
-Research suggests that knowledge is often accumulated and organized based on our own relevant experiences~\cite{johnson1989mental,argote2011organizational}. As a developer, many experiences are focused on writing source code; writing software is also perhaps one of the most concrete actions that can be labeled as an experience for a developer. Therefore, I used \emph{concept-specific source code} to determine independent variables for my models. I define concept-specific code is code that maps to a given programming concepts; an example of multi-threading-specific code is \texttt{synchronized(variable)}, where the developer has written code that synchronizes variables for multi-threaded execution.
+As a developer, many experiences are focused on writing source code; writing software is also perhaps one of the most concrete actions that can be labeled as an experience for a developer. Therefore, I used \emph{concept-specific source code} to determine independent variables for my models. I define concept-specific code is code that maps to a given programming concepts; an example of multi-threading-specific code is \texttt{synchronized(variable)}, where the developer has written code that synchronizes variables for multi-threaded execution.
 I built a Java source code analyzer that analyzes code bases for concept-specific code.
 
 To accurately create models, I need to be able to attribute code changes to a specific developer; this is coupled with developer--dependent scores from the concept inventories to create and evaluate the models. Analyzing static code can tell me the presence of conceptually relevant code patterns, such as synchronization or generics usage. However, it can not tell me who contributed that code which is important when trying to build models that can accurately predict individual knowledge. 
@@ -772,6 +772,7 @@ The goal of this study was to develop and assess an approach for developing mode
 \end{labeling}
 
 \subsubsection{Approach.}
+% TODO add mention of pilot??
 \vspace{0.5em}
 \noindent\textit{Assessing \& Encapsulating Conceptual Knowledge.}
 To assess \& encapsulate developer knowledge as the dependent variable my our models, I borrowed from computer science education literature and developed a concept inventory~\cite{tew2010assessing}. 
