@@ -371,7 +371,7 @@ I have outlined my proposed research; next I will outline the studies, experimen
 % why don't study (completed)
 This section outlines the research I have completed and propose to complete for my dissertation. For each study, I provide an abbreviated name in brackets ([]) to facilitate discussion about projects and results in later sections.
 
-\subsection{Why don't developers use static analysis tools to find bugs? [Reasons]}\label{subsec:s1}
+\subsection{Why don't developers use program analysis tools? [Reasons]}\label{subsec:s1}
 
 \subsubsection{Study rationale.} Static analysis tools provide a means for analyzing code without having to run
 the code, helping ensure higher quality software throughout the development process. There are a variety of ways to perform automatic static
@@ -382,8 +382,7 @@ are cheap to fix~\cite{Ayewah:2008:FindBugs}. For example, there are static anal
 lead to unsafe thread interactions. Developers have been able to eliminate many defects that were previously overlooked at large companies~\cite{Ayewah:2010:GFF} using the warnings produced
 by static analysis tools. 
 Despite the benefits of using static analysis tools to find bugs, consistent usage of these tools is not very frequent~\cite{Ayewah:2008:FindBugs}. 
-There have been studies to investigate ways of improving static analysis tools. However, none look at what the tools do or can do for a developer, what features
-developers use, what could be improved \emph{and} why~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}. 
+There have been studies to investigate ways of improving static analysis tools. However, none look at what the tools do or can do for a developer, what tools developers use, \emph{and} why~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}. 
 
 \subsubsection{Research questions.}
 \begin{labeling}{questions}
@@ -1000,21 +999,29 @@ I have explicitly assessed the applicability of general communication theory to 
 \subsubsection{Research questions \& Hypothesis.}
 
 \begin{labeling}{questions}
-	\item [RQ1] How does existing notification design research map to differences in developer knowledge?
+	\item [RQ1] How does existing notification design, problem solving, and debugging research map to differences in developer knowledge?
 	\item [RQ2] Are there differences in notification design expectations across developers with differing knowledge?
 	\item [H\textsubscript{1}] Adaptive, knowledge-based notifications require less time and context-switching for notification understanding and resolution than one-size-fits-all notifications.
 \end{labeling}
 
 \subsubsection{Proposed methodology.}
-% TODO make sure to mention using FindBugs and why
-To answer RQ1, I will perform a literature review of existing research on the design, presentation, and developer interpretation of tool notifications. The focus of this literature review will be to explore the design space of notifications and how developers with various backgrounds (i.e. novice versus expert) find and use information to understand problems in their code. For example, existing research suggests that experts more often rely on abstractions to understand problems in their code, while novices tend to focus on the literal features, such as the constructs in the source code~\cite{Weiser:1983:Representation}. Therefore, one potential design consideration for notifications for novices is to center the explanation around the source code, or parts of the source code, while for experts a consideration would be to use more abstractions. I will compile a list of related findings and map these findings to developer knowledge or expertise.
+To answer RQ1, rather than iterating on design ideas based on speculation, I will perform a literature review of existing research on notification design, problem solving, and debugging in relation to programming expertise. The focus of this literature review will be the design space of notifications and how developers with various backgrounds (i.e. novice versus expert) find and use information to understand problems in their code. For example, existing research suggests that experts more often rely on abstractions to understand problems in their code, while novices tend to focus on the literal features, such as the constructs in the source code~\cite{Weiser:1983:Representation}. Therefore, one potential design consideration for notifications for novices is to center the explanation around the source code, or parts of the source code, while for experts a consideration would be to use more abstractions. I will compile a list of related findings and map these findings to developer knowledge or expertise.
 
 To answer RQ2, I will code the list of findings to determine 1) themes within a knowledge group and 2) how themes differ across knowledge groups. I plan to use a methodology similar to the methodology outlined in Section~\ref{subsec:s2}. Once I have these themes, I can begin to develop my approach for assessing H\textsubscript{1}. 
 
 To assess H\textsubscript{1}, I plan to 1) assess potential knowledge-based notification adaptations and 2) implement and evaluate a tool that replaces one-size-fits-all notifications with knowledge-based notifications. 
-I will first use findings from RQ1 and RQ2 to design notification templates that map to different levels of expertise; for consistency, I will attempt to use three groups as I did in the study in Section~\ref{subsec:s3}. 
+I will first use findings from RQ1 and RQ2 to design notification templates that map to different expertise categories; for consistency, I will attempt to use three groups as I did in the study in Section~\ref{subsec:s3}.
+
+Notification adaptations will be based on knowledge of programming concepts, therefore I need to be able to identify the concepts present in a given notification to know what to adapt. 
+I will identify concepts in notifications based on:
+\begin{itemize}
+	\item \textit{Type of tool.}
+	\item \textit{Keywords in text.} % TODO what is a keyword? 
+	\item \textit{Source code notification is attached to.} % TODO maybe not this one
+\end{itemize}
 % TODO this is incomplete!
-Once I have a prototype notification design template...
+
+Once I have a prototype notification design template for each expertise category, I will assess the validity and applicability of existing research regarding expertise and 
 
 Based on the results from my user study, I will develop a prototype tool, which I will call SmartBugs, that will adapt notification presentation based on developer knowledge. I plan to build SmartBugs on top of FindBugs because it is a mature, open source defect finding tool with a wide range of notifications that have no obvious pattern behind the information it provides in a given notification. FindBugs will serve as the baseline (one-size-fits-all) set of notifications to compare SmartBugs' notifications to (knowledge-based).
 
