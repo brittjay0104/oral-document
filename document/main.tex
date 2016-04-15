@@ -19,6 +19,7 @@
 \usepackage{flushend}
 
 \usepackage{ocgx}
+\usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{ocgx}
 
@@ -30,6 +31,22 @@
 \setlength\floatsep{1\baselineskip plus 3pt minus 2pt}
 \setlength\textfloatsep{1\baselineskip plus 3pt minus 2pt}
 \setlength\intextsep{1\baselineskip plus 3pt minus 2 pt}
+
+\lstdefinestyle{mystyle}{
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=true,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle} 
 %
 \begin{document}
 
@@ -133,7 +150,7 @@ Because the tools Valerie uses have no notion of what she does and does not know
 \subsection{What are program analysis tools?}
 Program analysis tools are designed to aide developers when developing software by automating the writing, analysis, and modification of source code.
 Often, program analysis is discussed as synonymous with static analysis~\cite{nielson2015principles}. 
-For the purpose of my research, I define a program analysis tool as a recommendation system that performs program analysis, whether it be static or dynamic analysis, and provides information regarding the source code being analyzed~\cite{robillard2014recommendation}.
+For the purpose of my research, I define a program analysis tool as \emph{a recommendation system that performs program analysis, whether it be static or dynamic analysis, and provides information regarding the source code being analyzed}~\cite{robillard2014recommendation}.
 Examples of program analysis tools include, but are not limited to, static code analyzers, code coverage tools, code smell detectors, and refactoring tools~\cite{adolph2011using,Murphy-Hill:2010:Ambient,ge2012reconciling}.
 In the following sections, I will define and discuss static analysis and dynamic analysis tools separately; the reader should note that although we discuss static and dynamic analysis separately, it is not uncommon to find program analysis tools that combine static and dynamic analysis~\cite{ernst2003static}.                                                
 
@@ -161,17 +178,17 @@ One common thread between program analysis tools like FindBugs and EclEmma is th
 
 % TODO: see if I can find a tool that is evenly visual and textual.
 Notifications across tools vary; some provide lots of text (like FindBugs), some use primarily visual means of communications (like EclEmma), and some fall in between using equal parts text and visuals to communicate. Notifications can also have different goals, which may influence how developers design notifications. For example, the goal of a FindBugs notification is to explain a potential defect in the developer's source code and, ideally, help the developer make a decision about the defect (i.e. whether and how to resolve). Because FindBugs' goal is to explain, we expect to see textual notifications that provide that explanation.
-The goal of EclEmma notifications is to statically show dynamic program behavior and help the developer determine the effectiveness of her test suite. Though EclEmma could use text to communicate code coverage, this takes away the ability to scan the program for areas in most need of attention; therefore, EclEmma uses colors applied directly to the source code to communicate. EclEmma uses other visuals, such as the bar visuals in the Coverage View (Figure~\ref{fig:ecl}) to show coverage on a given package or class.
+The goal of EclEmma notifications is to statically show dynamic program behavior and help the developer determine the effectiveness of her test suite. EclEmma uses colors applied directly to the source code to communicate as opposed to text. Though EclEmma also uses text to communicate code coverage (i.e. \texttt{1 of 2 branches missed} on a partially covered \texttt{if} statement), this does not allow the developer to scan the program for areas in most need of attention. Therefore, EclEmma uses other visuals, such as the bar visuals in the Coverage View (Figure~\ref{fig:ecl}) to show coverage on a given package or class.
  % TODO talk about how different parts of notification communicate for each tool; make sure it ties back to goals (defects and test coverage)!
 
-The list of tools and notifications tools use can go on and on, but for the purposes of my research, the general definition I will use for a notification is \emph{a combination of visual and textual information used by a program analysis tool to communicate information to developers about their code.} Notifications can vary regarding what information and how much detail they provide, however, there are commonalities across tool notifications that informed this definition, which I will discuss next.
+The list of tools and notifications tools use can go on and on, but for the purposes of my research, the general definition I will use for a notification is \emph{a combination of visual and textual interfaces used by a program analysis tool to communicate information to developers about their source code.} Notifications can vary regarding what information and how much detail they provide, however, there are commonalities across tool notifications that informed this definition, which I will discuss next.
 
 \subsection{What are the typical components of a tool notification?}
 % based on robilliard book
-One reason I talk about program analysis tools as a type of recommendation system is because they provide information to developers while completing software engineering tasks~\cite{robillard2014recommendation}. 
-Another reason is that program analysis tools use the same strategies defined by Robillard as typical of recommendation systems.
-There are typically two parts to a program analysis tool notification: 1) something that gets the user's attention and 2) a description of what the tool is attempting to communicate.
-Because the program analysis tools I study are typically used within integrated development environments (IDE), I will focus on examples of notifications inside IDEs.
+One reason I talk about program analysis tools as a type of recommendation system is because they provide information to developers completing software engineering tasks~\cite{robillard2014recommendation}. 
+Another reason is that program analysis tools use the same strategies defined by Robillard as typical of recommendation systems: 1) strategies for getting the user's attention and 2) descriptive interfaces.
+Program analysis tools use these strategies when communicating with developers via notifications.
+Because the program analysis tools I study are most often used within integrated development environments (IDE), I will focus on examples of notifications inside IDEs.
 
 \subsubsection{Getting Developer's Attention.}
 There are a variety of ways that a tool can get the attention of its user~\cite{robillard2014recommendation}. Program analysis tools get the attention of developers in their IDEs in one of three ways: icons, dashboards, or email notifications.
@@ -207,9 +224,34 @@ Typically a given notification is associated with only one human-oriented concep
 On the flip side, one notification can communicate about more than one programming-oriented concept. 
 Consider the following source code:
 
-\begin{quotation}
-	\texttt{There will be some relevant code here :D}
-\end{quotation}
+\begin{lstlisting}[language=Java]
+	private BufferedWriter bufferedLogWriter = null;
+	private static LogWriter theWriter = null;
+	private Service loggingService = null;
+	private boolean demoMode = true;
+	
+	public void writeLog(String eventString) {
+	
+	if (isDemoMode()) {
+	//DebugLogger.log("Sending: " + eventString);
+	Sender.send(eventString);
+	} else {
+	try {
+	openLogForWriting();
+	if (bufferedLogWriter != null) {
+	bufferedLogWriter.append(eventString);
+	bufferedLogWriter.append("\n");
+	bufferedLogWriter.flush();
+	bufferedLogWriter.close();
+	}
+	DebugLogger.log("Writing: " + eventString);
+	
+	} catch (IOException e) {
+	DebugLogger.log("Couldn't write to " + bufferedLogWriter);
+	e.printStackTrace();
+	}
+	}
+\end{lstlisting}
 
 The goal, or human-oriented concept, at play is ``write to file''. 
 A notification attached to this code is telling the developer something about the code she wrote to ``write to file''.
@@ -230,8 +272,8 @@ Based on the data from these interviews, the reasons developers do not frequentl
 Three out of four findings regarding tool use pertain to the notifications tools use and how tools present information to the developer.
 Discovering that tool notifications are one of the reasons developers do not use program analysis tools is useful, however, not actionable. The next piece of information needed to make these findings actionable is to discover what about tool notifications make it difficult for developers to interpret their notifications.
 
-\subsection{What challenges do developers encounter when interpreting notifications?}
-% interactive interviews (icse) & %session study (fse)
+\section{A Tool Miscommunication Theory}\label{sec:theory}
+%session study (fse)
 To answer the question \emph{why do developers encounter challenges when interpreting program analysis tool notifications?}, I observed 26 developers with varying backgrounds while they used three different program analysis tools: Eclipse Java compiler, FindBugs, and EclEmma. I presented participants with and asked them to interpret notifications from each of the three tools. 
 % TODO need something relevant to cross-tool!
 To identify challenges, we examined tool use through the lens of communication theory~\cite{bowman1987modeling}.
@@ -239,17 +281,6 @@ Building on an existing model of (mis)communication~\cite{mustajoki2008modelling
 
 % TODO expand here! What did I do/find and how does it relate to communication/miscommunication??
 
-
-
-Based on findings from these studies, we identified the following problems with the state-of-the-art in program analysis tool notification design:
-
-\begin{itemize}
-	\item Tool notifications can be difficult to sort through and interpret, making them difficult to use.
-	\item Many notifications do not effectively and consistently communicate to accommodate individual developer knowledge.
-\end{itemize}
-
-\section{A Tool Miscommunication Theory}\label{sec:theory}
-%session study (fse)
 Based on the challenges participants encounter when interpreting tool notifications, I propose a tool miscommunication theory that can be used to inform the design of program analysis tools.
 Experts in qualitative research suggest that rather than presenting a set of disparate findings, qualitative researchers should instead produce an explanatory theory, a ``skeleton or framework that explains why things happen''~\cite{corbin2014basics}. While explicitly putting forward theories is rare in software engineering~\cite{hannay2007systematic}, one example is Lawrance and colleagues' theory of how programmers navigate code during debugging~\cite{lawrance2013programmers}. In the same way that Lawrance and colleagues' build on 
 information foraging theory~\cite{pirolli1999information}, my theory builds on communication theory~\cite{bowman1987modeling}.
@@ -268,7 +299,7 @@ Remember Valerie? Though she is a hypothetical developer, the challenges she fac
 
 \section{A Proposed Approach for Modeling Developer Knowledge}
 %modeling approach (vlhcc)
-In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. I propose that by borrowing from education research and using developer experiences as a concrete representation of knowledge, it is possible to learn and approximately predict developer knowledge of programming concepts.
+In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. For the remainder of this document, I use concept to mean programming-oriented concepts. I chose to focus on programming-oriented concepts because existing research conducted by Smith and colleagues suggests understanding programming-oriented affects developers' ability to resolve notifications~\cite{smith2015questions}. I propose that by borrowing from education research and using developer experiences as a concrete representation of knowledge, it is possible to learn and approximately predict developer knowledge of programming concepts.
 
 \subsection{Using Concept Inventories to Assess Concept Knowledge}
 % TODO read through and revise as needed! 
@@ -967,7 +998,7 @@ I have explicitly assessed the applicability of general communication theory to 
 \begin{labeling}{questions}
 	\item [RQ1] How does existing notification design research map to differences in developer knowledge?
 	\item [RQ2] Are there differences in notification design expectations across developers with differing knowledge?
-	\item [H\textsubscript{1}] Adaptive, knowledge-based notifications are more effective than one-size-fits-all notifications.
+	\item [H\textsubscript{1}] Adaptive, knowledge-based notifications require less time and context-switching for notification understanding and resolution than one-size-fits-all notifications.
 \end{labeling}
 
 \subsubsection{Proposed methodology.}
