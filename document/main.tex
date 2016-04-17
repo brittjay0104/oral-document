@@ -99,11 +99,11 @@
 %\newpage
 %
 
-\section{Introduction}
+\section{My Thesis}
 
 
 \fbox{
-	\parbox{\textwidth}{I propose program analysis \emph{tool use} is a form of \emph{communication} and \emph{inability to resolve} notifications is a result of \emph{miscommunication}, therefore we can improve tool design by adopting a theory similar to \emph{constructivism} where tools can \emph{approximate} individual developer's \emph{conceptual knowledge} to adapt notifications, leading to \emph{reduced time and context-switching} required for developers to understand and resolve tool notifications.		}
+	\parbox{\textwidth}{Program analysis \emph{tool use} is a form of \emph{communication} and \emph{inability to interpret and resolve} notifications is a result of \emph{miscommunication} caused by \emph{knowledge gaps} and \emph{knowledge mismatches}; therefore we can improve tool design by applying \emph{constructivism} communication theory such that tools can \emph{approximate} individual developer's \emph{conceptual knowledge} to adapt notifications accordingly, leading to \emph{reduced time and context-switching} required for developers to interpret and resolve tool notifications.}
 	}
 % TODO make sure later it's obvious how (and why) will assess time and context-switching
 %
@@ -152,7 +152,7 @@ Program analysis tools are designed to aide developers when developing software 
 Often, program analysis is discussed as synonymous with static analysis~\cite{nielson2015principles}. 
 For the purpose of my research, I define a program analysis tool as \emph{a recommendation system that performs program analysis, whether it be static or dynamic analysis, and provides information regarding the source code being analyzed}~\cite{robillard2014recommendation}.
 Examples of program analysis tools include, but are not limited to, static code analyzers, code coverage tools, code smell detectors, and refactoring tools~\cite{adolph2011using,Murphy-Hill:2010:Ambient,ge2012reconciling}.
-In the following sections, I will define and discuss static analysis and dynamic analysis tools separately; the reader should note that although we discuss static and dynamic analysis separately, it is not uncommon to find program analysis tools that combine static and dynamic analysis~\cite{ernst2003static}.                                                
+In the following sections, I will define and discuss static analysis and dynamic analysis tools separately; the reader should note that although I discuss static and dynamic analysis separately, it is not uncommon to find program analysis tools that combine static and dynamic analysis~\cite{ernst2003static}.                                                
 
 \subsubsection{Static Analysis Tools.}
 
@@ -170,7 +170,7 @@ Dynamic analysis tools are designed to aide developers when developing software 
 Dynamic analysis works by executing the program and then making observations about program execution; because dynamic analysis runs the code, it is typically more precise than static analysis. Though dynamic analysis can produce more precise results in a similar amount of time as static analysis, dynamic analysis execution is less likely to generalize to future executions since it is based on a set of inputs that can, and probably will, change for each execution.
 Examples of dynamic analysis tools include testing, code coverage, and profiling tools.
 
-Let's use the example of EclEmma,\footnote{http://eclemma.org/} an open source dynamic code coverage tool, to better understand how dynamic analysis tools work. EclEmma executes source code, using either JUnit test cases or a pre-defined set of inputs, and reports to the user what parts of the code got covered and what parts did not. Because EclEmma executes the source code, it can communicate precisely regarding the flow of the program during run-time. A static code coverage tool could speculate how much of a code base would be covered based on test cases, and possibly even a set of inputs; however, it would require more effort and be more likely to produce false positives than a dynamic code coverage tool. On the down side, the test suites a developer writes may not be characteristic of all possible executions of the program, thereby lowering the generalizability of dynamic analyses.
+Let's use the example of Cobertura,\footnote{http://cobertura.github.io/cobertura/} an open source dynamic code coverage tool, to better understand how dynamic analysis tools work. Cobertura executes source code using JUnit test cases and reports to the user what parts of the code got covered and what parts did not. Because Cobertura executes the source code, it can communicate precisely regarding the flow of the program during run-time. A static code coverage tool could speculate how much of a code base would be covered based on test cases, and possibly even a set of inputs; however, it would require more effort and be more likely to produce false positives than a dynamic code coverage tool. On the down side, the test suites a developer writes may not be characteristic of all possible executions of the program, thereby lowering the generalizability of dynamic analyses.
 
 \subsection{How do tools communicate?}\label{subsec:comm}
 
@@ -191,22 +191,36 @@ Program analysis tools use these strategies when communicating with developers v
 Because the program analysis tools I study are most often used within integrated development environments (IDE), I will focus on examples of notifications inside IDEs.
 
 \subsubsection{Getting Developer's Attention.}
-There are a variety of ways that a tool can get the attention of its user~\cite{robillard2014recommendation}. Program analysis tools get the attention of developers in their IDEs in one of three ways: icons, dashboards, or email notifications.
+There are a variety of ways that a tool can get the attention of its user~\cite{robillard2014recommendation}. Program analysis tools get the attention of developers in their IDEs in one or more of the following ways: icons, dashboards, pop-ups, affordance overlays, or email notifications.
+
+All program analysis tools provide descriptive interfaces that convey information about a developer's source code once the tool has her attention. 
+Information is conveyed using some combination of textual, visual, and sometimes transformative descriptions.
+
+Some tools, like FindBugs, 
+% TODO finish here, bring together these lists into some examples of components since already listed rather than listing and explaining each
 
 \noindent\textit{Icons.} Most often, program analysis tools use icons to get developers' attention. Icons are images found in the sidebar of IDEs. To alert developers of information available about their source code, tools place an icon on the line of code the tool deems most relevant to the information being conveyed. Images used for icons vary by tool, as can be seen in Figures~\ref{fig:eclipse} and~\ref{fig:ecl}.
 
 \noindent\textit{Dashboards.} Dashboards are less frequently used by program analysis tools, however, there exists tools that use dashboards to get developers' attention while they are writing code. For example, StenchBlossom, a tool that detects bad code smells, uses an ambient dashboard to provide information to developers regarding code smells in their code.
 % recommendation systems break down: somethign to get attention, description
 
+\noindent\textit{Popups.}
+% TODO Find tool that alerts developer via pop-up? 
+
+\noindent\textit{Affordance Overlays.} Affordance overlays annotate the user interface by provide visual overlays on top of user interface affordances. For example, after execution EclEmma notifies the developer of code coverage by providing visual overlays on the code (Figure~\ref{fig:ecl}). 
+
 \noindent\textit{Email Notifications.} The least intrusive way that program analysis tools get user's attention is by sending email notifications when there is information to communicate. For example, developers can configure Coverity to send emails when there are potential defects found in their code.
 
 \subsubsection{Description Interfaces.}
-All program analysis tools provide descriptive interfaces that convey information about developer source code~\cite{robillard2014recommendation}. 
-Information is conveyed using some combination of textual descriptions and visual descriptions.
+All program analysis tools provide descriptive interfaces that convey information about a developer's source code once the tool has her attention~\cite{robillard2014recommendation}. 
+Information is conveyed using some combination of textual, visual, and sometimes transformative descriptions.
 
-\noindent\textit{Textual Descriptions.}
+\noindent\textit{Textual Descriptions.} Textual descriptions provide information using primarily text. Text descriptions are sometimes augmented with visual elements to enhance the ability to communicate the necessary information. For example, tools like FindBugs and PMD use mostly text to communicate information, however, they also use color to represent information importance.
 
 \noindent\textit{Visual Descriptions.}
+
+\noindent\textit{Transformative Descriptions.} 
+% TODO WitchDoctor
 % types of descriptions (text and visual)
 % goals of information provided (??)
 
@@ -266,20 +280,17 @@ A developer may also get a notification regarding exception handling. Here, the 
 Despite the possibility provided by program analysis tools for exploration and improvement of source code, research has found that developers often to not use tools like FindBugs~\cite{Ayewah:2008:FindBugs}.
 Though research explored tool usage, there was no research that explored the reasons developers have for using the tools they do use and not using the tools they do not use~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}.
 To answer the question \emph{why do developers not use static analysis tools}, I conducted interactive interviews with 20 professional developers to better understand why they do not use static analysis tools, one type of program analysis tool, when writing code~\cite{johnson2013don}.
-Each interactive interview consisted of three parts: 1) an interview regarding past experiences with static analysis tools, 2) an interactive exploration of FindBugs and 3) a participatory design session to discuss suggested tool improvements.
 
 Based on the data from these interviews, the reasons developers do not frequently use static analysis tools are \textbf{Lack of collaborative support}, \textbf{Seemingly unorganized tool output}, \textbf{Poor support for customizations}, and \textbf{Difficult to interpret notifications}. 
 Three out of four findings regarding tool use pertain to the notifications tools use and how tools present information to the developer.
-Discovering that tool notifications are one of the reasons developers do not use program analysis tools is useful, however, not actionable. The next piece of information needed to make these findings actionable is to discover what about tool notifications make it difficult for developers to interpret their notifications.
+Discovering that tool notifications are one of the reasons developers do not use program analysis tools is useful, however, not actionable. The next piece of information needed to make these findings actionable is to discover what about tool notifications make it difficult for developers to interpret them.
 
 \section{A Tool Miscommunication Theory}\label{sec:theory}
 %session study (fse)
 To answer the question \emph{why do developers encounter challenges when interpreting program analysis tool notifications?}, I observed 26 developers with varying backgrounds while they used three different program analysis tools: Eclipse Java compiler, FindBugs, and EclEmma. I presented participants with and asked them to interpret notifications from each of the three tools. 
 % TODO need something relevant to cross-tool!
 To identify challenges, we examined tool use through the lens of communication theory~\cite{bowman1987modeling}.
-Building on an existing model of (mis)communication~\cite{mustajoki2008modelling}, we identified 
-
-% TODO expand here! What did I do/find and how does it relate to communication/miscommunication??
+Building on an existing model of (mis)communication~\cite{mustajoki2008modelling}, we identified 12 kinds of challenges developers encounter when interpreting tool notifications.
 
 Based on the challenges participants encounter when interpreting tool notifications, I propose a tool miscommunication theory that can be used to inform the design of program analysis tools.
 Experts in qualitative research suggest that rather than presenting a set of disparate findings, qualitative researchers should instead produce an explanatory theory, a ``skeleton or framework that explains why things happen''~\cite{corbin2014basics}. While explicitly putting forward theories is rare in software engineering~\cite{hannay2007systematic}, one example is Lawrance and colleagues' theory of how programmers navigate code during debugging~\cite{lawrance2013programmers}. In the same way that Lawrance and colleagues' build on 
@@ -291,7 +302,6 @@ I summarize my theory as:
 	\emph{The challenges developers encounter when interpreting program analysis tool notifications are caused by gaps and mismatches between developer knowledge and how notifications communicate information.}
 \end{quotation}
 
-My theory is based on the findings from my most recent study on the challenges developers encounter when interpreting tool notifications. 
 I speak about knowledge here and throughout as the culmination of experiences~\cite{johnson1989mental,argote2011organizational}.
 Using that definition, a \emph{knowledge gap} occurs when there is a gap between what the developer knows and how the tool communicates; a \emph{knowledge mismatch} occurs when what the developer knows and expects from the tool does not match the notification the tool uses.
 
@@ -391,9 +401,6 @@ There have been studies to investigate ways of improving static analysis tools. 
 	\item [RQ3] What improvements do developers want to see made to static analysis tools?
 \end{labeling}
 
-\subsubsection{Participants.}
-
-
 \subsubsection{Methodology.}
 To answer my research questions, I used semi-structured interviews. Each semi-structured interview consisted of three parts: \textit{Question and  Short Response}, \textit{Interactive Interview}, and \textit{Participatory Design}. Once completed, I transcribed and coded each interview. Here I describe each part of the interview and my coding process.
 
@@ -410,7 +417,7 @@ Some of the questions asked include:
 
 \vspace{0.5em}
 \noindent\textit{Interactive Interview.}
-The goal behind an interactive interview is to be able to observe developers actually using a static analysis tool. This allowed me to get more detailed information as to how developers are using their tools. I  used information obtained during this portion of the interview to answer RQ1 and RQ2. I asked participants to explain what they are doing out loud~\cite{Lewis:1982:ThinkAloudProtocol} so I could get a better understanding of their workflow and thought process as they used the tool. Practice interviews before this study revealed that using the interactive interview portion produced more detailed information regarding when and how developers use their static analysis tools~\cite{Johnson:2012:PreFFSAT}.
+The goal behind an interactive interview is to be able to observe developers actually using a static analysis tool. This allowed me to get more detailed information as to how developers are using their tools. I used information obtained during this portion of the interview to answer RQ1 and RQ2. I asked participants to explain what they are doing out loud~\cite{Lewis:1982:ThinkAloudProtocol} so I could get a better understanding of their workflow and thought process as they used the tool. Practice interviews before this study revealed that using the interactive interview portion produced more detailed information regarding when and how developers use their static analysis tools~\cite{Johnson:2012:PreFFSAT}.
 
 Some of the questions asked during the interactive interview include:
 \begin{itemize}
@@ -467,6 +474,8 @@ easier~\cite{Gordon:1998:Coding}. I used Gordon's basic steps to code the interv
 
 The next step in Gordon's methodology is to assign ``category symbols'' to each category for easier indexing and processing of information. Gordon then suggests finding and classifying the relevant information in the transcriptions using category symbols. In my codings, each coding category had its own color as a ``symbol''; if a portion of a participant's transcription fell into one of the categories, I highlighted the same color as its respective category. A participant's coded interview could contain multiple categories or even multiple data items for one category. To ensure consistency, I alone was responsible for coming up with the coding categories and ``symbols'' and going through the transcriptions to apply them. The last step is to check the reliability of the codings. For this study, once I finished coding the interviews, I passed the transcripts off to the other contributors to look over. If they found any discrepancies, we discussed and resolved them as a group. This includes items that could fall into more than one category; in this situation, either a new, more specific, category or a ``sub-category'' was created for the item. The purpose of the categories are to organize the data in a relevant and useful manner; they are not meant to directly correlate with the research questions.
 
+\subsubsection{Participants.} I conducted this study with 20 participants. I recruited participants using a recruitment flyer sent out to industry contacts. Sixteen of our participants are professional developers at a large company and 4 are graduate students at NC State University with previous industry experience. Participant development experience ranged from 3 to 25 years.
+
 \subsubsection{Results.} I will now outline the findings from this study; I use parentheses after each theme to denote how many participants discussed topics in each theme. 
 Participants discussed the following as reasons they do use static analysis tools (RQ1): 
 \begin{description}
@@ -521,9 +530,6 @@ In our previous interviews, 20 professional developers reported not using static
 \end{labeling}
 
 Using Hannay and colleagues' guidelines~\cite{hannay2007systematic}, I framed the question as \emph{why} rather than \emph{what} to support building a theory that explains the challenges developers encounter.
-
-\subsubsection{Participants.}
-
 
 \subsubsection{Methodology.} To answer my research question, I observed participants while using three different program analysis tools.
 
@@ -735,6 +741,9 @@ Because one my criteria is participant inability to explain a notification, any 
 	\label{fig:results}
 \end{figure*}
 
+\subsubsection{Participants.} I conducted this study with 26 undergraduate students (10), graduate students (6), and professional developers(10), with varying amounts of development and tool usage experience. Three graduate students reported having industry experience. I recruited participants using mailing lists, classroom recruitment, and personal contacts.
+Ten participants had prior experience using EclEmma. Nineteen participants had prior experience with FindBugs. All participants had experience with the Eclipse Java compiler.
+
 \subsubsection{Results.} 
 I discussed my proposed theory for tool miscommunication in Section~\ref{sec:theory}; as a reminder, the theory is summarized as:
 
@@ -945,12 +954,12 @@ Regardless, these findings suggest that although both LOC and concept-specific c
 
 \subsection{Does my prototype concept knowledge model generalize? [Generalizability]} \label{subsec:s4}
 
-\subsubsection{Study rationale.} Two important aspects to consider when developing a quality tool or approach are \emph{performance} and \emph{scalability}. 
-% Because the goal is to develop an approach the generalizes to all developers and concepts, I plan to assess scalability in terms of the ability to generalize to other populations/data sets.
+\subsubsection{Study rationale.} Two important aspects to consider when developing a quality tool or approach are \emph{performance} and \emph{scalability}~\cite{fox2011performance}. 
+However, when evaluating models, rather assessing scalability, researchers should assess model performance and \textit{generalizability}~\cite{forster2000key}. 
 My previous study, \textbf{Predictions}, found that it is possible to assess, model, and accurately predict developer knowledge regarding Java generics (performance), based on the predictions of a prototype model (M1). However, it is not obvious if M1 generalizes to other concepts and developers.
-The end goal is an approach that can be applied to any concept and be used to make predictions for any Java developer (scalable) while still performing at a high level. Therefore, I designed a study where I will explore the generalizability of M1 to other programming concepts and different sets of developers and the affects on model performance. 
+The end goal is an approach that can be applied to any concept and be used to make predictions for any Java developer (scalable) while still performing at a high level. Therefore, I designed a study where I will explore the generalizability of M1 to other programming concepts and different sets of developers. 
 
-Assessing generalizability in the context of a mathematical model is a primarily quantitative process. Although there is value in quantitative findings, my research experience suggests that there is a richness in qualitative data that cannot be achieved with quantitative data and analyses. I chose the variables for M1 based on quantitative data and analyses; however, it may be that there are other factors that contribute to developer concept knowledge I have not yet considered. Therefore, I also plan to explore the scalability, and approach that led to the creation, of M1 by interviewing and surveying developers. 
+Assessing generalizability in the context of a mathematical model is a primarily quantitative process. Although there is value in quantitative findings, my research experience suggests that there is a richness in qualitative data that cannot be achieved with quantitative data and analyses. I chose the variables for M1 based on quantitative data and analyses; however, it may be that there are other factors that contribute to developer concept knowledge I have not yet considered. Therefore, I also plan to explore the generalizability, and approach that led to the creation, of M1 by interviewing and surveying developers. 
 
 \subsubsection{Research questions.}
 
@@ -961,36 +970,38 @@ Assessing generalizability in the context of a mathematical model is a primarily
 \end{labeling}
 
 \subsubsection{Proposed methodology.}
-I plan to explore the scalability of, and refine, M1 by combining qualitative feedback with scalability assessments. One of my ongoing (implicit) model refinement efforts is finding more developers for building and assessing M1 and, if needed, creating and evaluating new models.
+I plan to explore the generalizability of, and refine, M1 by combining qualitative feedback with generalizability assessments. One of my ongoing (implicit) model refinement efforts is finding more developers for building and assessing M1 and, if needed, creating and evaluating new models.
 
 \vspace{0.5em}
 \noindent\textit{Generalizability Assessments.}
-I built and assessed M1 using the same set of developers; one way I plan to assess the generalizability of M1 to other developers (RQ1) is by making predictions with a separate set of developers. Doing so will allow me to observe the ability for M1 to generalize to a wide range of developers. 
+I built and evaluated M1 using the same set of developers. I plan to assess the generalizability of M1 to other developers (RQ1) is by making predictions with a separate set of developers. Doing so will allow me to observe the ability for M1 to generalize to a wide range of developers. 
 To assess the generalizability of M1 in regards to other concepts (RQ2), I plan to analyze participant repositories for concept-specific code pertaining to others Java concepts.
 % TODO how am I going to choose the 3? concepts where possible to get multi-concept notifications that include two or more??? To prepare for future study that adapts and assesses notifications 
 % TODO Specify what concepts you'll be doing. How many participants you'll get. How you'll recruit them. How long this effort will take compared to the prior CI, and why you think this one will be faster. (#69)
-To select the concepts for assessment, I plan to use the following criteria:
-\begin{itemize}
-	\item It is a concept that appears in program analysis tool notifications, particularly FindBugs which I plan to extend to assess the potential for adaptive notifications (Section~\ref{subsec:s5}).
-	\item It is a concept that has a wide range of sub-concepts.
-	\item It is a concept that has features that may go unused by most developers.
-\end{itemize}
-
-Rather than attempting to find an exhaustive list of concepts that fit one or more of these criteria, I plan to begin with the first criteria; FindBugs has a publicly available, and regularly updated, webpage with a list of the notifications it uses.\footnote{http://findbugs.sourceforge.net/bugDescriptions.html}
-I plan to evaluate M1 on at least three additional concepts.
+%To select the concepts for assessment, I plan to use the following criteria:
+%\begin{itemize}
+%	\item It is a concept that appears in program analysis tool notifications, particularly FindBugs which I plan to extend to assess the potential for adaptive notifications (Section~\ref{subsec:s5}).
+%	\item It is a concept that has a wide range of sub-concepts.
+%	\item It is a concept that has features that may go unused by most developers.
+%\end{itemize}
+%
+%Rather than attempting to find an exhaustive list of concepts that fit one or more of these criteria, I plan to begin with the first criteria; FindBugs has a publicly available, and regularly updated, webpage with a list of the notifications it uses.\footnote{http://findbugs.sourceforge.net/bugDescriptions.html}
+%I plan to evaluate M1 on at least three additional concepts.
 
 \vspace{0.5em}
 
 \noindent\textit{Qualitative Data Collection \& Analysis.}
 % TODO should this be another RQ (i.e. do developers agree with the relationship between source code and knowledge)??
-Another way I plan to assess the scalability of M1 is by conducting short, semi-structured interviews with developers (10--20) regarding their perceptions of source code and programming concept expertise (RQ2). Each interview will last approximately 30 minutes and will be divided into two phases: 1) their perception of the relationship between the code they write and their expertise regarding the concept and 2) their perception of the other factors that contribute to their knowledge of programming concepts.  
+Another way I plan to assess the generalizability, and find opportunities for refinement, of M1 is by conducting short, semi-structured interviews with developers (10--20) regarding their perceptions of source code and programming concept expertise (RQ2). Each interview will last approximately 30 minutes and will be divided into two phases: 1) the relationship between the code they write and their expertise regarding the concept and 2) other factors that contribute to their knowledge of programming concepts.  
 
-To determine what factors developers consider as contributors to their knowledge, I plan to 1) code each transcript and 2) perform content analysis in R~\cite{RSoftware} on interview transcripts. Content analysis assumes that content most frequently mentioned is the most important. In order to perform content analysis, I need well defined categories; this is where the coding process comes into play. Using a methodology similar to the one in Section~\ref{subsec:s2}, I will code each transcript for statements pertaining to their knowledge of concepts and experiences that contributed knowledge for them. 
+To determine what factors developers consider as contributors to their knowledge, I plan to 1) code each transcript and 2) perform content analysis in R~\cite{RSoftware} on interview transcripts. Content analysis assumes that content most frequently mentioned is the most important. For example, if in multiple interviews participants discuss on-line programming forums, such as Stack Overflow, one item that content analysis may identify as important in relation to the topic being discussed, is on-line forums. In order to perform content analysis, I need well defined categories, such as on-line forum usage; this is where the coding process comes into play. Using a methodology similar to the one in Section~\ref{subsec:s2}, I will code each transcript for statements pertaining to their knowledge of concepts and experiences that contributed knowledge for them. 
 
 Using the codes from the transcripts, I will perform content analysis to determine which factors developers feel contribute most to their knowledge.
-To validate source code as a factor, and other factors that emerged during the interviews, I plan to administer a survey to another set of developers (50--100). To encourage participation, and thereby increase the likelihood I will get a large set of responses, I plan to ask only one question: \emph{Which of the following contribute to your knowledge of programming concepts?}. I will include a definition and example of a programming concept so that participants are able to accurately respond. I will include each factor identified during the interviews as response options.
+To validate source code as a factor, and other factors that emerged during the interviews, I plan to administer a survey to another set of developers (50--100). To encourage participation, and thereby increase the likelihood I will get a large set of responses~\cite{smith2013improving}, I plan to ask only one question: \emph{Which of the following contribute to your knowledge of programming concepts?}. I will include a definition and example of a programming concept so that participants are able to accurately respond. I will also communicate to their interests as developers, such as improvement of the tools available for the to use.
+I will include each factor identified during the interviews as response options.
 I will determine the factors that contribute most to developer knowledge by running various analyses using R with data from the survey. Findings from both the qualitative and quantitative analyses will serve to potentially confirm current model building efforts and inform future data analysis and model building efforts.
 
+\subsubsection{Participants.} To increase the ability to compare M1 to future models, I plan to conduct this study with at least 25 GitHub developers. I plan to recruit participants by re-contacting participants from \textbf{Predictions}. As a back-up, I also plan to use mailing lists, personal contacts, and GitHub search to find developers. Because I already have a participant pool to re-sample, and a handful of participants that have expressed interest in continuing participation and helping with recruitment, I expect it will be faster and easier to acquire my goal of at least 25 participants.
 
 \subsection{Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications? [SmartBugs]} \label{subsec:s5}
 \subsubsection{Study rationale.}
@@ -1026,8 +1037,8 @@ Once I have a prototype notification design template for each expertise category
 
 Based on the results from my user study, I will develop a prototype tool, which I will call SmartBugs, that will adapt notification presentation based on developer knowledge. I plan to build SmartBugs on top of FindBugs because it is a mature, open source defect finding tool with a wide range of notifications that have no obvious pattern behind the information it provides in a given notification. FindBugs will serve as the baseline (one-size-fits-all) set of notifications to compare SmartBugs' notifications to (knowledge-based).
 
-For the evaluation of SmartBugs, I will attempt to re-use the same participants from the studies in Section~\ref{subsec:s3} and Section~\ref{subsec:s4}. This will prevent the overhead of finding new participants with Git repositories and the potential overhead of asking more developers to take potentially multiple concept inventories.
-As a back-up plan, I will consider using self--reported knowledge; my findings from the study in Section~\ref{subsec:s3} suggest that most often developers are aware of how much they know about a given concept.
+For the evaluation of SmartBugs, I will attempt to re-use the same participants from \textbf{Predictions} and \textbf{Generalizability}. This will prevent the overhead of finding new participants with Git repositories and the potential overhead of asking more developers to take potentially multiple concept inventories.
+As a back-up plan, I will plan to have participants take the concept inventory as part of participation prior to arrival for their session using SmartBugs.
 % TODO what other way can I get knowledge? Anything lighter weight?
 
 For the user evaluation, I will divide participants into two groups: one group will use FindBugs (FB) and the other will use SmartBugs(SB). Each group will have an equal number of developers from each classification group to ease the process of analyzing the data. All developers in the FB group will be presented with the normal notifications used by FindBugs. Developers in the SB group will be presented with notifications based on their classification and the mappings from RQ1 and RQ2.
@@ -1039,6 +1050,9 @@ I also plan to allow use of the web for both FindBugs and SmartBugs; this will i
 To assess user satisfaction with SmartBugs and FindBugs notifications, I will administer a user satisfaction survey post-evaluation to gain insights into participant options of both sets of output.
 
 % TODO really wanna put PD in here somewhere!
+
+\subsection{Participants.} I plan to recruit 10--20 developers for this study. I will begin recruitment with existing participants from previous studies, as we will have built rapport, and ideally a mutual interest in the outcomes of my proposed research. I will also, if necessary, recruit using mailing lists and personal contacts.
+
 
 
 \section{Related Work}
