@@ -244,6 +244,7 @@ Some tools use affordance overlays or annotations to both get the attention of t
 	\label{fig:coverity}
 \end{figure}
 
+A small subset of tools use dashboards, such as the one shown to the right in Figure~\ref{fig:stench}. StenchBlossom, a code smell detection tool gets and maintains a developer's attention using an ambient dashboard~\cite{Murphy-Hill:2010:Ambient}. At anytime the developer is interested in the information being provided by the tool, the developer can use options in the dashboard to explore code smells present in their code base. The description is visual, using color overlays that map to each type of code smell. 
 
 \begin{figure}
 	\centering
@@ -251,8 +252,6 @@ Some tools use affordance overlays or annotations to both get the attention of t
 	\caption{Notifications provided by StenchBlossom regarding code smells.}
 	\label{fig:stench}
 \end{figure}
-
-A small subset of tools use dashboards, such as the one shown to the right in Figure~\ref{fig:stench}. StenchBlossom, a code smell detection tool gets and maintains a developer's attention using an ambient dashboard~\cite{Murphy-Hill:2010:Ambient}. At anytime the developer is interested in the information being provided by the tool, the developer can use options in the dashboard to explore code smells present in their code base. The description is visual, using color overlays that map to each type of code smell. 
 
 \begin{figure}
 	\centering
@@ -338,7 +337,7 @@ To answer the question \emph{why do developers encounter challenges when interpr
 To identify challenges, we examined tool use through the lens of communication theory~\cite{bowman1987modeling}.
 Building on an existing model of (mis)communication~\cite{mustajoki2008modelling}, we identified 12 kinds of challenges developers encounter when interpreting tool notifications.
 
-Based on the challenges participants encounter when interpreting tool notifications, I proposed a tool miscommunication theory that can be used to inform the design of program analysis tools.
+Based on the challenges participants encountered when interpreting tool notifications, I proposed a tool miscommunication theory that can be used to inform the design of program analysis tools.
 Experts in qualitative research suggest that rather than presenting a set of disparate findings, qualitative researchers should instead produce an explanatory theory, a ``skeleton or framework that explains why things happen''~\cite{corbin2014basics}. While explicitly putting forward theories is rare in software engineering~\cite{hannay2007systematic}, one example is Lawrance and colleagues' theory of how programmers navigate code during debugging~\cite{lawrance2013programmers}. In the same way that Lawrance and colleagues' build on 
 information foraging theory~\cite{pirolli1999information}, my theory builds on communication theory~\cite{bowman1987modeling}.
 I summarize my theory as:
@@ -427,7 +426,7 @@ I have outlined my proposed research; next I will outline the studies, experimen
 % why don't study (completed)
 This section outlines the research I have completed and propose to complete for my dissertation. For each study, I provide an abbreviated name in brackets ([]) to facilitate discussion about projects and results in later sections.
 
-\subsection{Why don't developers use program analysis tools? [Reasons]}\label{subsec:s1}
+\subsection{Why don't developers use program analysis tools? [Reasons]\protect\footnote{Publication: Johnson, B., Song, Y., Murphy-Hill, E., \& Bowdidge, R. (2013, May). Why don't software developers use static analysis tools to find bugs?. In Software Engineering (ICSE), 2013 35th International Conference on (pp. 672-681). IEEE.}}\label{subsec:s1}
 
 \subsubsection{Study rationale.} Static analysis tools provide a means for analyzing code without having to run
 the code, helping ensure higher quality software throughout the development process. There are a variety of ways to perform automatic static
@@ -563,7 +562,7 @@ Other suggestions made by participants throughout their sessions include having 
 
 
 
-\subsection{Why do developers have difficulty interpreting tool notifications? [Challenges]}\label{subsec:s2}
+\subsection{Why do developers have difficulty interpreting tool notifications? [Challenges]\protect\footnote{Publication: Johnson, B., Pandita, R., Smith, J., Ford, D., Elder, S., Murphy-Hill, E., Heckman, S., Sadowski, C., What We Have Here is a Failure to Communicate! A Cross Tool Study on Program Analysis Tool Notifications. FSE 2016 (in submission)}}\label{subsec:s2}
 % session study (completed)
 \subsubsection{Study rationale.} Program analysis tools, such as static analysis tools, refactoring tools, and code smell detectors, can ease manual and sometimes tedious software development tasks by automatically analyzing and modifying source code~\cite{adolph2011using,Murphy-Hill:2010:Ambient}. 
 Output from these tools, such as warnings and errors, come in the form of textual or visual notifications that vary from tool to tool.
@@ -808,7 +807,7 @@ When opened in Adobe Acrobat, clicking \framebox{``Hide/Display Details''}
 interactively toggles between showing and hiding this mapping.
 
 % model building (completed)
-\subsection{Can we use developer experience to predict knowledge? [Predictions]}\label{subsec:s3}
+\subsection{Can we use developer experience to predict knowledge? [Predictions]\protect\footnote{Publication: Johnson, B., Pandita, R., Murphy-Hill, E., Heckman, S., Menzies, T., Predicting Developer Conceptual Knowledge Using Public Git Repositories. VL/HCC 2016 (in submission)}}\label{subsec:s3}
 
 \subsubsection{Study rationale.}
 In the study outlined in Section~\ref{subsec:s2}, I found that the challenges developers encounter may be due to the fact that, despite developer differences in background and knowledge, tools use the same notifications to communicate to all developers. 
