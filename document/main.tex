@@ -152,6 +152,7 @@ Program analysis tools are designed to aide developers when developing software 
 Often, program analysis is discussed as synonymous with static analysis~\cite{nielson2015principles}. 
 For the purpose of my research, I define a program analysis tool as \emph{a recommendation system that performs program analysis, whether it be static or dynamic analysis, and provides information regarding the source code being analyzed}~\cite{robillard2014recommendation}.
 Examples of program analysis tools include, but are not limited to, static code analyzers, code coverage tools, code smell detectors, and refactoring tools~\cite{adolph2011using,Murphy-Hill:2010:Ambient,ge2012reconciling}.
+Program analysis tools can be used in integrated development environments (IDEs) as well in most text editors that can be used for programming, such as Vim~\footnote{http://www.vim.org/} or Emacs~\footnote{https://www.gnu.org/software/emacs/}. 
 In the following sections, I will define and discuss static analysis and dynamic analysis tools separately; the reader should note that although I discuss static and dynamic analysis separately, it is not uncommon to find program analysis tools that combine static and dynamic analysis~\cite{ernst2003static}.                                                
 
 \subsubsection{Static Analysis Tools.}
@@ -174,11 +175,13 @@ Let's use the example of Cobertura,\footnote{http://cobertura.github.io/cobertur
 
 \subsection{How do tools communicate?}\label{subsec:comm}
 
-One common thread between program analysis tools like FindBugs and EclEmma is that they use \emph{notifications} to communicate with the developer. Figure~\ref{fig:ecl} and Figure~\ref{fig:eclipse} provide examples of tool notifications. A notification, when speaking in terms of program analysis tools, is a combination of visuals and text used to communicate a message to its user; for program analysis tools, the user is the developer.
+One common thread between program analysis tools like FindBugs and Cobertura is that they use \emph{notifications} to communicate with the developer. Figure~\ref{fig:ecl} and Figure~\ref{fig:eclipse} provide examples of tool notifications. 
+A notification, when speaking in terms of program analysis tools, is typically a combination of visuals and text used to communicate a message to its user; for program analysis tools, the user is the developer.
+Text editors like Vim and Emacs rarely include any visual components, however, because text editors are a simpler versions of IDEs, research on notifications in IDEs are more likely to backwards apply to text editors than vice versa. 
+Therefore, I focus my research on notifications inside IDEs.
 
-% TODO: see if I can find a tool that is evenly visual and textual.
-Notifications across tools vary; some provide lots of text (like FindBugs), some use primarily visual means of communications (like EclEmma), and some fall in between using equal parts text and visuals to communicate. Notifications can also have different goals, which may influence how developers design notifications. For example, the goal of a FindBugs notification is to explain a potential defect in the developer's source code and, ideally, help the developer make a decision about the defect (i.e. whether and how to resolve). Because FindBugs' goal is to explain, we expect to see textual notifications that provide that explanation.
-The goal of EclEmma notifications is to statically show dynamic program behavior and help the developer determine the effectiveness of her test suite. EclEmma uses colors applied directly to the source code to communicate as opposed to text. Though EclEmma also uses text to communicate code coverage (i.e. \texttt{1 of 2 branches missed} on a partially covered \texttt{if} statement), this does not allow the developer to scan the program for areas in most need of attention. Therefore, EclEmma uses other visuals, such as the bar visuals in the Coverage View (Figure~\ref{fig:ecl}) to show coverage on a given package or class.
+Notifications across tools vary; some provide lots of text (like FindBugs) with few visual aides, some use primarily visual means of communications (like Cobertura). Notifications can also have different goals, which may influence how developers design notifications. For example, the goal of a notification from Coverity~\footnote{http://www.coverity.com/}, another static analysis tool, is to explain a potential defect in the developer's source code and, ideally, help the developer make a decision about the defect (i.e. whether and how to resolve). Because Coverity's goal is to explain, we expect to see textual notifications that provide that explanation.
+The goal of code coverage notifications is to statically show dynamic program behavior and help the developer determine the effectiveness of her test suite. EclEmma, another code coverage tool, uses colors applied directly to the source code to communicate as opposed to text. Though EclEmma also uses text to communicate code coverage (i.e. \texttt{1 of 2 branches missed} on a partially covered \texttt{if} statement), this does not allow the developer to scan the program for areas in most need of attention. Therefore, EclEmma uses other visuals, such as the bar visuals in the Coverage View (Figure~\ref{fig:ecl}) to show coverage on a given package or class.
  % TODO talk about how different parts of notification communicate for each tool; make sure it ties back to goals (defects and test coverage)!
 
 The list of tools and notifications tools use can go on and on, but for the purposes of my research, the general definition I will use for a notification is \emph{a combination of visual and textual interfaces used by a program analysis tool to communicate information to developers about their source code.} Notifications can vary regarding what information and how much detail they provide, however, there are commonalities across tool notifications that informed this definition, which I will discuss next.
@@ -188,39 +191,57 @@ The list of tools and notifications tools use can go on and on, but for the purp
 One reason I talk about program analysis tools as a type of recommendation system is because they provide information to developers completing software engineering tasks~\cite{robillard2014recommendation}. 
 Another reason is that program analysis tools use the same strategies defined by Robillard as typical of recommendation systems: 1) strategies for getting the user's attention and 2) descriptive interfaces.
 Program analysis tools use these strategies when communicating with developers via notifications.
-Because the program analysis tools I study are most often used within integrated development environments (IDE), I will focus on examples of notifications inside IDEs.
 
-\subsubsection{Getting Developer's Attention.}
-There are a variety of ways that a tool can get the attention of its user~\cite{robillard2014recommendation}. Program analysis tools get the attention of developers in their IDEs in one or more of the following ways: icons, dashboards, pop-ups, affordance overlays, or email notifications.
-
-All program analysis tools provide descriptive interfaces that convey information about a developer's source code once the tool has her attention. 
+There are a variety of ways that a tool can get the attention of its user~\cite{robillard2014recommendation}. Program analysis tool notifications get the attention of developers in their IDEs in one or more of the following ways: icons, dashboards, pop-ups, affordance overlays, annotations, or email notifications.
+Once the tool has the developer's attention, program analysis tool notifications provide descriptive interfaces that convey information about a developer's source code once the tool has her attention. 
 Information is conveyed using some combination of textual, visual, and sometimes transformative descriptions.
 
-Some tools, like FindBugs, 
-% TODO finish here, bring together these lists into some examples of components since already listed rather than listing and explaining each
+Some tools, like FindBugs and Coverity, use icons to get developers' attention. Using the same icons, developers can access more information either by hovering over or clicking the icon. Although the icons are visual, most of the description provided by these tools is textual. As stated previously, these kinds of notifications are most common with static analysis tools as they typically need to be more descriptive. However, dynamic analysis tools like Veracode~\footnote{http://www.veracode.com/products/dynamic-analysis-dast/dynamic-analysis}, which communicate about defects similar to the ones reported by FindBugs and Coverity, also use icons and text descriptions to pass along information to the developer.
 
-\noindent\textit{Icons.} Most often, program analysis tools use icons to get developers' attention. Icons are images found in the sidebar of IDEs. To alert developers of information available about their source code, tools place an icon on the line of code the tool deems most relevant to the information being conveyed. Images used for icons vary by tool, as can be seen in Figures~\ref{fig:eclipse} and~\ref{fig:ecl}.
+\begin{figure}
+	\centering
+	\includegraphics[width=3in]{figs/cobertura.png}
+	\caption{Notifications provided by Cobertura regarding code coverage.}
+	\label{fig:cobertura}
+\end{figure}
 
-\noindent\textit{Dashboards.} Dashboards are less frequently used by program analysis tools, however, there exists tools that use dashboards to get developers' attention while they are writing code. For example, StenchBlossom, a tool that detects bad code smells, uses an ambient dashboard to provide information to developers regarding code smells in their code.
-% recommendation systems break down: somethign to get attention, description
+\begin{figure}
+	\centering
+	\includegraphics[width=3in]{figs/jslice.jpg}
+	\caption{Notifications provided by JSlice regarding a dynamic slice of the program.}
+	\label{fig:jslice}
+\end{figure}
 
-\noindent\textit{Popups.}
-% TODO Find tool that alerts developer via pop-up? 
 
-\noindent\textit{Affordance Overlays.} Affordance overlays annotate the user interface by provide visual overlays on top of user interface affordances. For example, after execution EclEmma notifies the developer of code coverage by providing visual overlays on the code (Figure~\ref{fig:ecl}). 
+Some tools provide affordance overlays or annotations to both get the attention of the developer and for the descriptive interface. For example, Cobertura and JSlice~\footnote{http://jslice.sourceforge.net/} use affordance overlays in the form of source code highlighting, as shown in Figure~\ref{fig:cobertura} and Figure~\ref{fig:jslice}, to alert the developer of and communicate about dynamic behavior. Coverity Dynamic Analyzer~\footnote{http://www.coverity.com/library/pdf/Coverity-Dynamic-Analysis.pdf}, which is similar to Veracode, uses annotations, such as the one in Figure~\ref{fig:coverity} in the editor to communicate about defects in the code.
 
-\noindent\textit{Email Notifications.} The least intrusive way that program analysis tools get user's attention is by sending email notifications when there is information to communicate. For example, developers can configure Coverity to send emails when there are potential defects found in their code.
+\begin{figure}
+	\centering
+	\includegraphics[width=3in]{figs/coverity-dynamic.png}
+	\caption{A notification provided by Coverity regarding a race condition.}
+	\label{fig:coverity}
+\end{figure}
 
-\subsubsection{Description Interfaces.}
-All program analysis tools provide descriptive interfaces that convey information about a developer's source code once the tool has her attention~\cite{robillard2014recommendation}. 
-Information is conveyed using some combination of textual, visual, and sometimes transformative descriptions.
 
-\noindent\textit{Textual Descriptions.} Textual descriptions provide information using primarily text. Text descriptions are sometimes augmented with visual elements to enhance the ability to communicate the necessary information. For example, tools like FindBugs and PMD use mostly text to communicate information, however, they also use color to represent information importance.
+\begin{figure}
+	\centering
+	\includegraphics[width=3in]{figs/stenchblossom.pdf}
+	\caption{Notifications provided by StenchBlossom regarding code smells.}
+	\label{fig:stench}
+\end{figure}
 
-\noindent\textit{Visual Descriptions.}
+A small subset of tools use dashboards, such as the one shown to the right in Figure~\ref{fig:stench}. StenchBlossom, a code smell detection tool gets and maintains a developer's attention using an ambient dashboard~\cite{Murphy-Hill:2010:Ambient}. At anytime the developer is interested in the information being provided by the tool, the developer can use options in the dashboard to explore code smells present in their code base. The description provided is visual, providing color overlays that map to each type of code smell. 
 
-\noindent\textit{Transformative Descriptions.} 
-% TODO WitchDoctor
+\begin{figure}
+	\centering
+	\includegraphics[width=3in]{figs/witchdoctor.png}
+	\caption{A notification provided by WitchDoctor regarding a refactoring that's taking place.}
+	\label{fig:witch}
+\end{figure}
+
+Finally, an even smaller subset of program analysis tools provide transformative descriptive interfaces. Transformative interfaces provide the developer with some idea of how the suggestion being made would affect the task at hand. For example, WitchDoctor, a refactoring tool, detects refactorings and then makes the developer aware of their refactoring by offering to complete the refactoring for the developer. To inform this process, WitchDoctor provides information regarding the assumed refactoring by showing the developer within their text editor what will happen if the refactoring is applied, as shown in Figure~\ref{fig:witch}.
+
+
 % types of descriptions (text and visual)
 % goals of information provided (??)
 
