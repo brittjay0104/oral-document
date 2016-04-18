@@ -321,11 +321,11 @@ A developer may also get a notification regarding exception handling. Here, the 
 
 
 \subsection{Are developers able to interpret tool notifications?}
-Despite the possibility provided by program analysis tools for exploration and improvement of source code, research has found that developers often to not use tools like FindBugs~\cite{Ayewah:2008:FindBugs}.
-Though research explored tool usage, there was no research that explored the reasons developers have for using the tools they do use and not using the tools they do not use~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}.
-To answer the question \emph{why do developers not use static analysis tools}, I conducted interactive interviews with 20 professional developers to better understand why they do not use static analysis tools, one type of program analysis tool, when writing code~\cite{johnson2013don}.
+Despite the possibility provided by program analysis tools for exploration and improvement of source code, research has found that developers often to not use program analysis tools~\cite{Ayewah:2008:FindBugs,ge2012reconciling}.
+Though research has explored tool usage, there was no research that explored the reasons developers have for using the tools they do use and not using the tools they do not use~\cite{Bessey:2010:Coverity,Khoo:2008:PathProjection}.
+To answer the question \emph{why do developers not use program analysis tools}, I conducted interactive interviews with 20 professional developers to better understand why they do not use static analysis tools, one common type of program analysis tool, to find bugs when writing code~\cite{johnson2013don}.
 
-Based on the data from these interviews, the reasons developers do not frequently use static analysis tools are \textbf{Lack of collaborative support}, \textbf{Seemingly unorganized tool output}, \textbf{Poor support for customizations}, and \textbf{Difficult to interpret notifications}. 
+Based on the data from these interviews, some of the reasons developers do not frequently use static analysis tools are \textbf{Lack of collaborative support}, \textbf{Seemingly unorganized tool output}, \textbf{Poor support for customizations}, and \textbf{Difficult to interpret notifications}. 
 Three out of four findings regarding tool use pertain to the notifications tools use and how tools present information to the developer.
 Discovering that tool notifications are one of the reasons developers do not use program analysis tools is useful, however, not actionable. The next piece of information needed to make these findings actionable is to discover what about tool notifications make it difficult for developers to interpret them.
 
@@ -353,32 +353,36 @@ Remember Valerie? Though she is a hypothetical developer, the challenges she fac
 
 \section{A Proposed Approach for Modeling Developer Knowledge}
 %modeling approach (vlhcc)
-In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. For the remainder of this document, I use concept to mean programming-oriented concepts. I chose to focus on programming-oriented concepts because existing research conducted by Smith and colleagues suggests understanding programming-oriented affects developers' ability to resolve notifications~\cite{smith2015questions}. I propose that by borrowing from education research and using developer experiences as a concrete representation of knowledge, it is possible to learn and approximately predict developer knowledge of programming concepts.
+In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. For the remainder of this document, I use concept to mean programming-oriented concepts. I chose to focus on programming-oriented concepts because existing research conducted by Smith and colleagues suggests understanding programming-oriented concepts affects developers' ability to resolve notifications~\cite{smith2015questions}. I propose that by borrowing from education research and using developer experiences as a concrete representation of knowledge, it is possible to learn and approximately predict developer knowledge of programming concepts.
 
 \subsection{Using Concept Inventories to Assess Concept Knowledge}
 % TODO read through and revise as needed! 
 To create any kind of model, I need a dependent variable and one or more independent variables that could be used to predict the value of the dependent variable. Since I propose models that predict knowledge, my dependent variable has to be some measure of developer concept knowledge.
-Borrowing from existing computer science education research, I developed concept inventories for knowledge assessment. Traditionally, concept inventories are used to  assess conceptual knowledge and identify misconceptions; in Computer Science, the target audience is typically CS1 students~\cite{tew2010developing,kaczmarczyk2010identifying}. I will use concept inventories to assess what any developer knows, rather than what CS1 programmers do not know.
+Borrowing from existing computer science education research, I developed concept inventories for knowledge assessment. 
 
-I need to assess knowledge with a wide range of developers outside of academia, therefore I could not borrow directly from research that creates concept inventories for novice academic programming concept knowledge assessment~\cite{tew2010assessing}. I combined existing concept inventory research with examinations using Bloom's Taxonomy~\cite{tew2010developing,nelson1967testing,scott2003bloom}. By using Bloom's Taxonomy to inform question creation, I can increase assurance that my questions exhaustively assess understanding. The current inventory has 10 questions, each worth 1 point, that effectively assess knowledge and represent ground truth conceptual knowledge. The final, validated process I have developed for creating general programming concept inventories is as follows:
+
+Traditionally, concept inventories are used to  assess conceptual knowledge and identify misconceptions; in Computer Science, the target audience is typically CS1 students~\cite{tew2010developing,kaczmarczyk2010identifying}. 
+I need to assess knowledge with a wide range of developers outside of academia, therefore I could not borrow directly from research that creates concept inventories for novice academic programming concept knowledge assessment~\cite{tew2010assessing}. I combined existing concept inventory research with examinations using revised Bloom's Taxonomy~\cite{tew2010developing,nelson1967testing,scott2003bloom}. By using Bloom's Taxonomy to inform question creation, I increased assurance that my questions exhaustively assess understanding~\cite{scott2003bloom}. The current inventory has 10 questions, each worth 1 point, that assess knowledge and will serve as a representation of ground truth conceptual knowledge. 
+The final process I have developed for creating general programming concept inventories is as follows:
 
 \vspace{0.5em}
-\noindent\textbf{Define Conceptual Content for Test Specification.} I used sources such as Oracle Documentation and Tutorials to come up with the relevant conceptual content. A test specification is a way of formally outlining what will be on the test without having to write the questions~\cite{tew2010developing}. 
+\noindent\textbf{Define Conceptual Content for Test Specification.} A test specification is a way of formally outlining what will be on the test without having to write the questions~\cite{tew2010developing}. Once you have decided on the programming-oriented concept of interest, use language tutorials surrounding that concept to define conceptual content. This process should be exhaustive; the sub-concepts covered for a given concept in any tutorial found should be included in the test specification.
 
 \vspace{0.5em}
 
-\noindent\textbf{Build Bank of Test Questions.} This step is where Bloom's Taxonomy becomes important. Without using Bloom's Taxonomy, I could create a group of questions that potentially assess the same level of understanding. Therefore, I came up with at least 1 question for each level of Bloom's taxonomy, based on my test specification, using examples found in work by Nelson~\cite{nelson1967testing} and Thompson and colleagues~\cite{thompson2008bloom}.  
+\noindent\textbf{Build Bank of Test Questions.} This step is where Bloom's Taxonomy becomes important. Without using Bloom's Taxonomy, I could create a group of questions that potentially assess the same level of understanding. To assess different levels of understanding, each question should map to at least one level of Bloom's Taxonomy. If possible, it is helpful to compare the kinds of questions asked to assess each level of Bloom's Taxonomy with the questions in the bank to be used.
+It is also more effective if each level of Bloom's Taxonomy is represented in the bank of questions.
 
 \vspace*{0.5em}
 
-\noindent\textbf{Pilot Questions.} I piloted my initial set of questions with 11 developers and students at NC State University. I did another pilot once I established validity and reliability, the next step.
+\noindent\textbf{Pilot Questions.} Once you have a bank of questions, the next step is to pilot the questions on the target audience. The goal of this pilot is to note the range in scores to inform validation, which is the next step. If all the scores are really high, or really low, this might suggest an assessment that is too difficult or too easy~\cite{nelson1967testing}, which would require revisiting and revising the test bank.
 
 \vspace*{0.5em}
 
-\noindent \textbf{Establish Validity and Reliability.} To validate my concept inventory, I conducted item analysis~\cite{gorsuch1997exploratory}. The purpose of item analysis is to determine how effective your test, and the items on it, are. The primary goal in the scope of my research was the determine which questions may be considered too easy, too hard, or not fair. An example of an unfair question is a question where more than one response is a reasonable response, making it more difficult to determine the best response, even for an easy question. From the item analysis, I was able to remove 1 question that, according to my analyses, was not effective.
+\noindent \textbf{Establish Validity and Reliability.} Validation of an assessment tool can be done in a variety of ways. The most common form of validation is item analysis~\cite{gorsuch1997exploratory}. The purpose of item analysis is to determine how effective your test, and the items on it, for knowledge assessment. This includes determining at a more granular level which questions may be too hard, too easy, or unfair. 
+An example of an unfair question is a question where more than one response is a reasonable response, making it more difficult to determine the best response, even for an easy question.
 
-
-I discuss the process that led to this final set of steps when I related study in Section~\ref{subsec:s3}.
+%I discuss the process that led to this final set of steps when I related study in Section~\ref{subsec:s3}.
 
 \subsection{Using Public Git Repositories to Predict Concept Knowledge}
 As a developer, many experiences are focused on writing source code; writing software is also perhaps one of the most concrete actions that can be labeled as an experience for a developer. Therefore, I used \emph{concept-specific source code} to determine independent variables for my models. I define concept-specific code is code that maps to a given programming concepts; an example of multi-threading-specific code is \texttt{synchronized(variable)}, where the developer has written code that synchronizes variables for multi-threaded execution.
@@ -829,7 +833,12 @@ The goal of this study was to develop and assess an approach for developing mode
 \vspace{0.5em}
 \noindent\textit{Assessing \& Encapsulating Conceptual Knowledge.}
 To assess \& encapsulate developer knowledge as the dependent variable my our models, I borrowed from computer science education literature and developed a concept inventory~\cite{tew2010assessing}. 
-To determine the questions for the inventory, I identified key generics concepts. I used the Oracle Java Tutorial on Generics\footnote{\url{http://docs.oracle.com/javase/tutorial/java/generics/}} to find and map the relationships between generics concepts and ancestor concepts; if Lesson 5 built on top of Lesson 1, I considered Lesson 5 an ancestor of Lesson 1. For example, based on the generics tutorial, I labeled Upper Bounded Wildcards as an ancestor concept to Wildcards. Once I had the key concepts, I mapped each level of Bloom's Taxonomy to at least one key concept. From this process, I derived 11 questions.
+To determine the questions for the inventory, I identified key generics concepts. I used the Oracle Java Tutorial on Generics\footnote{\url{http://docs.oracle.com/javase/tutorial/java/generics/}} to find and map the relationships between generics concepts and ancestor concepts; if Lesson 5 built on top of Lesson 1, I considered Lesson 5 an ancestor of Lesson 1. For example, based on the generics tutorial, I labeled Upper Bounded Wildcards as an ancestor concept to Wildcards. Once I had the key concepts, I came up with at least 1 question for each level of revised Bloom's taxonomy, based on my test specification, using examples found in work by Nelson~\cite{nelson1967testing} and Thompson and colleagues~\cite{thompson2008bloom}.
+From this process, I derived 11 questions.
+
+I piloted my initial set of questions with 11 developers and students at NC State University. I did another pilot once I established validity and reliability, the next step.
+
+From the item analysis, I was able to remove 1 question that, according to my analyses, was not effective.
 
 Next, to test the validity of our concept inventory, I used item and distractor analysis in R. Item analysis determined if the items on our inventory contribute are valid methods of assessment; from this process we eliminated 1 question, which gave us a final set of 10 questions.  Distractor analysis determined if the options provided for a given question are fair and if the incorrect options contribute to the quality of our inventory; because each option was selected at least once for each inventory item, and most often the correct option was chosen, I kept all response options for each inventory item.
 
