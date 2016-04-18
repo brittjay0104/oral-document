@@ -354,11 +354,11 @@ Remember Valerie? Though she is a hypothetical developer, the challenges she fac
 
 \section{A Proposed Approach for Modeling Developer Knowledge}
 %modeling approach (vlhcc)
-In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. For the remainder of this document, I use concept to mean programming-oriented concepts. I chose to focus on programming-oriented concepts because existing research conducted by Smith and colleagues suggests understanding programming-oriented concepts affects developers' ability to resolve notifications~\cite{smith2015questions}. I propose that by borrowing from education research and using developer experiences as a concrete representation of knowledge, it is possible to learn and approximately predict developer knowledge of programming concepts.
+In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. For the remainder of this document, I use concept to mean programming-oriented concepts. I chose to focus on programming-oriented concepts because existing research conducted by Smith and colleagues suggests understanding programming-oriented concepts affects developers' ability to resolve notifications~\cite{smith2015questions}. Borrowing from education research and using developer experiences as a concrete representation of knowledge, I evaluate the possibility to learn and approximately predict developer knowledge of programming concepts.
 
 \subsection{Using Concept Inventories to Assess Concept Knowledge}
 % TODO read through and revise as needed! 
-To create any kind of model, I need a dependent variable and one or more independent variables that could be used to predict the value of the dependent variable. Since I propose models that predict knowledge, my dependent variable has to be some measure of developer concept knowledge.
+To create any kind of model, I need a dependent variable and one or more independent variables that could be used to predict the value of the dependent variable. Since I want to build models that predict knowledge, my dependent variable has to be some measure of developer concept knowledge.
 Borrowing from existing computer science education research, I developed concept inventories for knowledge assessment. 
 
 
@@ -424,7 +424,7 @@ I have outlined my proposed research; next I will outline the studies, experimen
 \section{Experiments \& Evaluations}\label{sec:eval}
 % TODO think about RQs for each
 % why don't study (completed)
-This section outlines the research I have completed and propose to complete for my dissertation. For each study, I provide an abbreviated name in brackets ([]) to facilitate discussion about projects and results in later sections.
+This section outlines the research I have completed and will complete for my dissertation. For each study, I provide an abbreviated name in brackets ([]) to facilitate discussion about projects and results in later sections.
 
 \subsection{Why don't developers use program analysis tools? [Reasons]\protect\footnote{Publication: Johnson, B., Song, Y., Murphy-Hill, E., \& Bowdidge, R. (2013, May). Why don't software developers use static analysis tools to find bugs?. In Software Engineering (ICSE), 2013 35th International Conference on (pp. 672-681). IEEE.}}\label{subsec:s1}
 
@@ -749,7 +749,7 @@ For example, if a participant navigated to different parts of the code but did n
 
 
 I analyzed each transcript using selective coding~\cite{corbin2014basics} to discover the challenges participants encountered with the goal of explaining the challenges programmers encounter. 
-To identify a challenge in the context of my research goal, I needed concrete coding criteria. I propose that tool use is a form of communication, and therefore that challenges when interpreting a notification can be seen as miscommunication. Following this logic, I used Mustajoki's proposed model of (mis)communication to determine when a miscommunication-related challenge occurred~\cite{mustajoki2008modelling} by creating three criteria to identify a challenge: 1) the participant explicitly states a challenge, 2) is unable to explain the notification, or 3) has to take steps, outside of reading the notification, to deduce the problem.
+To identify a challenge in the context of my research goal, I needed concrete coding criteria. I observed tool use as a form of communication, therefore challenges when interpreting a notification can be seen as miscommunication. Following this logic, I used Mustajoki's proposed model of (mis)communication to determine when a miscommunication-related challenge occurred~\cite{mustajoki2008modelling} by creating three criteria to identify a challenge: 1) the participant explicitly states a challenge, 2) is unable to explain the notification, or 3) has to take steps, outside of reading the notification, to deduce the problem.
 Whether an observation met a criterion is independent of whether the participant was able to explain the notification.
 
 The coding process was completed by two researchers, myself and a co-author on the submitted work, and in two phases. In phase 1, we each coded all the transcripts individually using the criteria above. In phase 2, we reconvened to merge our codes and check for disagreements. Of the 404 codes we originally extracted, we disagreed on 82 (20\%). 
@@ -811,9 +811,9 @@ interactively toggles between showing and hiding this mapping.
 
 \subsubsection{Study rationale.}
 In the study outlined in Section~\ref{subsec:s2}, I found that the challenges developers encounter may be due to the fact that, despite developer differences in background and knowledge, tools use the same notifications to communicate to all developers. 
-I propose that communication between notifications and developers can be improved if the notifications could adapt to the developer based on the developer's knowledge of programming concepts.
+I proposed that communication between notifications and developers can be improved if the notifications could adapt to the developer based on the developer's knowledge of programming concepts.
 This proposition is based on constructivism, a verbal communication theory that suggests awareness of how the audience might react to a message improves communication~\cite{griffin2011first}. For this to be possible in the context of tool use, tools need a way of knowing what concepts the developer knows and does not know. 
-We propose using concept inventories, a method used in education research for assessing conceptual knowledge~\cite{tew2010assessing}, and the possibility of providing knowledge information to tools in the form of concept knowledge models. 
+We used concept inventories, a method used in education research for assessing conceptual knowledge~\cite{tew2010assessing}, and the possibility of providing knowledge information to tools in the form of concept knowledge models. 
 The goal of this study was to develop and assess an approach for developing models that predict knowledge of programming concepts that appear in tool notifications based on concept-specific code the developer has written. 
 %We designed a concept inventory to assess conceptual knowledge and collected source code relevant to the Java concept of generics from 24 developers. We used unsupervised learning to determine a model that accurately predicts developer knowledge.
 %The main contributions of this paper are: 1) an approach for assessing developer conceptual knowledge using concept inventories and 2) an approach for modeling developer conceptual knowledge based on concept-specific code written by a given developer.
@@ -1057,7 +1057,7 @@ I will determine the factors that contribute most to developer knowledge by runn
 
 \subsection{Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications? [SmartBugs]} \label{subsec:s5}
 \subsubsection{Study rationale.}
-Based on findings from previous studies, I propose that communication between tools and developers can be improved if rather than using one-size-fits-all notifications, tools used knowledge-based notifications. Knowledge-based notifications would use the models I propose and refine in the studies from Section~\ref{subsec:s3} and Section~\ref{subsec:s4}. If communication theory applies directly to tool use, constructivism communication theory should also apply~\cite{griffin2011first}. Constructivism states that a speaker with awareness of how her audience will react to her message can tailor the message to the audience and therefore improve the audience's ability to understand and relate to the message. 
+Based on findings from previous studies, I proposed that communication between tools and developers can be improved if rather than using one-size-fits-all notifications, tools used knowledge-based notifications. Knowledge-based notifications would use concept knowledge models. We found that communication theory applies directly to tool use, therefore constructivism communication theory should also apply~\cite{griffin2011first}. Constructivism states that a speaker with awareness of how her audience will react to her message can tailor the message to the audience and therefore improve the audience's ability to understand and relate to the message. 
 I have explicitly assessed the applicability of general communication theory to tool use (Section~\ref{subsec:s2}), however, I have not explicitly assessed the applicability of constructivism to notification and tool design. Therefore, the goal of this study is to assess whether knowledge-based communication, in regards to tool use, is better than one-size-fits-all communication.
 
 \subsubsection{Research questions \& Hypothesis.}
