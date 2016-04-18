@@ -32,21 +32,43 @@
 \setlength\textfloatsep{1\baselineskip plus 3pt minus 2pt}
 \setlength\intextsep{1\baselineskip plus 3pt minus 2 pt}
 
-\lstdefinestyle{mystyle}{
-	basicstyle=\footnotesize,
-	breakatwhitespace=false,         
-	breaklines=true,                 
-	captionpos=b,                    
-	keepspaces=true,                 
-	numbers=left,                    
-	numbersep=5pt,                  
-	showspaces=false,                
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
 	showstringspaces=false,
-	showtabs=true,                  
-	tabsize=2
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
 }
 
-\lstset{style=mystyle} 
+%
+%\lstdefinestyle{mystyle}{
+%	basicstyle=\footnotesize,
+%	breakatwhitespace=false,         
+%	breaklines=true,                 
+%	captionpos=b,                    
+%	keepspaces=true,                 
+%	numbers=left,                    
+%	numbersep=5pt,                  
+%	showspaces=false,                
+%	showstringspaces=false,
+%	showtabs=true,                  
+%	tabsize=2
+%}
+%
+%\lstset{style=mystyle} 
 %
 \begin{document}
 
@@ -248,18 +270,18 @@ Finally, an even smaller subset of program analysis tools provide transformative
 \subsection{What do tool notifications communicate about?}
 
 % communicate about the state of with source code
-The goal of program analysis tool notifications is to communicate to the developer about their source code.
+The goal of program analysis tool notifications is to communicate some information to the developer about her source code.
 % source code maps to concepts (vann2004, biggerstaff); both human oriented and programming oriented concepts (biggerstaff)
 The source code a developers writes is a runnable manifestation of programming-oriented and human-oriented concepts~\cite{van2004concepts,biggerstaff1994program}. 
 At the lowest, most fundamental level, are \emph{programming-oriented concepts}, which relate to how the source code maps to programming language concepts.
 Programming concepts can be as simple as the means for storing and passing data, such as variables, or as complex as the means for structuring data, such as generics~\cite{jazayeri1997programming}.
-At a more abstract level, \emph{human-oriented concepts} relate to the high level goal of the source code, such as ``acquire target'' or ``complete transaction''.
+At a more abstract level, \emph{human-oriented concepts} relate to the high level requirement of the source code, such as ``acquire target'' or ``complete transaction''.
 
 Typically a given notification is associated with only one human-oriented concept.
-On the flip side, one notification can communicate about more than one programming-oriented concept. 
+On the flip side, there can be more than one notification pertaining to a one human-oriented concept and one notification can communicate about more than one programming-oriented concept. 
 Consider the following source code:
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}
 	private BufferedWriter bufferedLogWriter = null;
 	private static LogWriter theWriter = null;
 	private Service loggingService = null;
@@ -267,28 +289,29 @@ Consider the following source code:
 	
 	public void writeLog(String eventString) {
 	
-	if (isDemoMode()) {
-	//DebugLogger.log("Sending: " + eventString);
-	Sender.send(eventString);
-	} else {
-	try {
-	openLogForWriting();
-	if (bufferedLogWriter != null) {
-	bufferedLogWriter.append(eventString);
-	bufferedLogWriter.append("\n");
-	bufferedLogWriter.flush();
-	bufferedLogWriter.close();
-	}
-	DebugLogger.log("Writing: " + eventString);
+		if (isDemoMode()) {
+			//DebugLogger.log("Sending: " + eventString);
+			Sender.send(eventString);
+		} else {
+			try {
+				openLogForWriting();
+				if (bufferedLogWriter != null) {
+					bufferedLogWriter.append(eventString);
+					bufferedLogWriter.append("\n");
+					bufferedLogWriter.flush();
+					bufferedLogWriter.close();
+				}
+				DebugLogger.log("Writing: " + eventString);
 	
-	} catch (IOException e) {
-	DebugLogger.log("Couldn't write to " + bufferedLogWriter);
-	e.printStackTrace();
-	}
+			} catch (IOException e) {
+				DebugLogger.log("Couldn't write to " + bufferedLogWriter);
+				e.printStackTrace();
+			}
+		}
 	}
 \end{lstlisting}
 
-The goal, or human-oriented concept, at play is ``write to file''. 
+The requirement, or human-oriented concept, at play is ``write to log file''. 
 A notification attached to this code is telling the developer something about the code she wrote to ``write to file''.
 There are multiple programming-oriented concepts at play, which aligns with the types of notifications the developer may get. 
 In the process of writing this code, the developer may get a notification regarding any number of programming-oriented concepts (buffered streams, exception handling); for example, tools like FindBugs, Sonar, and IntelliJ's built-in static analyzers notify developer when they have opened a stream (\texttt{BufferedWriter} in the above example) and there is a possibility the stream that is writing to the file will not close.
