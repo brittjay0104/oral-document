@@ -215,10 +215,10 @@ Another reason is that program analysis tools use the same strategies defined by
 Program analysis tools use these strategies when communicating with developers via notifications.
 
 There are a variety of ways that a tool can get the attention of its user~\cite{robillard2014recommendation}. Program analysis tool notifications get the attention of developers in their IDEs in one or more of the following ways: icons, dashboards, pop-ups, affordance overlays, annotations, or email notifications.
-Once the tool has the developer's attention, program analysis tool notifications provide descriptive interfaces that convey information about a developer's source code once the tool has her attention. 
+Once the tool has the developer's attention, program analysis tool notifications provide descriptive interfaces that convey information about a developer's source code. 
 Information is conveyed using some combination of textual, visual, and sometimes transformative descriptions.
 
-Some tools, like FindBugs and Coverity, use icons to get developers' attention. Using the same icons, developers can access more information either by hovering over or clicking the icon. Although the icons are visual, most of the description provided by these tools is textual. As stated previously, these kinds of notifications are most common with static analysis tools as they typically need to be more descriptive. However, dynamic analysis tools like Veracode~\footnote{http://www.veracode.com/products/dynamic-analysis-dast/dynamic-analysis}, which communicate about defects similar to the ones reported by FindBugs and Coverity, also use icons and text descriptions to pass along information to the developer.
+Some tools, like FindBugs and most IDE compilers, use icons to get developers' attention. Using the same icons, developers can access more information either by hovering over or clicking the icon. Although the icons are visual, most of the description provided by these tools is textual. As stated previously, these kinds of notifications are most common with static analysis tools as they typically need to be more descriptive. However, dynamic analysis tools like Veracode~\footnote{http://www.veracode.com/products/dynamic-analysis-dast/dynamic-analysis}, which communicate about defects similar to the ones reported by FindBugs and Coverity, also use icons and text descriptions to pass along information to the developer.
 
 \begin{figure}
 	\centering
@@ -235,7 +235,7 @@ Some tools, like FindBugs and Coverity, use icons to get developers' attention. 
 \end{figure}
 
 
-Some tools provide affordance overlays or annotations to both get the attention of the developer and for the descriptive interface. For example, Cobertura and JSlice~\footnote{http://jslice.sourceforge.net/} use affordance overlays in the form of source code highlighting, as shown in Figure~\ref{fig:cobertura} and Figure~\ref{fig:jslice}, to alert the developer of and communicate about dynamic behavior. Coverity Dynamic Analyzer~\footnote{http://www.coverity.com/library/pdf/Coverity-Dynamic-Analysis.pdf}, which is similar to Veracode, uses annotations, such as the one in Figure~\ref{fig:coverity} in the editor to communicate about defects in the code.
+Some tools use affordance overlays or annotations to both get the attention of the developer and for the descriptive interface. For example, Cobertura and JSlice~\footnote{http://jslice.sourceforge.net/} use affordance overlays in the form of source code highlighting, as shown in Figure~\ref{fig:cobertura} and Figure~\ref{fig:jslice}, to alert the developer of and communicate about dynamic behavior. Coverity Dynamic Analyzer~\footnote{http://www.coverity.com/library/pdf/Coverity-Dynamic-Analysis.pdf}, which is similar to Veracode, uses annotations, such as the one in Figure~\ref{fig:coverity} in the editor to communicate about defects in the code.
 
 \begin{figure}
 	\centering
@@ -252,7 +252,7 @@ Some tools provide affordance overlays or annotations to both get the attention 
 	\label{fig:stench}
 \end{figure}
 
-A small subset of tools use dashboards, such as the one shown to the right in Figure~\ref{fig:stench}. StenchBlossom, a code smell detection tool gets and maintains a developer's attention using an ambient dashboard~\cite{Murphy-Hill:2010:Ambient}. At anytime the developer is interested in the information being provided by the tool, the developer can use options in the dashboard to explore code smells present in their code base. The description provided is visual, providing color overlays that map to each type of code smell. 
+A small subset of tools use dashboards, such as the one shown to the right in Figure~\ref{fig:stench}. StenchBlossom, a code smell detection tool gets and maintains a developer's attention using an ambient dashboard~\cite{Murphy-Hill:2010:Ambient}. At anytime the developer is interested in the information being provided by the tool, the developer can use options in the dashboard to explore code smells present in their code base. The description is visual, using color overlays that map to each type of code smell. 
 
 \begin{figure}
 	\centering
@@ -270,16 +270,17 @@ Finally, an even smaller subset of program analysis tools provide transformative
 \subsection{What do tool notifications communicate about?}
 
 % communicate about the state of with source code
-The goal of program analysis tool notifications is to communicate some information to the developer about her source code.
-% source code maps to concepts (vann2004, biggerstaff); both human oriented and programming oriented concepts (biggerstaff)
+The goal of program analysis tool notifications is to communicate some information to the developer about her source code about the task at hand.
 The source code a developers writes is a runnable manifestation of programming-oriented and human-oriented concepts~\cite{van2004concepts,biggerstaff1994program}. 
 At the lowest, most fundamental level, are \emph{programming-oriented concepts}, which relate to how the source code maps to programming language concepts.
 Programming concepts can be as simple as the means for storing and passing data, such as variables, or as complex as the means for structuring data, such as generics~\cite{jazayeri1997programming}.
 At a more abstract level, \emph{human-oriented concepts} relate to the high level requirement of the source code, such as ``acquire target'' or ``complete transaction''.
 
-Typically a given notification is associated with only one human-oriented concept.
+Typically a given notification is associated with only one human-oriented concept, though not all tools communicate about human-oriented concepts. For example, refactoring tools do not communicate about requirements such as ``acquire target.'' These kinds of tools typically focus on programming concepts; refactoring tools attempt to communicate about programming concepts such as variables and modules.
 On the flip side, there can be more than one notification pertaining to a one human-oriented concept and one notification can communicate about more than one programming-oriented concept. 
-Consider the following source code:
+
+
+Consider, for example, the following source code:
 
 \begin{lstlisting}
 	private BufferedWriter bufferedLogWriter = null;
@@ -312,10 +313,11 @@ Consider the following source code:
 \end{lstlisting}
 
 The requirement, or human-oriented concept, at play is ``write to log file''. 
-A notification attached to this code is telling the developer something about the code she wrote to ``write to file''.
-There are multiple programming-oriented concepts at play, which aligns with the types of notifications the developer may get. 
-In the process of writing this code, the developer may get a notification regarding any number of programming-oriented concepts (buffered streams, exception handling); for example, tools like FindBugs, Sonar, and IntelliJ's built-in static analyzers notify developer when they have opened a stream (\texttt{BufferedWriter} in the above example) and there is a possibility the stream that is writing to the file will not close.
-A developer may also get a notification regarding exception handling. Here, the developer has written code to catch an \texttt{IOException} if it occurs. However, if she did not implement code to deal with the potential for an \texttt{IOException} she would get a notification communicating the need to do so.
+A notification attached to this code is telling the developer something about the code she wrote to ``write to log file''.
+There are multiple programming-oriented concepts at play, which aligns with the types of notifications the developer could get. 
+In the process of writing this code, the developer could get a notification regarding any number of programming-oriented concepts (buffered streams, exception handling); for example, tools like FindBugs, Sonar, and IntelliJ's built-in static analyzers notify developers when they have opened a stream (\texttt{BufferedWriter} in the above example) and there is a possibility the stream that is writing to the file is not closed.
+A developer may also get a notification regarding exception handling. Here, the developer has written code to catch an \texttt{IOException} if it occurs. However, if she did not implement code to deal with the potential for an \texttt{IOException} she would get a compiler notification communicating the need to do so.
+
 
 % TODO later, should note that focusing on programming oriented concepts because those generalize and are foundational to developing the abstractions that are human oriented concepts (biggerstaff)
 
@@ -330,13 +332,13 @@ Three out of four findings regarding tool use pertain to the notifications tools
 Discovering that tool notifications are one of the reasons developers do not use program analysis tools is useful, however, not actionable. The next piece of information needed to make these findings actionable is to discover what about tool notifications make it difficult for developers to interpret them.
 
 \section{A Tool Miscommunication Theory}\label{sec:theory}
-%session study (fse)
-To answer the question \emph{why do developers encounter challenges when interpreting program analysis tool notifications?}, I observed 26 developers with varying backgrounds while they used three different program analysis tools: Eclipse Java compiler, FindBugs, and EclEmma. I presented participants with and asked them to interpret notifications from each of the three tools. 
+%session study (fse)\\
 % TODO need something relevant to cross-tool!
+To answer the question \emph{why do developers encounter challenges when interpreting program analysis tool notifications?}, I observed 26 developers with varying backgrounds while they used three different program analysis tools: Eclipse Java compiler, FindBugs, and EclEmma. I presented participants with and asked them to interpret notifications from each of the three tools. 
 To identify challenges, we examined tool use through the lens of communication theory~\cite{bowman1987modeling}.
 Building on an existing model of (mis)communication~\cite{mustajoki2008modelling}, we identified 12 kinds of challenges developers encounter when interpreting tool notifications.
 
-Based on the challenges participants encounter when interpreting tool notifications, I propose a tool miscommunication theory that can be used to inform the design of program analysis tools.
+Based on the challenges participants encounter when interpreting tool notifications, I proposed a tool miscommunication theory that can be used to inform the design of program analysis tools.
 Experts in qualitative research suggest that rather than presenting a set of disparate findings, qualitative researchers should instead produce an explanatory theory, a ``skeleton or framework that explains why things happen''~\cite{corbin2014basics}. While explicitly putting forward theories is rare in software engineering~\cite{hannay2007systematic}, one example is Lawrance and colleagues' theory of how programmers navigate code during debugging~\cite{lawrance2013programmers}. In the same way that Lawrance and colleagues' build on 
 information foraging theory~\cite{pirolli1999information}, my theory builds on communication theory~\cite{bowman1987modeling}.
 I summarize my theory as:
@@ -362,7 +364,7 @@ Borrowing from existing computer science education research, I developed concept
 
 
 Traditionally, concept inventories are used to  assess conceptual knowledge and identify misconceptions; in Computer Science, the target audience is typically CS1 students~\cite{tew2010developing,kaczmarczyk2010identifying}. 
-I need to assess knowledge with a wide range of developers outside of academia, therefore I could not borrow directly from research that creates concept inventories for novice academic programming concept knowledge assessment~\cite{tew2010assessing}. I combined existing concept inventory research with examinations using revised Bloom's Taxonomy~\cite{tew2010developing,nelson1967testing,scott2003bloom}. By using Bloom's Taxonomy to inform question creation, I increased assurance that my questions exhaustively assess understanding~\cite{scott2003bloom}. The current inventory has 10 questions, each worth 1 point, that effectively assess knowledge and will serve as a representation of ground truth conceptual knowledge; this is under the assumption that following validated steps for creation increases confidence in effectiveness as an assessment tool.
+I need to assess knowledge with a wide range of developers outside of academia, therefore I could not borrow directly from research that creates concept inventories for novice academic programming concept knowledge assessment~\cite{tew2010assessing}. I combined existing concept inventory research with examinations using revised Bloom's Taxonomy~\cite{tew2010developing,nelson1967testing,scott2003bloom}. By using Bloom's Taxonomy to inform question creation, I increased assurance that my questions exhaustively assess understanding~\cite{scott2003bloom}. 
 The final process I have developed for creating general programming concept inventories is as follows:
 
 \vspace{0.5em}
@@ -385,14 +387,12 @@ An example of an unfair question is a question where more than one response is a
 %I discuss the process that led to this final set of steps when I related study in Section~\ref{subsec:s3}.
 
 \subsection{Using Public Git Repositories to Predict Concept Knowledge}
-As a developer, many experiences are focused on writing source code; writing software is also perhaps one of the most concrete actions that can be labeled as an experience for a developer. Therefore, I used \emph{concept-specific source code} to determine independent variables for my models. I define concept-specific code is code that maps to a given programming concepts; an example of multi-threading-specific code is \texttt{synchronized(variable)}, where the developer has written code that synchronizes variables for multi-threaded execution.
-I built a Java source code analyzer that analyzes code bases for concept-specific code.
+As a developer, many experiences are focused on writing and modifying source code; writing software is also perhaps one of the most concrete actions that can be labeled as an experience for a developer. Therefore \emph{concept-specific source code} can be used to determine independent variables for concept knowledge models. I define concept-specific code as code that maps to a given programming concept; an example of multi-threading-specific code is \texttt{synchronized(variable)}, where the developer has written code that synchronizes variables for multi-threaded execution.
 
-To accurately create models, I need to be able to attribute code changes to a specific developer; this is coupled with developer--dependent scores from the concept inventories to create and evaluate the models. Analyzing static code can tell me the presence of conceptually relevant code patterns, such as synchronization or generics usage. However, it can not tell me who contributed that code which is important when trying to build models that can accurately predict individual knowledge. 
-Therefore, I propose using version control to automate and ease the process of assigning code contributions to a given developer. 
-Version control is also useful for determining how recently a developer has made concept-specific code contributions, which I found can be an important factor when using experience as a proxy for knowledge~\cite{johnson2015bespoke}. % TODO cite vlhcc here if accepted!
-I will discuss my approach in more detail in Section~\ref{sec:eval}.
-Given the ability to model concept knowledge, the next step is to assess the use of these models to determine appropriate feedback to give to the developer in a given notification.
+To accurately create models, we need to be able to attribute code changes to a specific developer; their contributions are coupled with concept inventory scores to create and evaluate the models. Analyzing static code can detect the presence of concept-specific code, such as synchronization or generics usage. However, it can not tell me who contributed that code, which is important when trying to build models that can accurately predict individual knowledge. 
+Using version control can automate and ease the process of assigning code contributions to a given developer. 
+Version control is also useful for determining how recently a developer has made concept-specific code contributions, which may be an important factor when using experience as a proxy for knowledge~\cite{johnson2015bespoke}. % TODO cite vlhcc here if accepted!
+Given the ability to model concept knowledge, the next step is to assess the use of these models to determine appropriate information to give a developer in a given notification.
 
 
 \section{A Proposed Approach for Knowledge-Based Notifications}
@@ -413,16 +413,14 @@ A developer who is less familiar with concepts related to generic types might fi
 In contrast, a developer who is very familiar with these concepts might find this notification too verbose or even distracting.
 
 A tool that has access to models that can predict what a developer knows about programming concepts could adapt the notification to the developer looking at it.
-To continue the above example, if a developer knows little about the concept of generic types, the message would be more verbose, perhaps providing links to 
-relevant on-line material or example solutions.
+To continue the above example, if a developer knows little about the concept of generic types, the message would be more verbose, perhaps providing links to relevant on-line material or example solutions.
 If a developer knows all the relevant concepts well, the notification could instead simply say ``unchecked generic type,'' and point her to where in the code the generic type parameters are expected.
 
-Like the other examples, the code that the developer has written is a useful source of data for hints about a developer's knowledge of a concept.
+The code that the developer has written is a useful source of data for hints about a developer's knowledge of a concept.
 For the generic type notification, this includes usage of generics where a generic type parameter is specified and usage of generic objects.
-Another source would be notifications she has already resolved; if the developer has resolved notifications of the same kind or notifications that involve the same concepts,
-the developer likely has some knowledge of the underlying concepts.
+Another source would be notifications she has already resolved; if the developer has resolved notifications of the same kind or notifications that involve the same concepts, the developer likely has some knowledge of the underlying concepts.
 
-I have outlined my proposed research; next I will outline the studies, experiments, and evaluations I have and will complete for my dissertation research.
+I have outlined my proposed research; next I will outline the studies, experiments, and evaluations I have completed and will complete for my dissertation research.
 
 \section{Experiments \& Evaluations}\label{sec:eval}
 % TODO think about RQs for each
@@ -841,6 +839,8 @@ I piloted my initial set of questions with 11 developers and students at NC Stat
 From the item analysis, I was able to remove 1 question that, according to my analyses, was not effective.
 
 Next, to test the validity of our concept inventory, I used item and distractor analysis in R. Item analysis determined if the items on our inventory contribute are valid methods of assessment; from this process we eliminated 1 question, which gave us a final set of 10 questions.  Distractor analysis determined if the options provided for a given question are fair and if the incorrect options contribute to the quality of our inventory; because each option was selected at least once for each inventory item, and most often the correct option was chosen, I kept all response options for each inventory item.
+
+The current inventory has 10 questions, each worth 1 point, that effectively assess knowledge and will serve as a representation of ground truth conceptual knowledge; this is under the assumption that following validated steps for creation increases confidence in effectiveness as an assessment tool.
 
 For additional validation and reliability assessment, I added a self--reporting question that asks developer ``On a scale of 1 to 10, 1 being little to no knowledge, how would you score your knowledge of Java generics?'' 
 By decreasing the spread of rank values for a developer to consider when deciding which value best represents how much they know, we increase the potential for accurate self-reports. To simplify the process of comparing self-reports to actual score each question is worth 1 point, making the maximum score a 10 to match the maximum possible self-report value. 
