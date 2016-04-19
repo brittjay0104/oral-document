@@ -394,10 +394,10 @@ Version control is also useful for determining how recently a developer has made
 Given the ability to model concept knowledge, the next step is to assess the use of these models to determine appropriate information to give a developer in a given notification.
 
 
-\section{A Proposed Approach for Knowledge-Based Notifications}
+\section{An Argument for Knowledge-Based Notifications}
 % bespoke paper (focused on notifications - fse)
 % TODO proof-read and integrate with the rest of paper
-Program analysis tools could improve communication with developers by aligning notifications with the experience and knowledge of the developer using the tool.
+Based on the ability to model and predict developer concept knowledege, I propose that program analysis tools could improve communication with developers by aligning notifications with the experience and knowledge of the developer using the tool.
 For example, FindBugs provides the following notification:
 
 \vspace*{-1ex}
@@ -419,7 +419,7 @@ The code that the developer has written is a useful source of data for hints abo
 For the generic type notification, this includes usage of generics where a generic type parameter is specified and usage of generic objects.
 Another source would be notifications she has already resolved; if the developer has resolved notifications of the same kind or notifications that involve the same concepts, the developer likely has some knowledge of the underlying concepts.
 
-I have outlined my proposed research; next I will outline the studies, experiments, and evaluations I have completed and will complete for my dissertation research.
+In the above sections, I have outlined the significance and idea behind my proposed research; next I will outline the studies, experiments, and evaluations I have completed and will complete for my dissertation.
 
 \section{Experiments \& Evaluations}\label{sec:eval}
 % TODO think about RQs for each
@@ -942,8 +942,8 @@ The end goal is an approach that can be applied to any concept and be used to ma
 
 \begin{labeling}{questions}
 	\item [RQ1] To what extent does M1 generalize to developers outside the set used to create the model?
-	\item [RQ2] To what extent does M1 generalize to concepts outside the concept used to create the model?
-	\item [RQ3] What factors do developers perceive as contributors to their knowledge of programming concepts?
+	\item [RQ2] To what extent does M1, and the approach used to create M1, generalize to concepts outside the concept used to create the model?
+	\item [RQ3] What other factors may contributor to developer knowledge of programming concepts?
 \end{labeling}
 
 \subsubsection{Proposed methodology.}
@@ -952,36 +952,22 @@ I plan to explore the generalizability of, and refine, the approach that led to 
 \vspace{0.5em}
 \noindent\textit{Generalizability Assessments.}
 I built and evaluated M1 using the same set of developers. I plan to assess the generalizability M1 on other developers (RQ1) by making predictions using M1 with a separate set of developers. Doing so will allow me to observe the ability for M1 to generalize to a wide range of developers. 
-To assess the generalizability of the approach that led to M1 in regards to other concepts (RQ2), I plan to develop new concept inventories and analyze participant repositories for concept-specific code pertaining to others Java concepts.
+To assess the generalizability of M1 in regards to other concepts (RQ2), I plan to develop new concept inventories and analyze participant repositories for concept-specific code pertaining to others Java concepts.
+
 I plan to conduct these generalizability assessments using three concepts: operators, variables, and exceptions.
 I chose three concepts to balance feasibility of completion within a reasonable timeframe (1 - 1.5 years) and confidence in generalizability outside of one concept or set of notifications.
-I chose operators, variables, and exceptions as the three concepts I will use for my generalizability assessments because 1) there are notifications across tools pertaining to these concepts, 2) FindBugs, the tool whose notifications I will use in future evaluations, has notifications pertaining to these concepts, and 3) notifications pertaining to these concepts appear in production software~\cite{ayewah2007evaluating}.
-% TODO how am I going to choose the 3? concepts where possible to get multi-concept notifications that include two or more??? To prepare for future study that adapts and assesses notifications 
-% TODO Specify what concepts you'll be doing. How many participants you'll get. How you'll recruit them. How long this effort will take compared to the prior CI, and why you think this one will be faster. (#69)
-%To select the concepts for assessment, I plan to use the following criteria:
-%\begin{itemize}
-%	\item It is a concept that appears in program analysis tool notifications, particularly FindBugs which I plan to extend to assess the potential for adaptive notifications (Section~\ref{subsec:s5}).
-%	\item It is a concept that has a wide range of sub-concepts.
-%	\item It is a concept that has features that may go unused by most developers.
-%\end{itemize}
-%
-%Rather than attempting to find an exhaustive list of concepts that fit one or more of these criteria, I plan to begin with the first criteria; FindBugs has a publicly available, and regularly updated, webpage with a list of the notifications it uses.\footnote{http://findbugs.sourceforge.net/bugDescriptions.html}
-%I plan to evaluate M1 on at least three additional concepts.
+I chose operators, variables, and exceptions as the three concepts I will use for my generalizability assessments because 1) there are notifications across tools pertaining to these concepts, 2) FindBugs, the tool whose notifications I will use in future evaluations, has notifications pertaining to these concepts~\footnote{http://findbugs.sourceforge.net/bugDescriptions.html}, and 3) notifications pertaining to these concepts appear in production software~\cite{ayewah2007evaluating}.
 
 \vspace{0.5em}
 
 \noindent\textit{Qualitative Data Collection \& Analysis.}
-% TODO should this be another RQ (i.e. do developers agree with the relationship between source code and knowledge)??
 Although there is value in quantitative findings, my research experience suggests that there is a richness in qualitative data that cannot be achieved with quantitative data and analyses.
-I chose the variables for M1 based on qualitative and quantitative findings; therefore, another way I plan to assess the generalizability, and find opportunities for refinement, of M1 is by conducting short, semi-structured interviews with developers (10--20) regarding their perceptions of source code and programming concept expertise (RQ2). 
+I chose the variables for M1 based on qualitative and quantitative findings; therefore, another way I plan to assess generalizability, and find opportunities for approach refinement, is by conducting short, semi-structured interviews with developers (10--20) regarding factors that contribute to their programming concept expertise (RQ3). 
 
 Each interview will last approximately 30 minutes and will be divided into two phases: 1) the relationship between the code they write and their expertise regarding the concept and 2) other factors that contribute to their knowledge of programming concepts.  
 
-Assessing generalizability in the context of a mathematical model is a primarily quantitative process.   Therefore, I also plan to explore the generalizability, and approach that led to the creation, of M1 by interviewing and surveying developers. 
+To determine what factors developers consider as contributors to their knowledge, I plan to 1) code each transcript and 2) perform content analysis in R~\cite{RSoftware} on interview transcripts. Content analysis assumes that content most frequently mentioned is the most important. For example, if in multiple interviews participants discuss on-line programming forums, such as Stack Overflow, one item that content analysis may identify as important in relation to the topic being discussed, is on-line forums. In order to perform content analysis, I need well defined categories, such as on-line forum usage; this is where the coding process comes into play. Using a methodology similar to the ones in my previous research, I will code each transcript for statements pertaining to their knowledge of concepts and experiences that contributed knowledge for them. 
 
-To determine what factors developers consider as contributors to their knowledge, I plan to 1) code each transcript and 2) perform content analysis in R~\cite{RSoftware} on interview transcripts. Content analysis assumes that content most frequently mentioned is the most important. For example, if in multiple interviews participants discuss on-line programming forums, such as Stack Overflow, one item that content analysis may identify as important in relation to the topic being discussed, is on-line forums. In order to perform content analysis, I need well defined categories, such as on-line forum usage; this is where the coding process comes into play. Using a methodology similar to the one in Section~\ref{subsec:s2}, I will code each transcript for statements pertaining to their knowledge of concepts and experiences that contributed knowledge for them. 
-
-Using the codes from the transcripts, I will perform content analysis to determine which factors developers feel contribute most to their knowledge.
 To validate source code as a factor, and other factors that emerged during the interviews, I plan to administer a survey to another set of developers (50--100). To encourage participation, and thereby increase the likelihood I will get a large set of responses~\cite{smith2013improving}, I plan to ask only one question: \emph{Which of the following contribute to your knowledge of programming concepts?}. I will include a definition and example of a programming concept so that participants are able to accurately respond. I will also communicate to their interests as developers, such as improvement of the tools available for the to use.
 I will include each factor identified during the interviews as response options.
 I will determine the factors that contribute most to developer knowledge by running various analyses using R with data from the survey. Findings from both the qualitative and quantitative analyses will serve to potentially confirm current model building efforts and inform future data analysis and model building efforts.
@@ -990,7 +976,7 @@ I will determine the factors that contribute most to developer knowledge by runn
 
 \subsection{Are adaptive, knowledge-based notifications more effective than one-size-fits-all notifications? [SmartBugs]} \label{subsec:s5}
 \subsubsection{Study rationale.}
-Based on findings from previous studies, I proposed that communication between tools and developers can be improved if rather than using one-size-fits-all notifications, tools used knowledge-based notifications. Knowledge-based notifications would use concept knowledge models. We found that communication theory applies directly to tool use, therefore constructivism communication theory should also apply~\cite{griffin2011first}. Constructivism states that a speaker with awareness of how her audience will react to her message can tailor the message to the audience and therefore improve the audience's ability to understand and relate to the message. 
+Based on findings from previous studies, I proposed that communication between tools and developers can be improved if rather than using one-size-fits-all notifications, tools used knowledge-based notifications~\cite{johnson2015bespoke}. Knowledge-based notifications would use concept knowledge models. We found that communication theory applies directly to tool use, therefore constructivism communication theory should also apply~\cite{griffin2011first}. 
 I have explicitly assessed the applicability of general communication theory to tool use (Section~\ref{subsec:s2}), however, I have not explicitly assessed the applicability of constructivism to notification and tool design. Therefore, the goal of this study is to assess whether knowledge-based communication, in regards to tool use, is better than one-size-fits-all communication.
 
 \subsubsection{Research questions \& Hypothesis.}
@@ -1004,37 +990,32 @@ I have explicitly assessed the applicability of general communication theory to 
 \subsubsection{Proposed methodology.}
 To answer RQ1, rather than iterating on design ideas based on speculation, I will perform a literature review of existing research on notification design, problem solving, and debugging in relation to programming expertise. The focus of this literature review will be the design space of notifications and how developers with various backgrounds (i.e. novice versus expert) find and use information to understand problems in their code. For example, existing research suggests that experts more often rely on abstractions to understand problems in their code, while novices tend to focus on the literal features, such as the constructs in the source code~\cite{Weiser:1983:Representation}. Therefore, one potential design consideration for notifications for novices is to center the explanation around the source code, or parts of the source code, while for experts a consideration would be to use more abstractions. I will compile a list of related findings and map these findings to developer knowledge or expertise.
 
-To answer RQ2, I will code the list of findings to determine 1) themes within a knowledge group and 2) how themes differ across knowledge groups. I plan to use a methodology similar to the methodology outlined in Section~\ref{subsec:s2}. Once I have these themes, I can begin to develop my approach for assessing H\textsubscript{1}. 
+To answer RQ2, I will first use findings from RQ1 to design notification templates that map to different expertise categories; for consistency, I will attempt to use three classifications I previously identified (beginner, intermediate, advanced).
+To inform this mapping, I will code the list of findings from RQ2 to determine 1) themes within a knowledge group and 2) how themes differ across knowledge groups.
+Once I have a prototype notification design template for each expertise category, I will assess the validity and applicability of existing research regarding expertise and problem solving by having developers from each expertise category evaluate and provide feedback on the notification. 
 
-To assess H\textsubscript{1}, I plan to 1) assess potential knowledge-based notification adaptations and 2) implement and evaluate a tool that replaces one-size-fits-all notifications with knowledge-based notifications. 
-I will first use findings from RQ1 and RQ2 to design notification templates that map to different expertise categories; for consistency, I will attempt to use three groups as I did in the study in Section~\ref{subsec:s3}.
+ 
 
+To assess H\textsubscript{1}, I plan to 1) assess potential knowledge-based notification adaptations and 2) implement a prototype tool that fully automates my approach by replacing one-size-fits-all notifications with knowledge-based notifications based on model classification.
 Notification adaptations will be based on knowledge of programming concepts, therefore I need to be able to identify the concepts present in a given notification to know what to adapt. 
 I will identify concepts in notifications based on:
 \begin{itemize}
-	\item \textit{Type of tool.}
-	\item \textit{Keywords in text.} % TODO what is a keyword? 
+	\item \textit{Type of tool.} 
+	\item \textit{Keywords in text.} % TODO what is a keyword? based on terms and phrases found in tutorials used for inventories?
 	\item \textit{Source code notification is attached to.} % TODO maybe not this one
 \end{itemize}
-% TODO this is incomplete!
 
-Once I have a prototype notification design template for each expertise category, I will assess the validity and applicability of existing research regarding expertise and 
 
-Based on the results from my user study, I will develop a prototype tool, which I will call SmartBugs, that will adapt notification presentation based on developer knowledge. I plan to build SmartBugs on top of FindBugs because it is a mature, open source defect finding tool with a wide range of notifications that have no obvious pattern behind the information it provides in a given notification. FindBugs will serve as the baseline (one-size-fits-all) set of notifications to compare SmartBugs' notifications to (knowledge-based).
+Based on the results from my notification user study, I will develop a prototype tool, which I will call SmartBugs, that will adapt notification presentation based on developer knowledge. I plan to build SmartBugs on top of FindBugs because it is a mature, open source defect finding tool with a wide range of notifications that have no obvious pattern behind the information it provides in a given notification. FindBugs will serve as the baseline (one-size-fits-all) set of notifications to compare SmartBugs' notifications to (knowledge-based).
 
 For the evaluation of SmartBugs, I will attempt to re-use the same participants from \textbf{Predictions} and \textbf{Generalizability}. This will prevent the overhead of finding new participants with Git repositories and the potential overhead of asking more developers to take potentially multiple concept inventories.
 As a back-up plan, I will plan to have participants take the concept inventory as part of participation prior to arrival for their session using SmartBugs.
-% TODO what other way can I get knowledge? Anything lighter weight?
 
-For the user evaluation, I will divide participants into two groups: one group will use FindBugs (FB) and the other will use SmartBugs(SB). Each group will have an equal number of developers from each classification group to ease the process of analyzing the data. All developers in the FB group will be presented with the normal notifications used by FindBugs. Developers in the SB group will be presented with notifications based on their classification and the mappings from RQ1 and RQ2.
+For the user evaluation, I will divide participants into two groups: one group will use FindBugs (FB) and the other will use SmartBugs(SB). Each group will have an equal number of developers from each classification group to ease the process of analyzing the data. All developers in the FB group will be presented with the normal notifications used by FindBugs. Developers in the SB group will be presented with notifications based on their classification and the mappings from RQ2.
 
-To assess whether SmartBugs is more effective than FindBugs, I will observe 1) the ability for participants to understand and resolve each notification and 2) the time it takes for participants to understand and resolve each notification. I will measure understanding by requesting participants explain the notification aloud. I will assess the correctness of their explanations to determine whether they correctly interpreting the message; this will be my proxy for understanding. I will assess ability to resolve the notification by observing if the participant makes intentional code changes
+To assess whether SmartBugs is more effective than FindBugs, I will observe 1) the ability for participants to interpret and resolve, 2) the time it takes for participants to interpret and resolve, and 3) the amount of context-switching required to interpret and resolve each notification. I will measure ability to interpret by requesting participants explain the notification aloud. I will assess the correctness of their explanations to determine whether they are able to and correctly interpret the message; this will be my proxy for ability to interpret. I will assess ability to resolve the notification by observing if the participant makes intentional code changes that removes the notification.
 
-I also plan to allow use of the web for both FindBugs and SmartBugs; this will inform future improvement efforts. For example, if a group of SmartBugs users have to go to the web, particularly if they are in the same classification, this information can be used to improve the information provided to developers in that classification.
-
-To assess user satisfaction with SmartBugs and FindBugs notifications, I will administer a user satisfaction survey post-evaluation to gain insights into participant options of both sets of output.
-
-% TODO really wanna put PD in here somewhere!
+I also plan to allow use of the web for both FindBugs and SmartBugs; this will allow me to collect detailed context-switching information and inform future improvement efforts. For example, if a group of SmartBugs users have to go to the web, particularly if they are in the same classification, this information can be used to improve the information provided to developers in that classification.	
 
 \subsection{Participants.} I plan to recruit 10--20 developers for this study. I will begin recruitment with existing participants from previous studies, as we will have built rapport, and ideally a mutual interest in the outcomes of my proposed research. I will also, if necessary, recruit using mailing lists and personal contacts.
 
