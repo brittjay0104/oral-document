@@ -271,12 +271,12 @@ Finally, an even smaller subset of program analysis tools provide transformative
 % communicate about the state of with source code
 The goal of program analysis tool notifications is to communicate some information to the developer about her source code about the task at hand.
 The source code a developers writes is a runnable manifestation of programming-oriented and human-oriented concepts~\cite{van2004concepts,biggerstaff1994program}. 
-At the lowest, most fundamental level, are \emph{programming-oriented concepts}, which relate to how the source code maps to programming language concepts.
+At the lowest, most fundamental level, are \emph{programming-oriented concepts}, which relate to how the source code maps to programming language concepts. For simplicity, I will refer to these concepts simply as programming concepts.
 Programming concepts can be as simple as the means for storing and passing data, such as variables, or as complex as the means for structuring data, such as generics~\cite{jazayeri1997programming}.
 At a more abstract level, \emph{human-oriented concepts} relate to the high level requirement of the source code, such as ``acquire target'' or ``complete transaction''.
 
 Typically a given notification is associated with only one human-oriented concept, though not all tools communicate about human-oriented concepts. For example, refactoring tools do not communicate about requirements such as ``acquire target.'' These kinds of tools typically focus on programming concepts; refactoring tools attempt to communicate about programming concepts such as variables and modules.
-On the flip side, there can be more than one notification pertaining to a one human-oriented concept and one notification can communicate about more than one programming-oriented concept. 
+On the flip side, there can be more than one notification pertaining to a one human-oriented concept and one notification can communicate about more than one programming concept. 
 
 
 Consider, for example, the following source code:
@@ -313,8 +313,8 @@ Consider, for example, the following source code:
 
 The requirement, or human-oriented concept, at play is ``write to log file''. 
 A notification attached to this code is telling the developer something about the code she wrote to ``write to log file''.
-There are multiple programming-oriented concepts at play, which aligns with the types of notifications the developer could get. 
-In the process of writing this code, the developer could get a notification regarding any number of programming-oriented concepts (buffered streams, exception handling); for example, tools like FindBugs, Sonar, and IntelliJ's built-in static analyzers notify developers when they have opened a stream (\texttt{BufferedWriter} in the above example) and there is a possibility the stream that is writing to the file is not closed.
+There are multiple programming concepts at play, which aligns with the types of notifications the developer could get. 
+In the process of writing this code, the developer could get a notification regarding any number of programming concepts (buffered streams, exception handling); for example, tools like FindBugs, Sonar, and IntelliJ's built-in static analyzers notify developers when they have opened a stream (\texttt{BufferedWriter} in the above example) and there is a possibility the stream that is writing to the file is not closed.
 A developer may also get a notification regarding exception handling. Here, the developer has written code to catch an \texttt{IOException} if it occurs. However, if she did not implement code to deal with the potential for an \texttt{IOException} she would get a compiler notification communicating the need to do so.
 
 
@@ -354,7 +354,7 @@ Remember Valerie? Though she is a hypothetical developer, the challenges she fac
 
 \section{A Proposed Approach for Modeling Developer Knowledge}
 %modeling approach (vlhcc)
-In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. For the remainder of this document, I use concept to mean programming-oriented concepts. I chose to focus on programming-oriented concepts because existing research conducted by Smith and colleagues suggests understanding programming-oriented concepts affects developers' ability to resolve notifications~\cite{smith2015questions}. Borrowing from education research and using developer experiences as a concrete representation of knowledge, I evaluate the possibility to learn and approximately predict developer knowledge of programming concepts.
+In order to adapt tool notifications to a given developer's knowledge, there needs to be some notion of how much the developer knows about the concepts in the notification. For the remainder of this document, I use concept to mean programming concepts. I chose to focus on programming concepts because existing research conducted by Smith and colleagues suggests understanding programming concepts affects developers' ability to resolve notifications~\cite{smith2015questions}. Borrowing from education research and using developer experiences as a concrete representation of knowledge, I evaluate the possibility to learn and approximately predict developer knowledge of programming concepts.
 
 \subsection{Using Concept Inventories to Assess Concept Knowledge}
 % TODO read through and revise as needed! 
@@ -367,7 +367,7 @@ I need to assess knowledge with a wide range of developers outside of academia, 
 The final process I have developed for creating general programming concept inventories is as follows:
 
 \vspace{0.5em}
-\noindent\textbf{Define Conceptual Content for Test Specification.} A test specification is a way of formally outlining what will be on the test without having to write the questions~\cite{tew2010developing}. Once you have decided on the programming-oriented concept of interest, use language tutorials surrounding that concept to define conceptual content. This process should be exhaustive; the sub-concepts covered for a given concept in any tutorial found should be included in the test specification.
+\noindent\textbf{Define Conceptual Content for Test Specification.} A test specification is a way of formally outlining what will be on the test without having to write the questions~\cite{tew2010developing}. Once you have decided on the programming concept of interest, use language tutorials surrounding that concept to define conceptual content. This process should be exhaustive; the sub-concepts covered for a given concept in any tutorial found should be included in the test specification.
 
 \vspace{0.5em}
 
@@ -447,109 +447,20 @@ There have been studies to investigate ways of improving static analysis tools. 
 \end{labeling}
 
 \subsubsection{Methodology.}
-To answer my research questions, I used semi-structured interviews. Each semi-structured interview consisted of three parts: \textit{Question and  Short Response}, \textit{Interactive Interview}, and \textit{Participatory Design}. Once completed, I transcribed and coded each interview. Here I describe each part of the interview and my coding process.
+To answer my research questions, I used semi-structured interviews. Each semi-structured interview consisted of three parts: \textit{Question and  Short Response}, \textit{Interactive Interview}, and \textit{Participatory Design}. Once completed, I transcribed and coded each interview. Here I briefly describe each part of the interview and my coding process.
+Research materials can be found on-line.\footnote{http://www4.ncsu.edu/~bijohnso/ffsat.html}
 
 \vspace{0.5em}
-\noindent\textit{Question and Short Response.} During the Question and Short Response portion of the interview, we asked developers questions related to their general usage, understanding, and opinion of static analysis tools in order to answer RQ1.
-Some of the questions asked include:
-\begin{itemize}
-	\item Can you tell us about your first experience with a static analysis tool?
-	\item Can you remember anything that stood out about this experience as easy or difficult?
-	\item Have you ever used a static analysis tool in a team setting? Was it beneficial and why?
-	\item Have you ever consciously avoided using a static analysis tool? Why or why not?
-	\item What in your opinion are the critical characteristics of a good static analysis tool?
-\end{itemize}
+\noindent\textit{Question and Short Response.} During the Question and Short Response portion of the interview, we asked developers questions related to their general usage, understanding, and opinion of static analysis tools in order to answer RQ1. Questions asked can be found on-line with other research materials.
 
 \vspace{0.5em}
 \noindent\textit{Interactive Interview.}
-The goal behind an interactive interview is to be able to observe developers actually using a static analysis tool. This allowed me to get more detailed information as to how developers are using their tools. I used information obtained during this portion of the interview to answer RQ1 and RQ2. I asked participants to explain what they are doing out loud~\cite{Lewis:1982:ThinkAloudProtocol} so I could get a better understanding of their workflow and thought process as they used the tool. Practice interviews before this study revealed that using the interactive interview portion produced more detailed information regarding when and how developers use their static analysis tools~\cite{Johnson:2012:PreFFSAT}.
-
-Some of the questions asked during the interactive interview include:
-\begin{itemize}
-	\item Now that you have run your tool and gotten your feedback, what is your next move(s)?
-	\item Do you configure the settings of your tool from default? If so, how?
-	\item Does this static analysis tool aid in assessing what to do about a warning?
-	\item Do you feel that ``quick fixes'' or code suggestions would be helpful if they were available?\footnote{Participants were only asked about quick fixes and code suggestions being useful when they mentioned, either during the Question and Answer or Interactive Interview, that they either a) find quick fixes useful, b) felt that the tool should be more helpful or c) did not understand how to fix the defect we presented them with. }
-\end{itemize}
-
-For confidentiality reasons, not all participants could use their own workstation for this part of the interview. For those who could not, I provided 6 open source projects in Java, such as log4j~\cite{log4j} and Ant~\cite{ANT}, and asked each participant to run FindBugs on one of them.  I chose FindBugs because it is one of the most popular and mature static analysis tools for Eclipse. Due to technical difficulties, the remote interviews were not able to fully experience the ``interactive'' portion. I gave each remote participant a scenario of static analysis tool usage and asked them to, first, explain their thought process in walking through that particular scenario. I then asked the same questions as I would have asked if they had been local.
+The goal behind an interactive interview was observe developers actually using a static analysis tool; for the study, the tool was FindBugs. I provided 6 open source projects in Java, such as log4j~\cite{log4j} and Ant~\cite{ANT}, and asked each participant to run FindBugs on one of them. I chose FindBugs because it is one of the most popular and mature static analysis tools for Eclipse. I used information obtained during this portion of the interview to answer RQ1 and RQ2. I asked participants to explain what they are doing out loud~\cite{Lewis:1982:ThinkAloudProtocol} so I could get a better understanding of their workflow and thought process as they used the tool. I define a workflow as the steps a developer takes when writing, inspecting and modifying code.
 
 \vspace{0.5em}
 \noindent\textit{Participatory Design.}
-I used the last part of the interview to solicit participant design suggestions for improving static analysis tools. We utilized a concept called participatory design~\cite{Spinuzzi:2005:Participatory}, which involves
-getting stakeholders (in this case, our participants) involved in the design process by allowing them to show what they want instead of saying it. To promote creativity, I gave each participant a blank sheet of paper and asked them to show me what they wanted their tool to look like and how it should work~\cite{Johnson:2012:PreFFSAT}. It was not mandatory for participants to draw something, but 6 of them did. The other participants gave verbal descriptions of tool features they desired.
-
-\vspace{0.5em}
-\noindent\textit{Coding Interview Responses.}
-After completing the interviews, I manually transcribed each interview. Then, I \textit{coded} the final transcripts. Coding is a process that is meant to make referencing transcriptions quicker and
-easier~\cite{Gordon:1998:Coding}. I used Gordon's basic steps to code the interviews. Before coding an interview, ``coding categories'' need to be defined. These should be general enough for relevant information to be grouped together but detailed enough that a concrete example only falls under one category. For example, one coding category was \textbf{Workflows}, which I define as the steps a developer takes when writing, inspecting and modifying code. It is also possible to have ``emergent'' categories that may need to be defined after reading the transcriptions. The final set of coding categories, along with an example quote for each, are as follows: 
-
-\begin{description}
-	\item[Tool Output] -- Anything related to the output produced by the tool (for example, false positives). \hfill \\ \\
-	Jason: \emph{``\ldots like I mentioned with FlexLint it gives you
-		so many warnings and sifting through them is so, arduous that whenever I just
-		look at it I'm like ehhh forget this.''}
-	\\
-	\item[User Input/Customizability] -- Anything about the customizability of the static analysis tools (for example, modifying rule sets). \hfill \\ \\
-	Andy: \emph{``\ldots it's like is this
-		list prioritized by you know what's important to me? No. You know? And there
-		may be a default listing that should be prioritized because like this one's
-		inefficient.''}
-	\\
-	\item[Supporting Teamwork] -- Anything about using static analysis tools in a team or collaborative setting. \hfill \\ \\
-	John: \emph{``The only reason I like the batch
-		results is to communicate, broadcast to the team a sense of progress or lack of
-		progress.''}
-	\\
-	\item[Result Understandability] -- Anything about the ability or inability to understand or interpret the results produced by a static analysis tool.\hfill \\ \\
-	Matt: \emph{so now I wanna know why raising a string
-		exception is bad. Like what should I be doing instead? Since it thinks it's a
-		problem. And so none of these really help me.}
-	\\
-	\item[Workflows] -- Anything related to the steps a developer takes when writing, inspecting and modifying their software (for example, tool integration).\hfill \\ \\
-	Mike: \emph{``Clang is my favorite. It's built into the compiler. You don't
-		have to invoke anything special.''}
-	\\
-	\item[Tool Design] -- Proposed tool design ideas from participants.\hfill \\ \\
-	Chris: \emph{``I don't mind the idea of the actual source code itself having
-		some plasticity \ldots let's say the fourth line there was some error
-		here\ldots having the 5th line drop down and having the content expand with maybe all
-		sorts of annotations about my code.''}
-\end{description}
-
-The next step in Gordon's methodology is to assign ``category symbols'' to each category for easier indexing and processing of information. Gordon then suggests finding and classifying the relevant information in the transcriptions using category symbols. In my codings, each coding category had its own color as a ``symbol''; if a portion of a participant's transcription fell into one of the categories, I highlighted the same color as its respective category. A participant's coded interview could contain multiple categories or even multiple data items for one category. To ensure consistency, I alone was responsible for coming up with the coding categories and ``symbols'' and going through the transcriptions to apply them. The last step is to check the reliability of the codings. For this study, once I finished coding the interviews, I passed the transcripts off to the other contributors to look over. If they found any discrepancies, we discussed and resolved them as a group. This includes items that could fall into more than one category; in this situation, either a new, more specific, category or a ``sub-category'' was created for the item. The purpose of the categories are to organize the data in a relevant and useful manner; they are not meant to directly correlate with the research questions.
-
-\subsubsection{Participants.} I conducted this study with 20 participants. I recruited participants using a recruitment flyer sent out to industry contacts. Sixteen of our participants are professional developers at a large company and 4 are graduate students at NC State University with previous industry experience. Participant development experience ranged from 3 to 25 years.
-
-\subsubsection{Results.} I will now outline the findings from this study; I use parentheses after each theme to denote how many participants discussed topics in each theme. 
-Participants discussed the following as reasons they do use static analysis tools (RQ1): 
-\begin{description}
-	\item[Automation (5)] Static analysis tools automate bug finding, and sometimes bug solving. Developers use static analysis tools to save time and effort when maintaining their code.
-	\item[Availability (3)] Some development environments, such as IntelliJ IDEA~\footnote{https://www.jetbrains.com/idea/}, come with built-in static analysis tools. Developers also use static analysis tools because they are already installed and available in their IDEs, requiring little effort on their parts to at least adopt the tool.
-	\item[Customizability (3)] Some tools allow its users to customize anything from the appearance of the tool's output to the type of output that is presented. Developer use static analysis tools when they are able to make desired customizations.
-\end{description}
-
-On the flip side, participants discussed the following reasons they do not use static analysis tools (RQ1): 
-\begin{description}
-		\item [Collaboration (9)] Software development is inherently collaborative; some participants noted that tools they use and have used do not provide support for collaborative code improvement efforts.
-		\item [Tool Output (14)] Findings prior to my study found that tools can produce large volumes of notifications, many of which end up being false positives~\cite{Ayewah:2010:GFF,Shen:2011:EFindBugs}; I found that this output can be overwhelming as presented by current tools. Participants noted that more intuitive and user-friendly output could help minimize the effects of dealing with these characteristics of tool output.
-		\item [Customizability (17)] Developers want to configure their tools to present output how and when they want; currently tools do not effectively support the customizations developers want to make. If they do support customizations, the support is minimal and often time-consuming to use.
-		\item [Result Understandability (19)] In order to effectively use static analysis tools, developers need to be able to interpret the notifications provided. Currently, many of the tools participants use provide cryptic notifications that lead to challenges for them when attempting to interpret the message.
-\end{description}
-
-I also explored the ability for existing tools to integrate with developer workflows (RQ2). Based on feedback from 19 participants, the following are workflow integration concerns:
-\begin{description}
-	\item[IDEs vs. Text Editors] Developers have preferences regarding how they want their tool integrated into their work environment. For example, some developers use IDEs so it is ideal if the tool can integrate with their IDE. Some developers do not use IDEs, so they would prefer compiler-level integration provided by some tools, like Clang\footnote{http://clang.llvm.org/docs/ClangTools.html}.
-	\item[Tight Integration] Another important factor is how tight the integration is; some participants used IntelliJ as an example of an IDE with good tool and workflow integration due to the fact that the static analysis is built-in. This includes the tool running without having to be explicitly invoked by the developer.
-	\item [Fast Feedback] Participants noted that another important part of workflow integration is the ability to give fast feedback; in other words, the sooner the tool can alert the developer to a problem in their code, the better the tool integrates into their workflow.
-\end{description}
-
-Finally, participants elaborated a number of ideas for how current static analysis tools could improve (RQ3). 
-The majority of design suggestions fell into one of two categories: \textbf{Quick Fix Design} and \textbf{Warning Notification and Manipulation Design}. I will now discuss each design suggestion in detail:
-\begin{description}
-	\item[Quick Fix Design (10)] Quick fixes automatically resolve defects by applying a fix to the developer's code on her behalf. Suggestions participants had for improving this feature include providing fix previews through diffs and providing dialog boxes for walking through and toggling between fixes. 
-	\item [Warning Notification and Manipulation Design (20)] All participants had suggestions for improving how and when notifications are presented to them. Suggestions for notifications include providing fast, discrete feedback and allowing developer to make and apply on-the-fly judgements, such as temporary suppression, to a given notification. 
-\end{description}
+I used the last part of the interview to solicit participant design suggestions for improving static analysis tools. I utilized a concept called participatory design~\cite{Spinuzzi:2005:Participatory}, which involves
+getting stakeholders (in this case, developers) involved in the design process by allowing them to show what they want instead of saying it. To promote creativity, I gave each participant a blank sheet of paper and asked them to show me what they wanted their tool to look like and how it should work~\cite{Johnson:2012:PreFFSAT}. It was not mandatory for participants to draw something, but 6 of them did. Figure~\ref{fig:drawing} shows an example drawing from one participant. The other participants gave verbal descriptions of tool features they desired.
 
 \begin{figure} [h]
 	\centering
@@ -558,32 +469,82 @@ The majority of design suggestions fell into one of two categories: \textbf{Quic
 	\label{fig:drawing}
 \end{figure}
 
-Other suggestions made by participants throughout their sessions include having ``plastic'' editors that fold and expand to show and hide information, visual output (i.e. pie-style diagram of project and bugs in it), and using a heat map to show where the most critical bugs in a project are. One interesting suggestion was to use gradient colors instead of multiple different colors to represent defect severity. Figure~\ref{fig:drawing} shows one of the drawings completed by a participant during participatory design; he labeled the side of the editor ``gradient'' (A) where he would like to see his severity representation. In the top right corner, Matt also lists the colors that his current tool uses (B); for example, ``R'' means red. The idea behind this is not new; other studies have focused their attention on effectively using colors for error representation~\cite{Oberg:1992:Gradients,Murphy-Hill:2010:Ambient}.
+\vspace{0.5em}
+\noindent\textit{Coding Interview Responses.}
+After completing the interviews, I manually transcribed each interview. Then, I \textit{coded} the final transcripts. Coding is a process that is meant to make referencing transcriptions quicker and
+easier~\cite{Gordon:1998:Coding}. I used Gordon's basic steps to code the interviews. Before coding an interview, ``coding categories'' needed to be defined. For example, one coding category was \textbf{Workflows}. 
+Some coding categories emerged after reading the transcripts.
+The final set of coding categories are as follows: 
 
+\begin{description}
+	\item[Tool Output] -- Anything related to the output produced by the tool (for example, false positives). 
+	\item[User Input/Customizability] -- Anything about the customizability of the static analysis tools (for example, modifying rule sets). 
+	\item[Supporting Teamwork] -- Anything about using static analysis tools in a team or collaborative setting. 
+	\item[Result Understandability] -- Anything about the ability or inability to understand or interpret the results produced by a static analysis tool.
+	\item[Workflows] -- Anything related to the steps a developer takes when writing, inspecting and modifying their software (for example, tool integration).
+	\item[Tool Design] -- Proposed tool design ideas from participants.
+\end{description}
+
+To ease indexing in the transcripts, I used color to identify each coding category.
+The last step was to check the reliability of the codings. Once I finished coding the interviews, I passed the transcripts off to four other researchers to look over. If they found any discrepancies, we discussed and resolved them as a group. This included items that could fall into more than one category; in this situation, either a new, more specific, category or a ``sub-category'' was created for the item. The purpose of the categories are to organize the data in a relevant and useful manner; they are not meant to directly correlate with the research questions.
+
+\subsubsection{Participants.} I conducted this study with 20 participants. I recruited participants using a recruitment flyer sent out to industry contacts. Sixteen participants were professional developers at a large company and 4 were graduate students at NC State University with previous industry experience. Participant development experience ranged from 3 to 25 years.
+
+\subsubsection{Results.} As I discuss my findings, I use parentheses after each theme to denote how many participants discussed topics in each theme. 
+Participants discussed the following as reasons they \emph{do} use static analysis tools (\textbf{RQ1}): 
+\begin{description}
+	\item[Automation (5)] Static analysis tools automate bug finding, and sometimes bug solving. Developers use static analysis tools to save time and effort when maintaining their code.
+	\item[Availability (3)] Some development environments, such as IntelliJ IDEA~\footnote{https://www.jetbrains.com/idea/}, come with built-in static analysis tools. Developers also use static analysis tools because they are already installed and available in their IDEs, requiring little effort on their parts to at least adopt the tool.
+	\item[Customizability (3)] Some tools allow its users to customize anything from the appearance of the tool's output to the type of output that is presented. Developer use static analysis tools when they are able to make desired customizations.
+\end{description}
+
+On the flip side, participants discussed the following reasons they \emph{do not} use static analysis tools (\textbf{RQ1}): 
+\begin{description}
+		\item [Collaboration (9)] Software development is inherently collaborative; some participants noted that tools they use and have used do not provide support for collaborative code improvement efforts.
+		\item [Tool Output (14)] Findings prior to this study found that tools can produce large volumes of notifications, many of which end up being false positives~\cite{Ayewah:2010:GFF,Shen:2011:EFindBugs}; I found that this output can be overwhelming as presented by current tools. Participants noted that more intuitive and user-friendly output could help minimize the effects of dealing with these characteristics of tool output.
+		\item [Customizability (17)] Developers want to configure their tools to present output how and when they want; currently tools do not effectively support the customizations developers want to make. If they do support customizations, the support is minimal and often time-consuming to use.
+		\item [Result Understandability (19)] In order to effectively use static analysis tools, developers need to be able to interpret the notifications provided. Currently, many of the tools participants use provide cryptic notifications that lead to challenges for them when attempting to interpret the message.
+\end{description}
+
+I also explored the ability for existing tools to integrate with developer workflows (\textbf{RQ2}). Based on feedback from 19 participants, the following are workflow integration concerns:
+\begin{description}
+	\item[IDEs vs. Text Editors] Developers have preferences regarding how they want their tool integrated into their work environment. For example, some developers use IDEs so it is ideal if the tool can integrate with their IDE. Some developers do not use IDEs, so they would prefer compiler-level integration provided by some tools, like Clang\footnote{http://clang.llvm.org/docs/ClangTools.html}.
+	\item[Tight Integration] Another important factor is how tight the integration is; some participants used IntelliJ as an example of an IDE with good tool and workflow integration due to the fact that the static analysis is built-in. This includes the tool running without having to be explicitly invoked by the developer.
+	\item [Fast Feedback] Participants noted that another important part of workflow integration is the ability to give fast feedback; the sooner the tool can alert the developer to a problem in their code, the better the tool integrates into their workflow.
+\end{description}
+
+Finally, participants elaborated a number of ideas for how current static analysis tools could improve (\textbf{RQ3}). 
+The majority of design suggestions fell into one of two categories: \textbf{Quick Fix Design} and \textbf{Warning Notification and Manipulation Design}.
+\begin{description}
+	\item[Quick Fix Design (10)] Quick fixes automatically resolve defects by applying a fix to the developer's code on her behalf. Suggestions participants had for improving this feature include providing fix previews through diffs and providing dialog boxes for walking through and toggling between fixes. 
+	\item [Warning Notification and Manipulation Design (20)] All participants had suggestions for improving how and when notifications are presented to them. Suggestions for notifications include providing fast, discrete feedback and allowing developer to make and apply on-the-fly judgements, such as temporary suppression, to a given notification. 
+\end{description}
+
+%Other suggestions made by participants throughout their sessions include having ``plastic'' editors that fold and expand to show and hide information, visual output (i.e. pie-style diagram of project and bugs in it), and using a heat map to show where the most critical bugs in a project are. One interesting suggestion was to use gradient colors instead of multiple different colors to represent defect severity. Figure~\ref{fig:drawing} shows one of the drawings completed by a participant during participatory design; his suggestions focused on effective use of color for error representation, as have previous studies~\cite{Oberg:1992:Gradients,Murphy-Hill:2010:Ambient}.
 
 
 \subsection{Why do developers have difficulty interpreting tool notifications? [Challenges]\protect\footnote{Publication: Johnson, B., Pandita, R., Smith, J., Ford, D., Elder, S., Murphy-Hill, E., Heckman, S., Sadowski, C., What We Have Here is a Failure to Communicate! A Cross Tool Study on Program Analysis Tool Notifications. FSE 2016 (in submission)}}\label{subsec:s2}
 % session study (completed)
 \subsubsection{Study rationale.} Program analysis tools, such as static analysis tools, refactoring tools, and code smell detectors, can ease manual and sometimes tedious software development tasks by automatically analyzing and modifying source code~\cite{adolph2011using,Murphy-Hill:2010:Ambient}. 
 Output from these tools, such as warnings and errors, come in the form of textual or visual notifications that vary from tool to tool.
-In our previous interviews, 20 professional developers reported not using static analysis tools, one type of program analysis tool, because notifications can be difficult to interpret~\cite{johnson2013don}. The goal of this study was to understand what makes it challenging for developers to interpret program analysis tool notifications. To identify challenges, we examined tool use through the lens of communication theory~\cite{bowman1987modeling}. 
+In previous interviews, 19 professional developers reported not using static analysis tools, one type of program analysis tool, because notifications can be difficult to interpret~\cite{johnson2013don}. The goal of this study was to understand what makes it challenging for developers to interpret program analysis tool notifications. To identify challenges, I examined tool use through the lens of communication theory~\cite{bowman1987modeling}. 
 
-\subsubsection{Research questions.}
+\subsubsection{Research question.}
+Using Hannay and colleagues' guidelines~\cite{hannay2007systematic}, I framed my research question as \emph{why} rather than \emph{what} to support building a theory that explains the challenges developers encounter, yielding the following research question:
 
 \begin{labeling}{questions}
 	\item [RQ1] Why do developers encounter challenges when interpreting program analysis tool notifications? 
 \end{labeling}
 
-Using Hannay and colleagues' guidelines~\cite{hannay2007systematic}, I framed the question as \emph{why} rather than \emph{what} to support building a theory that explains the challenges developers encounter.
+
 
 \subsubsection{Methodology.} To answer my research question, I observed participants while using three different program analysis tools.
 
 \vspace{0.5em}
 \noindent\textit{Program Analysis Tools Investigated.}
-My research currently focuses on tools that can be used in the Eclipse Integrated Development Environment (IDE)~\cite{EclipseIDE}. I chose Eclipse because it is one of the most widely used IDEs~\cite{Goth:2005:Beware}, making it easier to recruit qualified participants, and because it is compatible with a variety of tools. I selected FindBugs, the Eclipse Java Compiler, and
-EclEmma as mature, popular tools.
+My research currently focuses on tools that can be used in the Eclipse Integrated Development Environment (IDE)~\cite{EclipseIDE}. I chose Eclipse because it is one of the most widely used IDEs~\cite{Goth:2005:Beware}, making it easier to recruit qualified participants, and because it is compatible with a variety of tools. I selected FindBugs, the Eclipse Java Compiler, and EclEmma as mature, popular tools. FindBugs is a static analysis tool for detecting potential defects in Java source code. The Eclipse Java compiler alerts developers of warnings and errors related to compilation and potential run-time problems. EclEmma is a Java code coverage tool. Examples of notifications used by these tools are shown in Figure~\ref{fig:N4} (FindBugs), Figure~\ref{fig:notificationCOMP} (compiler), and Figure~\ref{fig:notificationECL}.
 
-\begin{figure} [h]
+\begin{figure} 
 	
 	\subfigcapskip = 1pt
 	\subfigure[Source Code]{
@@ -626,14 +587,8 @@ EclEmma as mature, popular tools.
 				\label{fig:N4}
 			\end{figure}
 
-\textsc{FindBugs (version 2.0)} notifications communicate with the developer about defects in her
-code based on code patterns. Bug icons (\includegraphics[height=9px]{figs/bug}) in the gutter are colored red
-to indicate the ``scariest'' code patterns, orange for ``scary'' patterns, yellow
-for ``troubling'' patterns, and blue for ``of concern.'' Text descriptions are
-available by hovering over or clicking the \includegraphics[height=9px]{figs/bug} icon as seen in Figure~\ref{fig:N4}.
 
-
-\begin{figure} [h]
+\begin{figure} 
 	\subfigcapskip = 1pt
 	\centering
 	\subfigure[Source Code]{
@@ -657,17 +612,7 @@ available by hovering over or clicking the \includegraphics[height=9px]{figs/bug
 					\label{fig:notificationCOMP} 
 				\end{figure}
 
-\textsc{Eclipse Java compiler (JDT version 3.8)} notifications communicate with developers when their program cannot
-compile and provide warnings about suspicious code~\cite{EclipseCompiler}.
-Notifications are typically shown as squiggly underlines in the editor. Like FindBugs, the compiler uses color to represent severity; errors
-are shown as red underlines, warnings as yellow underlines.
-Underlines are augmented with gutter icons
-(\includegraphics[height=9px]{figs/comp-x}), as shown in
-Figure~\ref{fig:notificationCOMP} at line 159. When the developer mouses over
-the underlined code or the \includegraphics[height=9px]{figs/comp-x} icon, the
-notification displays a text description (Figure~\ref{Comptext}). Unlike FindBugs, clicking the gutter icon does not provide a detailed description. Instead, clicking the icon provides possible fixes that can be automatically applied to the code called quick fixes.
-
-\begin{figure} [h]
+\begin{figure} 
 	\subfigcapskip = 1pt
 	\centering
 	\subfigure [Source Code with Highlighting]{ 
@@ -688,32 +633,19 @@ notification displays a text description (Figure~\ref{Comptext}). Unlike FindBug
 				\label{fig:notificationECL}
 			\end{figure} 
 
-\textsc{EclEmma (v2.2)} is a code coverage tool that executes a program, typically with JUnit
-as the driver~\cite{JUnit}, to communicate with the developer about code paths that did and
-did not get exercised. EclEmma uses highlighting to indicate code execution; code highlighted in
-green was executed, red was not executed, and yellow was partially executed.
-Figure~\ref{fig:notificationECL} shows an example of coverage reported by
-EclEmma on an \texttt{if} statement. When the developer mouses over the
-\includegraphics[height=9px]{figs/diamond} icon, the tool notifies her of how many
-paths got executed on the associated branch statement at line 133
-(Figure~\ref{Ecltext}).
-
 \vspace{0.5em}
 \noindent\textit{Study Protocol.} 
-Participants engaged with each tool I investigated during sessions that each lasted approximately one hour. Each session consisted of seventeen tasks.
-I found source code for the tasks came from Sun JDK~\cite{SunJDK} and JFreeChart~\cite{JFreeChart}. I chose Sun JDK because it has a large code base from which I could easily find bugs using their publicly available FindBugs cloud report~\cite{FindBugsCloud}. I chose JFreeChart because it is a large code base with working JUnit test cases that exhibit less-than-perfect code coverage.
-
+Participants engaged with each tool I investigated during sessions that each lasted approximately one hour. Each session consisted of seventeen tasks. 
 For each task, I presented participants with and asked them to interpret one or more notifications from each tool.
 I disallowed the use of a web browser to isolate the challenges developers encounter to the notifications used by the tools and to exclude challenges caused by outside tools.
-I also wanted to see if developers could interpret tool notifications without the aid of web resources. During many tasks, and at least once for every participant, participants
-discussed or completed notification resolution. I did not require them to do so, since it would be unfair to ask them to resolve a notification if they did not understand it.
+During many tasks, and at least once for every participant, participants discussed or completed notification resolution. I did not require them to do so, since it would be unfair to ask them to resolve a notification if they did not understand it.
 As participants explained the notifications, I asked follow-up questions as necessary. 
 
 
 For each task, I chose notifications to represent the types of notifications developers may encounter when programming.
 For FindBugs and the Eclipse compiler, I chose notifications that appeared frequently in the Sun JDK project. I chose EclEmma notifications from JFreeChart to exercise a range of its coverage scenarios. Because EclEmma's documentation does not specify the range of notifications it uses, I manually went through JFreeChart's codebase after running the tool and took note of each new coverage scenario encountered. I then included an example of each coverage scenario in the EclEmma tasks.
 
-\begin{figure} [h]
+\begin{figure} 
 	\subfigcapskip = 1pt
 	\centering
 	\subfigure[Source Code]{
@@ -738,9 +670,9 @@ For FindBugs and the Eclipse compiler, I chose notifications that appeared frequ
 					\label{fig:CMP2} 
 \end{figure}
 
-For FindBugs, each task during the session corresponded to a single notification.
+For FindBugs, each task corresponded to a single notification.
 All but one compiler task corresponded to a single notification; because the two notifications on CMP2 (Figure~\ref{fig:CMP2}) contribute to the same problem on the same line, we presented them as one task. 
-Each EclEmma task consisted of participants explaining coverage notifications for the entire class. 
+Each EclEmma task consisted of coverage notifications for an entire class. 
 
 \vspace{0.5em}
 \noindent\textit{Data Collection \& Analysis.}
@@ -749,8 +681,8 @@ For example, if a participant navigated to different parts of the code but did n
 
 
 I analyzed each transcript using selective coding~\cite{corbin2014basics} to discover the challenges participants encountered with the goal of explaining the challenges programmers encounter. 
-To identify a challenge in the context of my research goal, I needed concrete coding criteria. I observed tool use as a form of communication, therefore challenges when interpreting a notification can be seen as miscommunication. Following this logic, I used Mustajoki's proposed model of (mis)communication to determine when a miscommunication-related challenge occurred~\cite{mustajoki2008modelling} by creating three criteria to identify a challenge: 1) the participant explicitly states a challenge, 2) is unable to explain the notification, or 3) has to take steps, outside of reading the notification, to deduce the problem.
-Whether an observation met a criterion is independent of whether the participant was able to explain the notification.
+To identify a challenge, observing tool use as communication, I used Mustajoki's proposed model of (mis)communication to determine when a miscommunication-related challenge occurred~\cite{mustajoki2008modelling}. 
+I created three criteria for identifying a challenge: 1) the participant explicitly states a challenge, 2) is unable to explain the notification, or 3) has to take steps, outside of reading the notification, to deduce the problem.
 
 The coding process was completed by two researchers, myself and a co-author on the submitted work, and in two phases. In phase 1, we each coded all the transcripts individually using the criteria above. In phase 2, we reconvened to merge our codes and check for disagreements. Of the 404 codes we originally extracted, we disagreed on 82 (20\%). 
 To resolve our disagreements, we referred to our criteria; if we could not come to an agreement regarding the code fitting the criteria, we removed the statement from our data set. For four sessions, we had no disagreement.
@@ -763,7 +695,7 @@ In phase 1, we sorted all cards into high-level themes; each card could only go 
 Phase 2 focused on determining where high-level themes could be broken down into lower-level themes.
 In phase 3, we focused on making sure that each card was in the best fitting theme. During this phase, we also clarified theme definitions and made note of example statements to represent each theme.
 
-Because one my criteria is participant inability to explain a notification, any actions or statements made surrounding that occurrence was included in the card sort. Upon reflection, some emergent themes took the form of consequences of being unable to explain rather than challenges that led to inability to explain, such as notification resolution without understanding and lack of trust in the tool, therefore I will not discuss them in relation to this study. I likewise do not discuss the emergent theme of tool feature requests.
+%Because one my criteria is participant inability to explain a notification, any actions or statements made surrounding that occurrence was included in the card sort. Upon reflection, some emergent themes took the form of consequences of being unable to explain rather than challenges that led to inability to explain, such as notification resolution without understanding and lack of trust in the tool, therefore I will not discuss them in relation to this study. I likewise do not discuss the emergent theme of tool feature requests.
 
 \def\toggle{
 	\begin{scope}[ocg={name=test1, ref=t1, status=visible}]
@@ -790,18 +722,18 @@ Because one my criteria is participant inability to explain a notification, any 
 Ten participants had prior experience using EclEmma. Nineteen participants had prior experience with FindBugs. All participants had experience with the Eclipse Java compiler.
 
 \subsubsection{Results.} 
-I discussed my proposed theory for tool miscommunication in Section~\ref{sec:theory}; as a reminder, the theory is summarized as:
+Based on findings from the study, I propose the following theory:
 
 \begin{quotation}
 	\noindent
 	\emph{The challenges developers encounter when interpreting program analysis tool notifications are caused by gaps and mismatches between developer knowledge and how notifications communicate information.}
 \end{quotation}
 
-This theory is based on the challenges encountered by participants in this study, which are shown in  Figure~\ref{fig:results}.\footnote{Credit for the creation of this figure goes to Sarah Elder, a co-author on this work.}
+The kinds of challenges developer encountered during this study are shown in  Figure~\ref{fig:results}.\footnote{Credit for the creation of this figure goes to Sarah Elder, a co-author on this work.}
 Vertical lines represent the tasks and the horizontal bars indicate challenges.
 The different size dots indicate how many participants encountered challenges with that notification in that theme. 
 The smallest dot represents one developer and the largest dot represents eight or more developers.
-Diagonal lines map participants to the challenges interpreting that notification.
+Diagonal lines map participants to the challenges interpreting that notification. Green challenges are caused by \emph{knowledge gaps} in what the developer knows and red challenges are caused by \emph{knowledge mismatches} between what the developer knows and how the tool communicates about those concepts.
 \setlength\fboxsep{1pt}
 When opened in Adobe Acrobat, clicking \framebox{``Hide/Display Details''} 
 interactively toggles between showing and hiding this mapping.
@@ -810,10 +742,10 @@ interactively toggles between showing and hiding this mapping.
 \subsection{Can we use developer experience to predict knowledge? [Predictions]\protect\footnote{Publication: Johnson, B., Pandita, R., Murphy-Hill, E., Heckman, S., Menzies, T., Predicting Developer Conceptual Knowledge Using Public Git Repositories. VL/HCC 2016 (in submission)}}\label{subsec:s3}
 
 \subsubsection{Study rationale.}
-In the study outlined in Section~\ref{subsec:s2}, I found that the challenges developers encounter may be due to the fact that, despite developer differences in background and knowledge, tools use the same notifications to communicate to all developers. 
-I proposed that communication between notifications and developers can be improved if the notifications could adapt to the developer based on the developer's knowledge of programming concepts.
-This proposition is based on constructivism, a verbal communication theory that suggests awareness of how the audience might react to a message improves communication~\cite{griffin2011first}. For this to be possible in the context of tool use, tools need a way of knowing what concepts the developer knows and does not know. 
-We used concept inventories, a method used in education research for assessing conceptual knowledge~\cite{tew2010assessing}, and the possibility of providing knowledge information to tools in the form of concept knowledge models. 
+The challenges developers encounter when interpreting tool notifications stem from the one-size-fits-all nature of tool notifications, despite the differences in what developers know and do not know.
+Communication between notifications and developers can be improved if the notifications could adapt to the developer based on the developer's knowledge of programming concepts.
+This proposition is based on constructivism, a verbal communication theory that suggests awareness of how the audience might react to a message improves communication~\cite{griffin2011first}. For this to be possible in the context of tool use, tools need a way of knowing what concepts the developer knows and do not know.
+I implemented and evaluated an approach that uses concept inventories, a method used in education research for assessing conceptual knowledge~\cite{tew2010assessing}, and explores the possibility of providing knowledge information to tools in the form of concept knowledge models. 
 The goal of this study was to develop and assess an approach for developing models that predict knowledge of programming concepts that appear in tool notifications based on concept-specific code the developer has written. 
 %We designed a concept inventory to assess conceptual knowledge and collected source code relevant to the Java concept of generics from 24 developers. We used unsupervised learning to determine a model that accurately predicts developer knowledge.
 %The main contributions of this paper are: 1) an approach for assessing developer conceptual knowledge using concept inventories and 2) an approach for modeling developer conceptual knowledge based on concept-specific code written by a given developer.
@@ -827,45 +759,41 @@ The goal of this study was to develop and assess an approach for developing mode
 
 \subsubsection{Approach.}
 % TODO add mention of pilot??
+Below I outline the approach I developed; research materials are available on-line.\footnote{http://www4.ncsu.edu/~bijohnso/apatian.html}
+
 \vspace{0.5em}
 \noindent\textit{Assessing \& Encapsulating Conceptual Knowledge.}
-To assess \& encapsulate developer knowledge as the dependent variable my our models, I borrowed from computer science education literature and developed a concept inventory~\cite{tew2010assessing}. 
-To determine the questions for the inventory, I identified key generics concepts. I used the Oracle Java Tutorial on Generics\footnote{\url{http://docs.oracle.com/javase/tutorial/java/generics/}} to find and map the relationships between generics concepts and ancestor concepts; if Lesson 5 built on top of Lesson 1, I considered Lesson 5 an ancestor of Lesson 1. For example, based on the generics tutorial, I labeled Upper Bounded Wildcards as an ancestor concept to Wildcards. Once I had the key concepts, I came up with at least 1 question for each level of revised Bloom's taxonomy, based on my test specification, using examples found in work by Nelson~\cite{nelson1967testing} and Thompson and colleagues~\cite{thompson2008bloom}.
+To assess \& encapsulate developer knowledge as the dependent variable for the models, I borrowed from computer science education literature and developed a concept inventory~\cite{tew2010assessing}. 
+To determine the questions for the inventory, I identified key generics concepts using the Oracle Java Tutorial on Generics\footnote{\url{http://docs.oracle.com/javase/tutorial/java/generics/}} to find and map the relationships between generics concepts and ancestor concepts; if Lesson 5 built on top of Lesson 1, I considered Lesson 5 an ancestor of Lesson 1. For example, based on the generics tutorial, I labeled Upper Bounded Wildcards as an ancestor concept to Wildcards. To ensure I covered all concepts, I checked other Java generics tutorials; no new concepts emerged from this process.
+
+Once I had the key concepts, I came up with at least 1 question for each level of revised Bloom's taxonomy, based on my test specification, using examples found in work by Nelson~\cite{nelson1967testing} and Thompson and colleagues~\cite{thompson2008bloom}.
 From this process, I derived 11 questions.
+I piloted my initial set of questions with 11 developers and students at NC State University. 
 
-I piloted my initial set of questions with 11 developers and students at NC State University. I did another pilot once I established validity and reliability, the next step.
+Next, to test the validity and reliability of the concept inventory, I used item and distractor analysis in R. Item analysis determined if the items on the inventory are valid methods of assessment; from this process I eliminated 1 question, which yielded a final set of 10 questions.  Distractor analysis determined if the options provided for a given question are fair and if the incorrect options contribute to the quality of the inventory; because each option was selected at least once for each inventory item, and most often the correct option was chosen, I kept all response options for each inventory item.
+I did another pilot once I established validity and reliability.
 
-From the item analysis, I was able to remove 1 question that, according to my analyses, was not effective.
-
-Next, to test the validity of our concept inventory, I used item and distractor analysis in R. Item analysis determined if the items on our inventory contribute are valid methods of assessment; from this process we eliminated 1 question, which gave us a final set of 10 questions.  Distractor analysis determined if the options provided for a given question are fair and if the incorrect options contribute to the quality of our inventory; because each option was selected at least once for each inventory item, and most often the correct option was chosen, I kept all response options for each inventory item.
-
-The current inventory has 10 questions, each worth 1 point, that effectively assess knowledge and will serve as a representation of ground truth conceptual knowledge; this is under the assumption that following validated steps for creation increases confidence in effectiveness as an assessment tool.
-
-For additional validation and reliability assessment, I added a self--reporting question that asks developer ``On a scale of 1 to 10, 1 being little to no knowledge, how would you score your knowledge of Java generics?'' 
-By decreasing the spread of rank values for a developer to consider when deciding which value best represents how much they know, we increase the potential for accurate self-reports. To simplify the process of comparing self-reports to actual score each question is worth 1 point, making the maximum score a 10 to match the maximum possible self-report value. 
-Examining the 65 responses on the inventory to date, self-report scores matched actual score 18\% of the time (12 out of 65). Most often (35 out of 65) developers estimated their knowledge within 1--2 points of their actual score. This suggests that along with objectively evaluating understanding, our concept inventory yields scores that map to how much developers think they know.
+I also asked participants to self-report how much they know about generics to assess the possibility to use self-report as a proxy for knowledge and experience. However, developers almost always over- or underestimated their knowledge based on my assessment, matching concept inventory scores 18\% of the time. This aligns with existing research that suggests objective knowledge, based on a factual test, may be better for task performance oriented measures, such as ability to understand concepts~\cite{cole1992exploring,raju1995differential}. Based on these findings, and existing research, I used concept inventory scores rather and collect source code as a proxy for experiences that led to knowledge~\cite{argote2011organizational,raju1995differential} rather than self-report scores alone.
 
 \vspace{0.5em}
 \noindent\textit{Source Code Analysis.}
 To test my hypotheses, I chose Java generics as the initial concept. I made this decision primarily because generics requires motivation on behalf of the developer to explore beyond the basics and is a concept appears in notifications across program analysis tools. When we say motivation, we refer to an intrinsic motivation to learn that stems from an interest in learning~\cite{krapp1999interest,hall2008we}.		
-Another advantage to using a concept like generics to test my hypotheses is that it is multi-faceted; there are enough features of and ways to use generics for there to be relationships that I can explore and use to generalize for applicability to other concepts.
+Another advantage to using a concept like generics to test my hypotheses is that it is multi-faceted; there are enough features of and ways to use generics for there to be relationships that I can explore and use to generalize for applicability to other concepts.~\footnote{Although this approach is evaluated on what I would consider a complex concept, this approach will also work for simpler concepts where, based on the language features, there may be fewer options for advanced learning about the concept.}
 
 To determine the independent variables for my model, I analyzed for code contributions and assigned them to developers using version control. 
 I built a Java source code analyzer that analyzes code bases for concept-specific code using the Eclipse JDT ASTParser. 
 One example of generics-specific code is a generic type declaration ((\texttt{public class <T> Box})).
-Analyzing static code with the ASTParser detects the presence of concept-specific code, however, it cannot provide who contributed that code. 	
-Therefore, I used code bases in repositories so I could determine what developer made what contribution via the commit history. 
-I chose the versioning platform Git\footnote{\url{https://git-scm.com/}} so we could use JGit,\footnote{\url{http://eclipse.org/jgit/}} which allows for manipulation of Git repositories via Java code, along with ASTParser to analyze for developer code contributions.
-%GitHub is a social coding website where developers can create and maintain coding projects using Git version control.\footnote{http://github.com} I chose GitHub as the first source of data for a number of reasons: 1) most repositories on GitHub are public, so I can recruit participants directly, 2) I wrote my analyzer in Java and used a JGit library that allows for manipulation of GitHub repositories via Java code, and 3) next to SVN, Git is one of the most popular versioning software in use today.\footnote{http://www.openhub.net/repositories/compare}
+I used code bases in repositories to determine what developer made what contribution via the commit history. 
+I chose the versioning platform Git\footnote{\url{https://git-scm.com/}} so I could use JGit,\footnote{\url{http://eclipse.org/jgit/}} which allows for manipulation of Git repositories via Java code, along with ASTParser to analyze for developer code contributions.
 
-To test H\textsubscript{1} and H\textsubscript{2}, I collected concept-specific code and manually collected LOC added from GitHub, a social coding site where developers can create and maintain Git repositories.\footnote{\url{http://www.github.com}} To determine LOC, I manually checked the contributions reported by GitHub for each developer's repositories. To determine what concept-specific code to analyze for, I used the same key concepts identified for the concept inventory (i.e. generic type declarations). I collected 11 different types of generics usage, such as generic type declarations and usage of the Wildcard (\texttt{?}) generic type.\footnote{The repository that holds our analyzer can be found at \url{https://github.com/brittjay0104/APATIANproto.git}.}
+To test H\textsubscript{1} and H\textsubscript{2}, I collected concept-specific code and manually collected LOC added from GitHub, a social coding site where developers can create and maintain Git repositories.\footnote{\url{http://www.github.com}} To determine LOC, I manually checked the contributions reported by GitHub for each developer's repositories. To determine what concept-specific code to analyze for, I used the same key concepts identified for the concept inventory (i.e. generic type declarations). I collected 11 different types of generics usage, such as generic type declarations and usage of the Wildcard (\texttt{?}) generic type.\footnote{The repository that holds the analyzer can be found at \url{https://github.com/brittjay0104/APATIANproto.git}.}
 
-Analyses I have completed towards the idea of adapting tool notifications suggest time may play a factor in how predictive code contributions are~\cite{johnson2015bespoke}, therefore we also used version control to detect when the most recent contribution of each type of generics usage was made.
-The output of my analyzer for each repository is an occurrence count for all contributed generics code and when the most recent contribution for each type of generics.
-To determine which types of generics usage might be more advanced than others, I used the output from our analyses to create a hierarchy of generics feature usage. The feature hierarchy, along with a description of the creation process and usage, can be found on-line.\footnote{http://www4.ncsu.edu/~bijohnso/docs/feature-map.pdf}
+I also used version control to detect when the most recent contribution of each type of generics usage was made; prior analyses indicated time may play a factor in how predictive code contributions are~\cite{johnson2015bespoke}.
+The output of my analyzer for each repository is an occurrence count for all contributed generics code and when the most recent contribution for each type of generics was.
+To determine which types of generics usage might be more advanced than others, I used the output from analyses to create a hierarchy of generics feature usage. The feature hierarchy, along with a description of the creation process and usage, can be found on-line.\footnote{http://www4.ncsu.edu/~bijohnso/docs/feature-map.pdf}
 
 % FEATURES AND HEURISTICS
-To increase the generalizability of the model to other concepts, I characterized the independent variables for the model by grouping the types of generics usage collected based on \emph{features} of the data. For example, a feature of type declarations and type parameter methods (\texttt{public <T> method()}) that groups them together is that the developer wrote new generic code for use by other developers, rather than using existing generic code.
+To increase the generalizability of the model to other concepts, I characterized the independent variables for the model by grouping the types of generics collected based on \emph{features} of the data. For example, a feature of type declarations and type parameter methods (\texttt{public <T> method()}) that groups them together is that the developer wrote new generic code for use by other developers, rather than using existing generic code.
 The set of features I identified among the data are as follows:
 \begin{itemize}
 	\item \textbf{Declared Generics:} I computed Declared Generics by adding together counts from the types of generics where the developer wrote new generic code for use by themselves or others (i.e. type declarations).
@@ -876,19 +804,18 @@ The set of features I identified among the data are as follows:
 \noindent I also defined two \emph{heuristics} to apply to the feature groups:
 
 \begin{itemize}
-	\item \textbf{Recency:} The recency heuristic takes each of the initial heuristics and multiplies each value by 1.0 if the most recent contribution was made in the last week, 0.8 if between one week and one month, 0.6 for 1--6 months, 0.4 for one year, and 0.2 for more than one year.
-	For example, if, the total number of declarations made by the developer (Declaration heuristic) is 198 and the most recent declaration was written between one week and one month, the Declaration Recency (DeclRecency) heuristic value would be 158.4 (\(198 \times 0.8)\). 
+	\item \textbf{Recency:} The recency heuristic takes each of the features and multiplies each value by 1.0 if the most recent contribution was made in the last week, 0.8 if between one week and one month, 0.6 for 1--6 months, 0.4 for one year, and 0.2 for more than one year.
+	For example, if, the total number of declarations made by a developer (Declaration heuristic) is 198 and the most recent declaration was written between one week and one month, the Declaration Recency (DeclRecency) heuristic value would be 158.4 (\(198 \times 0.8)\). 
 	\item \textbf{Natural Log:} This heuristic calculates natural log of each feature group before and after the recency heuristic is applied.
 \end{itemize}
 %	we were able to build models with useful levels of precision and recall
-
-I defined a recency heuristic because previous analyses suggest time may be a factor to consider when modeling knowledge~\cite{johnson2015bespoke}.	
+	
 I applied natural log to the data following the reasoning of Fritz and colleagues, who used natural log in their models to account for the potential for large differences in variable values~\cite{fritz2010degree}. For example, some repositories returned counts in the thousands for class instantiations but counts of zero for explicit method invocations; this might cause our model to put more weight on the contribution of feature groups and heuristics that include class instantiations than it truly contributes.
 I used both the \emph{features} and \emph{heuristics} defined above to determine the independent variables for analyses.
 
 \vspace{0.5em}
-\noindent\textit{Data Analysis.} % TODO if I get more developers, would I increase this number of could those go towards the next study ()? (probably depends on how many more -- can I add some to the 24 for model building/assessment but then still have some I can leave out for validation of the model?)
-To define the relationship between the dependent and independent variables, I used Weka~\cite{Hall:2009:WDM:1656274.1656278} for access to machine learning algorithms suitable for my small dataset of 24 GitHub developers; only 24 developers completed the concept inventory, which was necessary for developing my current approach. 
+\noindent\textit{Data Analysis.}
+To define the relationship between the dependent and independent variables, I used Weka~\cite{Hall:2009:WDM:1656274.1656278} for access to machine learning algorithms suitable for my small dataset of 24 GitHub developers; only 24 developers completed the concept inventory, which was necessary for developing and evaluating my current approach. 
 Specifically, I used Weka's J48 classifier~\cite{witten1999weka} to create decision trees.
 
 To select the independent variables best suited for the model, I used Correlation-based Feature Selection (CFS) in Weka. This analysis runs k-fold cross validation using the independent variables passed in; to lower the potential for a model with overestimation bias, I maintained even and sizable chunks by using 4-fold cross validation.
@@ -990,17 +917,17 @@ The values for each model's \emph{precision}, \emph{recall}, and \emph{F-Score} 
 	\label{fig:LOC}
 \end{figure}
 
-\noindent\textbf{My findings support my hypothesis that it is possible to predict conceptual knowledge using source code as a primary source of developer data. (H\textsubscript{1})}\\
-All three models correctly classified developers more often than not (LOC = 70\%; DeclRecency = 74\%; Combination = 78\%); in fact, by combining LOC with DeclRecency, the accuracy of classification increased by 4\%. This increase may be due to the fact that, as existing research suggests, all experiences contribute to overall knowledge~\cite{argote2011organizational}. Similarly, general coding experience seems to also contribute to conceptual knowledge.
+\noindent\textbf{My findings support H\textsubscript{1}: it is possible to predict conceptual knowledge using source code as a primary source of developer data.}\\
+All three models correctly classified developers more often than not (LOC = 70\%; DeclRecency = 74\%; Combination = 78\%); in fact, by combining LOC with DeclRecency, the accuracy of classification increased by 4\%. This increase may be due to the fact that, as existing research suggests, all experiences contribute to overall knowledge~\cite{argote2011organizational,raju1995differential}. Similarly, general coding experience seems to also contribute to conceptual knowledge.
 
-Based on the models shown in Figure~\ref{fig:declLOC} and Figure~\ref{fig:decl}, how recently code contributions are made also affect conceptual knowledge. Based on the recency heuristic, a higher DeclRecency value suggest more recent code contributions. This suggests that determining a developer's knowledge of concepts may require both declarations and recent experience with declarations. 
+Based on the models shown in Figure~\ref{fig:declLOC} and Figure~\ref{fig:decl}, how recently code contributions are made also affect conceptual knowledge. Based on the recency heuristic, a higher DeclRecency value suggest more recent code contributions. This suggests that determining a developer's knowledge of concepts may require both concept-specific declarations and recent experience with concept-specific declarations. 
 
 
 % H2 --> concept-specific code better
 \vspace{0.5em}
 
-\noindent\textbf{My findings support my hypothesis that concept-specific code improves model performance compared to a model that uses LOC only. (H\textsubscript{2})}\\
-The LOC model's precision, recall, and F-Score suggest it may be better at classifying developers with advanced generics knowledge than the DeclRecency model (Figure~\ref{tab:advanced}). However, overall model accuracy is higher in the DeclRecency model (74\%) than the LOC model (70\%) (Table~\ref{tab:total}. There was also a slight performance increase overall, with increased precision and F-Score for beginner (\(+ 0.167\), \(+ 0.04\)) and intermediate (\(+ 0.09\), \(+ 0.1\)) classification and increased total precision (\(+ 0.05\)), recall (\(+ 0.04\)), and F-Score (\(+ 0.03\)). Also, as shown in Figure~\ref{fig:declLOC}, LOC only becomes relevant when classifying beginner and intermediate developers. This may be because beginner and intermediate developers do not declare enough generics to make an informed decision without some reference to general experience they have.
+\noindent\textbf{My findings support H\textsubscript{2}: concept-specific code improves model performance compared to a model that uses LOC only.}\\
+The LOC model's precision, recall, and F-Score suggest it may be better at classifying developers with advanced generics knowledge than the DeclRecency model (Figure~\ref{tab:advanced}). However, overall model accuracy is higher in the DeclRecency model (74\%) than the LOC model (70\%) (Table~\ref{tab:total}. There was also a slight performance increase overall, with increased precision and F-Score for beginner (\(+ 0.167\), \(+ 0.04\)) and intermediate (\(+ 0.09\), \(+ 0.1\)) classification and increased total precision (\(+ 0.05\)), recall (\(+ 0.04\)), and F-Score (\(+ 0.03\)). Also, as shown in Figure~\ref{fig:declLOC}, LOC only becomes relevant when classifying beginner and intermediate developers. This may be because beginner and intermediate developers do not declare enough generics to make an informed decision without some reference to the general experience they have.
 Regardless, these findings suggest that although both LOC and concept-specific code can both be used to predict conceptual knowledge, concept-specific code increases overall model accuracy and precision.
 
 
@@ -1011,8 +938,6 @@ However, when evaluating models, rather assessing scalability, researchers shoul
 My previous study, \textbf{Predictions}, found that it is possible to assess, model, and accurately predict developer knowledge regarding Java generics (performance), based on the predictions of a prototype model (M1). However, it is not obvious if M1 generalizes to other concepts and developers.
 The end goal is an approach that can be applied to any concept and be used to make predictions for any Java developer (scalable) while still performing at a high level. Therefore, I designed a study where I will explore the generalizability of M1 to other programming concepts and different sets of developers. 
 
-Assessing generalizability in the context of a mathematical model is a primarily quantitative process. Although there is value in quantitative findings, my research experience suggests that there is a richness in qualitative data that cannot be achieved with quantitative data and analyses. I chose the variables for M1 based on quantitative data and analyses; however, it may be that there are other factors that contribute to developer concept knowledge I have not yet considered. Therefore, I also plan to explore the generalizability, and approach that led to the creation, of M1 by interviewing and surveying developers. 
-
 \subsubsection{Research questions.}
 
 \begin{labeling}{questions}
@@ -1022,12 +947,15 @@ Assessing generalizability in the context of a mathematical model is a primarily
 \end{labeling}
 
 \subsubsection{Proposed methodology.}
-I plan to explore the generalizability of, and refine, M1 by combining qualitative feedback with generalizability assessments. One of my ongoing (implicit) model refinement efforts is finding more developers for building and assessing M1 and, if needed, creating and evaluating new models.
+I plan to explore the generalizability of, and refine, the approach that led to M1 by combining qualitative feedback with generalizability assessments. One of my ongoing (implicit) model refinement efforts is finding more developers for building and assessing M1 and, if needed, creating and evaluating new models.
 
 \vspace{0.5em}
 \noindent\textit{Generalizability Assessments.}
-I built and evaluated M1 using the same set of developers. I plan to assess the generalizability of M1 to other developers (RQ1) is by making predictions with a separate set of developers. Doing so will allow me to observe the ability for M1 to generalize to a wide range of developers. 
-To assess the generalizability of M1 in regards to other concepts (RQ2), I plan to analyze participant repositories for concept-specific code pertaining to others Java concepts.
+I built and evaluated M1 using the same set of developers. I plan to assess the generalizability M1 on other developers (RQ1) by making predictions using M1 with a separate set of developers. Doing so will allow me to observe the ability for M1 to generalize to a wide range of developers. 
+To assess the generalizability of the approach that led to M1 in regards to other concepts (RQ2), I plan to develop new concept inventories and analyze participant repositories for concept-specific code pertaining to others Java concepts.
+I plan to conduct these generalizability assessments using three concepts: operators, variables, and exceptions.
+I chose three concepts to balance feasibility of completion within a reasonable timeframe (1 - 1.5 years) and confidence in generalizability outside of one concept or set of notifications.
+I chose operators, variables, and exceptions as the three concepts I will use for my generalizability assessments because 1) there are notifications across tools pertaining to these concepts, 2) FindBugs, the tool whose notifications I will use in future evaluations, has notifications pertaining to these concepts, and 3) notifications pertaining to these concepts appear in production software~\cite{ayewah2007evaluating}.
 % TODO how am I going to choose the 3? concepts where possible to get multi-concept notifications that include two or more??? To prepare for future study that adapts and assesses notifications 
 % TODO Specify what concepts you'll be doing. How many participants you'll get. How you'll recruit them. How long this effort will take compared to the prior CI, and why you think this one will be faster. (#69)
 %To select the concepts for assessment, I plan to use the following criteria:
@@ -1044,7 +972,12 @@ To assess the generalizability of M1 in regards to other concepts (RQ2), I plan 
 
 \noindent\textit{Qualitative Data Collection \& Analysis.}
 % TODO should this be another RQ (i.e. do developers agree with the relationship between source code and knowledge)??
-Another way I plan to assess the generalizability, and find opportunities for refinement, of M1 is by conducting short, semi-structured interviews with developers (10--20) regarding their perceptions of source code and programming concept expertise (RQ2). Each interview will last approximately 30 minutes and will be divided into two phases: 1) the relationship between the code they write and their expertise regarding the concept and 2) other factors that contribute to their knowledge of programming concepts.  
+Although there is value in quantitative findings, my research experience suggests that there is a richness in qualitative data that cannot be achieved with quantitative data and analyses.
+I chose the variables for M1 based on qualitative and quantitative findings; therefore, another way I plan to assess the generalizability, and find opportunities for refinement, of M1 is by conducting short, semi-structured interviews with developers (10--20) regarding their perceptions of source code and programming concept expertise (RQ2). 
+
+Each interview will last approximately 30 minutes and will be divided into two phases: 1) the relationship between the code they write and their expertise regarding the concept and 2) other factors that contribute to their knowledge of programming concepts.  
+
+Assessing generalizability in the context of a mathematical model is a primarily quantitative process.   Therefore, I also plan to explore the generalizability, and approach that led to the creation, of M1 by interviewing and surveying developers. 
 
 To determine what factors developers consider as contributors to their knowledge, I plan to 1) code each transcript and 2) perform content analysis in R~\cite{RSoftware} on interview transcripts. Content analysis assumes that content most frequently mentioned is the most important. For example, if in multiple interviews participants discuss on-line programming forums, such as Stack Overflow, one item that content analysis may identify as important in relation to the topic being discussed, is on-line forums. In order to perform content analysis, I need well defined categories, such as on-line forum usage; this is where the coding process comes into play. Using a methodology similar to the one in Section~\ref{subsec:s2}, I will code each transcript for statements pertaining to their knowledge of concepts and experiences that contributed knowledge for them. 
 
