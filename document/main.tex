@@ -997,19 +997,17 @@ Once I have a prototype notification design template for each expertise category
  
 
 To assess H\textsubscript{1}, I plan to 1) assess potential knowledge-based notification adaptations and 2) implement a prototype tool that fully automates my approach by replacing one-size-fits-all notifications with knowledge-based notifications based on model classification.
+Based on the results from RQ2, I will develop a prototype tool, which I will call SmartBugs, that will adapt notification presentation based on developer knowledge. I plan to build SmartBugs on top of FindBugs because it is a mature, open source defect finding tool with a wide range of notifications that have no obvious pattern behind the information it provides in a given notification. FindBugs will serve as the baseline (one-size-fits-all) set of notifications to compare SmartBugs' notifications to (knowledge-based).
+
 Notification adaptations will be based on knowledge of programming concepts, therefore I need to be able to identify the concepts present in a given notification to know what to adapt. 
-I will identify concepts in notifications based on:
+I will identify concepts in notifications based any combination of the following data:
 \begin{itemize}
-	\item \textit{Type of tool.} 
-	\item \textit{Keywords in text.} % TODO what is a keyword? based on terms and phrases found in tutorials used for inventories?
-	\item \textit{Source code notification is attached to.} % TODO maybe not this one
+	\item \textit{Type of tool.} The type of tool is one way to think about the concepts in the notification; one obvious example is that one concept relevant to most code code coverage tools is test coverage.
+	\item \textit{Keywords in text.} Looking at the notification text can provide insights regarding the concepts relevant to the notification. One obvious set of keywords is variations of the concept(i.e. operator, operators, operations). Another way to identify keywords would be to use words found in notifications that contain the obvious keywords; there may be other terms that are typically used in lieu of or to describe the obvious keywords.
+	% TODO what is a keyword? based on terms and phrases found in tutorials used for inventories?
+	\item \textit{Notification categories (if available)} Some tools group their notifications into categories based on the programming concept(s) it communicates about. For example, one category used by FindBugs is multi-threaded correctness; the assumption is that any notifications in this category will relate to the high level concept of multi-threading.
+	\item \textit{Source code notification is attached to.} This data is particularly useful for tools that do not provide details in text form (i.e. most code coverage tools and compilers). The code the notification is attached to, and possibly even surrounding code, are likely concept-specific and therefore is another way to determine concepts relevant to the notification.
 \end{itemize}
-
-
-Based on the results from my notification user study, I will develop a prototype tool, which I will call SmartBugs, that will adapt notification presentation based on developer knowledge. I plan to build SmartBugs on top of FindBugs because it is a mature, open source defect finding tool with a wide range of notifications that have no obvious pattern behind the information it provides in a given notification. FindBugs will serve as the baseline (one-size-fits-all) set of notifications to compare SmartBugs' notifications to (knowledge-based).
-
-For the evaluation of SmartBugs, I will attempt to re-use the same participants from \textbf{Predictions} and \textbf{Generalizability}. This will prevent the overhead of finding new participants with Git repositories and the potential overhead of asking more developers to take potentially multiple concept inventories.
-As a back-up plan, I will plan to have participants take the concept inventory as part of participation prior to arrival for their session using SmartBugs.
 
 For the user evaluation, I will divide participants into two groups: one group will use FindBugs (FB) and the other will use SmartBugs(SB). Each group will have an equal number of developers from each classification group to ease the process of analyzing the data. All developers in the FB group will be presented with the normal notifications used by FindBugs. Developers in the SB group will be presented with notifications based on their classification and the mappings from RQ2.
 
@@ -1017,7 +1015,10 @@ To assess whether SmartBugs is more effective than FindBugs, I will observe 1) t
 
 I also plan to allow use of the web for both FindBugs and SmartBugs; this will allow me to collect detailed context-switching information and inform future improvement efforts. For example, if a group of SmartBugs users have to go to the web, particularly if they are in the same classification, this information can be used to improve the information provided to developers in that classification.	
 
-\subsection{Participants.} I plan to recruit 10--20 developers for this study. I will begin recruitment with existing participants from previous studies, as we will have built rapport, and ideally a mutual interest in the outcomes of my proposed research. I will also, if necessary, recruit using mailing lists and personal contacts.
+\subsection{Participants.} 
+I plan to recruit 10--20 developers for this study. I will begin recruitment with existing participants from previous studies, as we will have built rapport, and ideally a mutual interest in the outcomes of my proposed research. This will also prevent the overhead of finding new participants with Git repositories and the potential overhead of asking more developers to take potentially multiple concept inventories. 
+As a back-up plan, I will plan to have participants take the concept inventory as part of participation prior to arrival for their session using SmartBugs.
+If necessary, recruit using mailing lists and personal contacts.
 
 
 
