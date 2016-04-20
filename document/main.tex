@@ -81,19 +81,18 @@
 
 \begin{center}
 	Brittany Johnson\\[1.0em]
-	NC State University \\
+	North Carolina State University \\
 	bijohnso@ncsu.edu
 	
 \end{center}
 
-
-\vspace{2pt}
-
 \begin{abstract}
-	
+Program analysis tools are designed to aide any developer when developing software by automating the writing, analysis, and modification of source code. However, previous research suggest developers may not use these tools. When they do, gaps in developer knowledge and mismatches between what the developer knows and how the tool communicates prevent effective communication.
+This thesis poses that program analysis tool use is a form of \textit{communication}, and the inability to interpret and resolve tool notifications is a result of miscommunication caused by \textit{knowledge gaps and mismatches}. Therefore, I propose tool design can be improved by approximating developer knowledge and experiences to adapt notifications to better align with individual developer preferences; this is inspired by \textit{constructivism} communication theory for improving communication by adapting to the audience.
+I propose research that explores the feasibility, generalizability, and effectiveness of using models that can predict developer conceptual knowledge to improve tool communication by adapting notifications to the individual developers.
+The contributions of this dissertation are: 1) a \textit{tool miscommunication theory} that explains the challenges developers encounter when interpreting tool notifications, 2) \textit{experiments and evaluations} that assess how valid and actionable the miscommunication theory is, and 3) a \textit{proof-of-concept tool}, called SmartBugs, that utilizes my proposed approaches for modeling and adapting tool notifications.
+My research suggests that it is possible to create and use models of developer knowledge to improve tool and notification usability.
 \end{abstract}
-
-\vfill
 
 %\rule{\textwidth}{1pt}
 %\begin{flushleft}
@@ -347,7 +346,7 @@ I summarize my theory as:
 	\emph{The challenges developers encounter when interpreting program analysis tool notifications are caused by gaps and mismatches between developer knowledge and how notifications communicate information.}
 \end{quotation}
 
-I speak about knowledge here and throughout as the culmination of experiences~\cite{johnson1989mental,argote2011organizational}.
+Because research has suggested experience matters when understanding vulnerabilities, and that experiences affect knowledge, I speak about knowledge here and throughout as the culmination of experiences~\cite{johnson1989mental,argote2011organizational,baca2009static}.
 Using that definition, a \emph{knowledge gap} occurs when there is a gap between what the developer knows and how the tool communicates; a \emph{knowledge mismatch} occurs when what the developer knows and expects from the tool does not match the notification the tool uses.
 
 Remember Valerie? Though she is a hypothetical developer, the challenges she faced are not hypothetical. Valerie experienced challenges caused by both knowledge gaps (no knowledge regarding lazy initialization) and knowledge mismatches (expecting an explicit connection to synchronization). Based on this theory, I hypothesize that if it was possible for tools to be aware of what developers know and do not know, tools can improve communication by adapting its notifications to the developer.
@@ -464,7 +463,7 @@ getting stakeholders (in this case, developers) involved in the design process b
 
 \begin{figure} [h]
 	\centering
-	\includegraphics[width=\textwidth]{figs/participatory.pdf}
+	\includegraphics[width=4in]{figs/participatory.pdf}
 	\caption{One participant's participatory design drawing; (A) shows where Matt wants the gradient colors and (B) shows the way his current tool represents severity.}
 	\label{fig:drawing}
 \end{figure}
@@ -733,10 +732,13 @@ The kinds of challenges developer encountered during this study are shown in  Fi
 Vertical lines represent the tasks and the horizontal bars indicate challenges.
 The different size dots indicate how many participants encountered challenges with that notification in that theme. 
 The smallest dot represents one developer and the largest dot represents eight or more developers.
-Diagonal lines map participants to the challenges interpreting that notification. Green challenges are caused by \emph{knowledge gaps} in what the developer knows and red challenges are caused by \emph{knowledge mismatches} between what the developer knows and how the tool communicates about those concepts.
+Diagonal lines map participants to the challenges interpreting that notification.
 \setlength\fboxsep{1pt}
-When opened in Adobe Acrobat, clicking \framebox{``Hide/Display Details''} 
-interactively toggles between showing and hiding this mapping.
+When opened in Adobe Acrobat, clicking \framebox{``Hide/Display Details''} in Figure~\ref{fig:results} interactively toggles between showing and hiding this mapping. 
+
+Green challenges are caused by \emph{knowledge gaps} in what the developer knows and red challenges are caused by \emph{knowledge mismatches} between what the developer knows and how the tool communicates about those concepts.
+These findings align with prior research that suggests one barrier for end-user programmers when using programming environments is ability to understand the code and errors associated with the code~\cite{ko2004six}. My research builds on these findings by identifying what causes inability to understand the notifications that appear in developers' source code.  
+
 
 % model building (completed)
 \subsection{Can we use developer experience to predict knowledge? [Predictions]\protect\footnote{Publication: Johnson, B., Pandita, R., Murphy-Hill, E., Heckman, S., Menzies, T., Predicting Developer Conceptual Knowledge Using Public Git Repositories. VL/HCC 2016 (in submission)}}\label{subsec:s3}
@@ -931,7 +933,7 @@ The LOC model's precision, recall, and F-Score suggest it may be better at class
 Regardless, these findings suggest that although both LOC and concept-specific code can both be used to predict conceptual knowledge, concept-specific code increases overall model accuracy and precision.
 
 
-\subsection{Does my prototype concept knowledge model generalize? [Generalizability]} \label{subsec:s4}
+\subsection{Does my prototype concept knowledge model generalize? [Generalize]} \label{subsec:s4}
 
 \subsubsection{Study rationale.} Two important aspects to consider when developing a quality tool or approach are \emph{performance} and \emph{scalability}~\cite{fox2011performance}. 
 However, when evaluating models, rather assessing scalability, researchers should assess model performance and \textit{generalizability}~\cite{forster2000key}. 
@@ -1023,11 +1025,146 @@ If necessary, recruit using mailing lists and personal contacts.
 
 
 \section{Related Work}
+Research related to mine fall under the following categories: evaluating and improving tool usability, improving notification understanding and resolution, predictive user models, and developer knowledge representation.
 
-There will be lots here -- just seemed like something I could put on the backburner for later drafts. :)
+\subsection{Evaluating \& Improving Program Analysis Tool Usability}
+% TODO: make sure exhaustive here; check studies on dynamic analysis tools too!
+
+There have been many studies on program analysis tools, many of which focus on
+their correctness and functionality~\cite{Ayewah:2008:FindBugs,Bessey:2010:Coverity,dugan2000developing,luk2005pin}.
+Unlike existing work, which typically focuses on one type of program analysis too, my work focuses on developers' perception on 
+using different types of program analysis tools, what may have caused their perceptions, and how we can build on or improve their perceptions. 
+Perception plays an important role in when considering human and computer interactions~\cite{Dastani:2002:Perception} and
+can be influenced by a number of things, such as the subjective preferences of
+the user.
+
+Hamou-Lhadj and Lethbridge surveyed trace exploration tools to determine how these tools 
+can be used by developers and potential improvements to trace exporation tools~\cite{hamou2004survey}. 
+Based on their evaluation of the tools, they found that areas 
+for improvement for these type of tools include visibility during trace removal and automated suggestions.
+Pacione and colleagues conducted a case study on five dynamic visualization tools that perform either static or dynamic code analysis and observed the output provided~\cite{pacione2003comparative}. Pertaining to usability, they found that level of abstract can make a difference when explaining large scale problems.
+
+Storey and colleagues ran user experiments with 12 developers on two approaches for presenting software structure in a reverse engineering system~\cite{storey1997rigi}. They found that certain interfaces are better for low-level tasks and that users prefer consolidated interfaces, rather than multiple windows, from reverse engineering tools.
+Bennett and colleagues conducted interviews and user experiments to evaluate the usability and potential improvements of their sequence diagram creation and exploration tool~\cite{bennett2008survey}. Sequence diagram tools create sequence diagrams using static analysis, dynamic analysis, or both.
+Much of the feedback developers provided suggested search and selection highlighting are both useful feature for sequence diagram tools, though there are improvements that can be made to existing implementations.
+
+
+Ayewah and Pugh conducted a study where they claimed that static analysis tools
+should help engineers find bugs as early as possible in the development cycle,
+when they are cheap to fix~\cite{Ayewah:2008:FBSurvey}. They interviewed 12
+FindBugs users by phone and conducted a controlled study with 12 students to see
+how they use FindBugs and handle defects that are labeled ``not a bug''. 
+Ayewah and Pugh also conducted a study on using checklists for triaging bug
+reports~\cite{Ayewah:2009:Checklists}. In their study, they asked students to
+complete a checklist based off the warnings produced by FindBugs in order to
+identify warnings that are most important to the users. The checklist gave
+different scales used to measure warning severity and relevance and was used
+for 13 different warnings.
+%Their work is similar to ours in that they are interested in how developers use static
+%analysis tools. Our work builds on this work by recruiting various
+%tool users for interactive, participatory interviews.
+
+Khoo et al. examined and focused on the interface of static analysis tools and
+how the interface could be improved~\cite{Khoo:2008:PathProjection}. They
+developed a user interface toolkit called \emph{Path Projection} that uses
+program visualizations to help developers walk through the error reports
+produced by static analysis tools.
+\emph{Path Projection} was designed to improve and simplify the process of
+triaging bug reports, or labeling bugs as a false or true positives, by
+utilizing checklists to systematically label bugs. This research is similar to my
+work in that they look at improving the static analysis tool user experience.
+My research builds on this work by investigating not only improving the user
+experience, but also finding out why these improvements need to be made from the
+developers who use them.
+
+% Although
+% both of these studies look at improving static analysis tools or its interface
+% to increase and improve the usage of static analysis tools, they still do not
+% investigate whether these interface changes are what developers really want or,
+% if they are, why. Our study builds on these studies by investigating not only
+% improving the user experience, but also finding out why these improvements need
+% to be made from the developers who use them in order to better understand how to
+% make improvements without focusing on specific functionalities or design ideas.
+
+Heckman and Williams conducted research in an attempt to develop a benchmark,
+FAULTBENCH, that would help developers compare and evaluate static analysis
+alert prioritization and classification techniques~\cite{Heckman:2008:Faultbench}. 
+The overall goal of their research was to make using static analysis tools easier and more useful to developers.
+My work is related in that I am also looking for ways to improve the current state of tools for developers. 
+Layman et al. recruited 18 participants to investigate factors that developers may consider when deciding whether to
+address a defect when notified of it~\cite{Layman:2007:FaultFix}. This study
+is related to my work in that they are also interested in learning more about how developers use tools available to them 
+and how usage can be made easier.  My work builds on these works by focusing on various
+aspects of using program analysis tools, including how users interact with the
+tools.
+
+\subsection{Improving Notification Understanding and Resolution}
+
+Existing research has focused on easing the process of understanding and resolving notifications~\cite{Hartmann:2010:Suggestions,Mucslu:2012:Speculative,pham2015automatically,fritz2014developers} from one particular tool.
+Rather than studying program analysis tools separately, we believe it is more fruitful to understand the challenges developers encounter across multiple program analysis tools.
+As we describe in this section,
+existing studies that examine multiple tools typically either focus on tools of the same type (i.e. multiple compilers) 
+or helping developers make informed choices among tools. 
+Our work is related in that our findings can be used to improve the design of tools to better support developers.
+Our work differs in that we investigate different types of tools to identify general challenges developers encounter when interpreting notifications across tools. 
+
+Much of the research on improving developers' ability to interpret tool notifications has focused on compiler notifications~\cite{Hartmann:2010:Suggestions,Traver:2010:Messages,barik14}. 
+Hartmann and colleagues developed a social recommender system, \textsc{HelpMeOut}, to better assist novices with understanding and resolving compiler notifications~\cite{Hartmann:2010:Suggestions}. They found their tool provides useful fixes about half of the time. Traver investigated why developers have difficulty with compiler notifications and ways to improve compiler notification design~\cite{Traver:2010:Messages}. Based on his findings, Traver developed compiler notification design principles, which includes using consistent messages and including more visual aids.
+
+Nienaltowski and colleagues studied novice developers' ability to identify errors in their programs and how we can better support that process~\cite{Nienaltowski:2008:Compiler}.
+Rigby and Thompson studied novices' use of Eclipse and Gild, a customized version of Eclipse featuring ``novice-friendly'' compiler notifications~\cite{Rigby:2005:Novice}.
+Mu\c{s}lu and colleagues developed \textsc{Quick Fix Scout}, an extension to Eclipse Quick Fix, to ease the process of determining an
+optimal fix~\cite{Mucslu:2012:Speculative}. They found programmers could more quickly assess and apply quick fixes when able to easily reason about fix trade-offs.
+Following up on work with \textsc{Quick Fix Scout}, Mu\c{s}lu and colleagues explored the possibility of improving IDE recommendations, and the ability for developers to determine the best fix for their code, by considering the whole code base rather the local context of the notification~\cite{mucslu2012improving}.
+Barik and colleagues studied how developers reason about compiler notifications to improve tool support for understanding and resolving tool notifications~\cite{barik14}.
+Compiler notifications are not the only type of notifications a developer might encounter, further supporting the need for cross-tool investigations.
+Studying tool notifications across tools, as we have, increases the likelihood our findings can generalize to a variety of tools.
+
+Cross-tool studies that do exist focus on helping developers decide what tools to use rather than tool improvement.
+Mettrey evaluated five expert systems tools on factors such as performance, to aide developers in selecting one for their projects~\cite{mettrey1991comparative}.
+Wagner and colleagues compared two analysis tools that detect defects to evaluate their efficiency~\cite{wagner2008evaluation}.
+Other tool evaluations have had the same goal~\cite{roy2009comparison,zheng2006value}.
+
+Though to our knowledge there are no studies that explore the applicability of communication theory to tool use, there are studies that explore the applicability of other theories to tool use~\cite{barik14,xiao2014social,riemenschneider2001explaining}.  
+One is our prior work on how developers visualize compiler messages; we found that self-explanation theory can be used to explain how developers work through compiler error messages~\cite{barik14}. 
+In other prior work, we used Diffusion of Innovation theory to explore factors that influence 
+security tool adoption~\cite{xiao2014social}. 
+Similarly, Rienmenschneider and Hardgrave explored why tools do not get used using the Technology Acceptance Model, based largely on the Theory of Reasoned Action~\cite{riemenschneider2001explaining}.
+Lawrance and colleagues used information foraging theory to propose a theory of information foraging for how programmers navigate code when debugging~\cite{lawrance2013programmers}. 
+In contrast, we apply communication theory to understand the challenges 
+developers encounter when interpreting tool notifications.
+
+\subsection{Predictive User Models and Knowledge Representation}
+Existing research has explored the idea of creating and using predictive user models both in the design of intelligent tutoring systems (ITS) and adaptive user interfaces (AUI). Research also exists that uses code as a proxy for knowledge~\cite{fritz2010degree}. While related, this research proposes models that predict knowledge of source code; my research proposes models that predict knowledge of programming concepts for adapting tool notifications.
+
+Both ITS and AUI use models of user knowledge to adapt to their users, based on the user's experiences.
+ITS pose questions to students to model knowledge of concepts and adapt lesson plans. In contrast, I used source code history to model knowledge for adaption of tool notifications~\cite{murray1999authoring}.
+Amershi and Conati explored using machine learning rather than knowledge-based user models to deal with the drawback of using knowledge-based user models, as most ITS do~\cite{amershi2007unsupervised}. 
+Stamper and Barnes proposed a method for using student data, such as the code they write, to improve ITS with adaptive hints for programming mistakes~\cite{stamper2009unsupervised}.
+Similarly, my research explores using source code and machine learning to predict user knowledge but for adaptive tool notifications.
+
+There are a variety of AUI used in different Human-Computer Interaction contexts, many of which use task or domain models~\cite{schlungbaum1996model}. Most relevant to our models in the context of AUIs are works that build and apply user models, such as FUSE, which creates user models based on static and dynamic properties of the user to assist with user interface development~\cite{lonczewski1996fuse}. Most relevant to our research are the models proposed by Zou and colleagues for adaptive menus in Eclipse~\cite{zou2008adapting}.
+This AUI's models are built based on how often developers use menu items to remove menu items that are used infrequently; we built models based on the concept-specific code a developer writes to adapt notifications to their experience.
+
+
+Using source code to represent knowledge relates closely to the degree-of-knowledge models proposed by Fritz and colleagues to determine how familiar a developer is with a particular portion of a codebase~\cite{fritz2010degree}. Their models predict how much a developer might know about a given piece of source code in a codebase based on how often they have visited or edited that part of the code.
+Other tools exist that make use of developer source to make predictions without models. Most relevant is Stylos and colleagues' tool Jadeite which determines API usage examples to provide to a developer based on code other developers have written~\cite{stylos2009improving}.
+Along the same lines, Perscheid and colleagues explored the notion that expertise is a good metric for determining who would understand a fault or failure when testing best in a code base~\cite{perscheid2012test}.
+
+Other research has explored how user actions can be used to represent knowledge, mostly in the context of games and learning. Eagle and colleagues conducted research to explore the relationship between the interactions students make in games and understanding science concepts embedded in those games~\cite{eagle2015measuring}. Hicks and colleagues developed an approach to modeling student interactions when using programming tutors and educational games, like BOTS, for predicting the best hints to provide when they are having trouble~\cite{hicks2014building}.
+%	In contrast, we predict how much a developer might know about a given concept based on the code she has written.
+
+
 
 \section{Project Plan}
 % TODO month by month (deadline driven - what papers?)
+
+\begin{figure} 
+	\centering
+	\includegraphics[width=5in]{figs/project-schedule.pdf}
+	\caption{Month by month breakdown of plan to complete dissertation research.}
+	\label{fig:plan}
+\end{figure}
 
 \subsection{Completed Projects \& Publications}
 
@@ -1040,11 +1177,12 @@ I have completed the following projects \& publications:
 
 \subsection{Upcoming Projects \& Publications}
 
-I plan to complete the following projects \& publications by my defense in Spring 2017:
+I plan to complete the following projects \& publications by my defense in Spring 2017 (shown in Figure~\ref{fig:plan}):
 
 \begin{description}
-	\item[Generalizability] (in progress) \textit{Amend IRB for interviews and survey} (May 2 -- May 9); \textit{Data collection} (April 11 -- April 25); \textit{Conduct Interviews} (May 11 -- May 20); \textit{Data analysis} (May 21 -- May 28) ; \textit{Create and administer survey} (May 29 -- June 12); \textit{Survey analysis} (June 13 -- June 30); \textit{Publication}: ICSE 2017 (est. 8/28)
-	\item[SmartBugs] \textit{Study IRB} (May 2 -- May 9); \textit{Literature Review} (June 6 -- June 12); \textit{Develop SmartBugs} (with aide of Master's student) (June 13 -- October 3); \textit{User Study} (October 10 -- October 21) ; \textit{Data analysis} (October 22 -- October 30); \textit{Write and edit draft} (November 1 - March 11/March 18); \textit{Publication}: FSE 2017 (est. 3/11) or VL/HCC 2017 (est. 3/18)
+	\item[Generalize] (in progress) \textit{Amend IRB for interviews and survey} (May 1 -- June 1); \textit{Data collection} (May 3 -- July 31); \textit{Conduct Interviews} (June 15 -- July 15); \textit{Data analysis} (June 15 -- August 15) ; \textit{Survey and Analysis} (July 15 -- August 15); \textit{Publication}: ICSE 2017 (est. 8/28)
+	\item[SmartBugs] \textit{Study IRB} (May 1 -- June 1); \textit{Literature Review} (September 1 -- September 15); \textit{Notification Template Evaluation} (September 15 - December 1); \textit{Publication}: FSE 2017 (est. 3/11); \textit{Develop SmartBugs} (with aide of Master's student) (August 1 -- January 1, 2017); \textit{User Study} (January 1 -- February 1 2017); \textit{Data analysis} (February 1 -- March 1); \textit{Write and edit draft} (January 1 - March 18); \textit{Publication}: VL/HCC 2017 (est. 3/18)
+	% TODO SmartBugs study to VL/HCC and notifcation user eval to FSE?
 	\item[Dissertation] \textit{Write and edit draft} (January 1 -- May 1) ; \textit{Publication}: Thesis Document
 \end{description}
 
@@ -1057,7 +1195,10 @@ I plan to complete the following projects \& publications by my defense in Sprin
 % JOURNAL??
 
 \section*{Acknowledgments}
-
+This material is based upon work supported by the National Science Foundation under
+Grant No. 1217700, a Google Faculty Award, and a National Science Foundation
+Graduate Research Fellowship under Grant No. DGE--0946818.
+Special thanks to Emerson Murphy-Hill, Sarah Heckman, and the Developer Liberation Front, AltCode, and RealSearch research groups for their contributions and feedback.
 
 \bibliographystyle{splncs03}
 \bibliography{main.bib}
